@@ -1449,3 +1449,7 @@ body {
 #content h3 {
 	color: #000 !important;
 }
+
+#content p {
+	text-align: justify;
+}
