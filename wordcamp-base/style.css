@@ -1447,5 +1447,5 @@ body {
 }
 
 #content h3 {
-	color: #000;
+	color: #000 !important;
 }
