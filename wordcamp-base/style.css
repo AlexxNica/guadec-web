@@ -1445,3 +1445,7 @@ body, input, textarea, .page-title span, .pingback a.url, h3#comments-title, h3#
 body {
 	background: #f5f5f4 !important;
 }
+
+#content h3 {
+	color: #000;
+}
