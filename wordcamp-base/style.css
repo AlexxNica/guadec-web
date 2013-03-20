@@ -1447,9 +1447,13 @@ body {
 }
 
 #content h3 {
-	color: #000 !important;
+	color: #6b8e9f !important;
 }
 
 #content p {
 	text-align: justify;
+}
+
+#after-header-container {
+	display: none;
 }
