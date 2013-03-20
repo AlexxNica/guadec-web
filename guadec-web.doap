@@ -1,0 +1,32 @@
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name xml:lang="en">GUADEC Website</name>
+  <shortdesc xml:lang="en">GUADEC Website</shortdesc>
+  <description>
+	GUADEC is the annual GNOME Conference. This is the website for that.
+</description>
+  <homepage rdf:resource="http://live.gnome.org/GnomeShell" />
+  <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/guadec" />
+  <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=website" />
+
+  <category rdf:resource="http://api.gnome.org/doap-extensions#desktop" />
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Andreas Nilsson</foaf:name>
+      <foaf:mbox rdf:resource="mailto:andreas@andreasn.se" />
+      <gnome:userid>andreasn</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Andrea Veri</foaf:name>
+      <foaf:mbox rdf:resource="mailto:av@gnome.org" />
+      <gnome:userid>av</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+</Project>
