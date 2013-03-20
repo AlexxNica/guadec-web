@@ -1,0 +1,158 @@
+<?php
+
+/*--------------------------------------------------------------------------------------
+ *
+ *	creates custom welcome e-mail and adds hooks to custom e-mail data
+ *
+ *-------------------------------------------------------------------------------------*/
+
+add_filter ("wp_mail_content_type", "get_mail_content_type");
+function get_mail_content_type() {
+	return "text/html";
+}
+	
+add_filter ("wp_mail_from", "get_mail_from");
+function get_mail_from() {
+	return "hithere@myawesomesite.com";
+}
+	
+add_filter ("get_mail_from_name", "get_mail_from_name");
+function get_mail_from_name() {
+	return "GUADEC 2013";
+}
+
+function wp_new_user_notification($user_id, $plaintext_pass) {
+	$user = new WP_User($user_id);
+
+	$user_login = stripslashes($user->user_login);
+	$user_email = stripslashes($user->user_email);
+	
+	$email_subject = "[GUADEC 2013] " . $user_login . ", your account has been created!";
+	
+	ob_start();	
+	?>
+	<html>
+		<head>
+			<title> Welcome to GUADEC 2013! </title>
+			<style>
+				body { font-family: sans-serif; background-color: #f5f5f4; }
+				h1, strong { color: #6b8e9f; }
+			</style>
+		</head>
+		<body>
+			<h1>
+				Welcome to GUADEC 2013!
+			</h1>
+
+			<p>	
+				Hello, <?php echo $user_login ?>! 
+			</p>
+	
+			<p>	
+				Thank you very much for joining us in the works of organizing GUADEC 2013! 
+			</p>
+	
+			<p>
+				Your password is <strong><?php echo $plaintext_pass ?></strong>.<br>
+				Please keep it secret and keep it safe!
+			</p>
+	
+			<p>
+				Your next step is to submit your talk proposal at <a href="http://www.guadec.org/wp-admin/post-new.php?post_type=wcb_session">our content management system</a>!<br>
+				Click the link above or copy and paste the following URL to your browser: http://www.guadec.org/wp-admin/post-new.php?post_type=wcb_session.
+			</p>
+
+			<p>
+				Thanks and see you in Brno!<br>				
+				<strong>The GUADEC 2013 Team</strong>
+			</p>
+		</body>
+	</html>
+	<?php	
+	$message = ob_get_contents();
+	ob_end_clean();
+
+	wp_mail($user_email, $email_subject, $message);
+}
+
+/*--------------------------------------------------------------------------------------
+ *
+ *	enables contributors to upload files to theirs posts
+ *
+ *-------------------------------------------------------------------------------------*/
+if ( current_user_can('contributor') && !current_user_can('upload_files') )
+	add_action('admin_init', 'allow_contributor_uploads');
+
+function allow_contributor_uploads() {
+	$contributor = get_role('contributor');
+	$contributor->add_cap('upload_files');
+}
+
+
+/*--------------------------------------------------------------------------------------
+ *
+ *	check_user_role
+ *  - checks if a particular user has a role. returns true if a match was found.
+ *
+ * 	@param string $role Role name.
+ * 	@param int $user_id (Optional) The ID of a user. Defaults to the current user.
+ * 	@return bool
+ *
+ *-------------------------------------------------------------------------------------*/
+function check_user_role( $role, $user_id = null ) {
+ 
+    if ( is_numeric( $user_id ) )
+	$user = get_userdata( $user_id );
+    else
+        $user = wp_get_current_user();
+ 
+    if ( empty( $user ) )
+	return false;
+ 
+    return in_array( $role, (array) $user->roles );
+}
+
+/*--------------------------------------------------------------------------------------
+ *
+ *	remove_menus
+ *	- unset option from wp-admin menu undesired settings. hide everything from the menu
+ *  except for talks, if user is a contributor or a subscriber.
+ *
+ *-------------------------------------------------------------------------------------*/
+function remove_menus() {	
+	
+	if (check_user_role("contributor") || check_user_role("subscriber")) {
+		global $menu;
+	
+		$restricted = array(
+			__('Dashboard'),
+			__('Posts'),
+			__('Media'),
+			__('Speakers'),
+			__('Sponsors'),
+			__('Organizers'),
+			__('Comments'),
+			__('Tools')
+		);
+	
+		end($menu);
+	
+		while (prev($menu)) {
+			$value = explode(' ', $menu[key($menu)][0]);
+			if (in_array($value[0] != null ? $value[0] : "", $restricted)) {
+				unset($menu[key($menu)]);
+			}		
+		}
+	}
+}
+
+/*--------------------------------------------------------------------------------------
+ *
+ *	applies remove_menus as an action hook for the admin_menu in wp-admin.
+ *
+ *-------------------------------------------------------------------------------------*/
+add_action('admin_menu', 'remove_menus');
+
+
+
+?>
