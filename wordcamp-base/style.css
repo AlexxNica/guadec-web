@@ -1436,6 +1436,10 @@ body, input, textarea, .page-title span, .pingback a.url, h3#comments-title, h3#
 	color: #fff;
 }
 
+#colophon a {
+	color: #fff;
+}
+
 #content-row,
 #after-header, #before-content, #after-content,
 .entry-content, .entry-summary {
