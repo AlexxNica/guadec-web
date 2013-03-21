@@ -154,7 +154,7 @@ function my_reset_password_title() {
 add_filter ("retrieve_password_message", "my_reset_password_message");
 function my_reset_password_message($content, $key) {
 	global $wpdb;
-	$user_login = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_activation_key = '$key'");
+	$user_login = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_activation_key = ' . $key . '");
 	
 	ob_start();
 	
