@@ -144,23 +144,31 @@ add_action( 'wp_before_admin_bar_render', 'my_admin_bar_render' );
  *
  *-------------------------------------------------------------------------------------*/
 
-add_filter ("retrieve_password_title", "my_reset_password_title");
+add_filter ("retrieve_password_title", "my_reset_password_title", 10, 1);
 
 function my_reset_password_title() {
 	return "[GUADEC 2013] Your password reset";
 }
 
 	
-add_filter ("retrieve_password_message", "my_reset_password_message");
+add_filter ("retrieve_password_message", "my_reset_password_message", 10, 2);
 function my_reset_password_message($content, $key) {
-	global $wpdb;
-	$user_login = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_activation_key = ' . $key . '");
-	
+
+	if ( strpos($_POST['user_login'], '@') ) {
+		$user_data = get_user_by_email(trim($_POST['user_login']));
+	} else {
+	        $login = trim($_POST['user_login']);
+	        $user_data = get_userdatabylogin($login);
+	}
+
+	$user_login = $user_data->user_login;
+
 	ob_start();
 	
-	$email_subject = "[GUADEC 2013] Your password reset";;
-?>
-
+	$email_subject = "[GUADEC 2013] Your password reset";
+	
+	?>
+	
 	<html>
 		<head>
 			<title>Your password reset for GUADEC 2013</title>
@@ -173,7 +181,7 @@ function my_reset_password_message($content, $key) {
 			
 			<p>
 				To reset your password, visit the following address, otherwise just ignore this email and nothing will happen. <br>
-				<?php echo wp_login_url("url") ?>?action=rp&key=<?php echo $key ?>&login=<?php echo $user_login ?>
+				<?php echo network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login'); ?>
 			</p>
 			
 			<p>
@@ -182,14 +190,14 @@ function my_reset_password_message($content, $key) {
 			</p>
 		</body>
 	</html>
+
+	<?php
 	
-<?php	
 	$message = ob_get_contents();
 
 	ob_end_clean();
   
 	return $message;
 }
-
 
 ?>
