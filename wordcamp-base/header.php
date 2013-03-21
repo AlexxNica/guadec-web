@@ -7,6 +7,7 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+ <link rel="shortcut icon" href="theme/images/favicon.png">
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <?php wcb_title_tag(); ?>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
