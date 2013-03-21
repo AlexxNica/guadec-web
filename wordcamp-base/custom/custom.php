@@ -138,4 +138,60 @@ function my_admin_bar_render() {
 add_action( 'wp_before_admin_bar_render', 'my_admin_bar_render' );
 
 
+/*--------------------------------------------------------------------------------------
+ *
+ *	password reset message
+ *
+ *-------------------------------------------------------------------------------------*/
+
+add_filter ("retrieve_password_title", "my_reset_password_title");
+
+function my_reset_password_title() {
+	return "[GUADEC 2013] Your password reset";
+}
+
+	
+add_filter ("retrieve_password_message", "my_reset_password_message");
+function my_reset_password_message($content, $key) {
+	global $wpdb;
+	$user_login = $wpdb->get_var("SELECT user_login FROM $wpdb->users WHERE user_activation_key = '$key'");
+	
+	ob_start();
+	
+	$email_subject = imp_retrieve_password_title();
+	
+	?>
+	
+	<html>
+		<head>
+			<title>Your password reset for GUADEC 2013</title>
+		</head>
+
+		<body>
+			<p>
+				It looks like you want to reset your password for your GUADEC 2013 account.
+			</p>
+			
+			<p>
+				To reset your password, visit the following address, otherwise just ignore this email and nothing will happen. <br>
+				<?php echo wp_login_url("url") ?>?action=rp&key=<?php echo $key ?>&login=<?php echo $user_login ?>
+			</p>
+			
+			<p>
+				Cheers,
+				The GUADEC 2013 Team
+			</p>
+		</body>
+	</html>
+	
+	?>
+	
+	$message = ob_get_contents();
+
+	ob_end_clean();
+  
+	return $message;
+}
+
+
 ?>
