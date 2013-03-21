@@ -78,6 +78,64 @@ function remove_menus() {
  *-------------------------------------------------------------------------------------*/
 add_action('admin_menu', 'remove_menus');
 
+/*--------------------------------------------------------------------------------------
+ *
+ *	show a custom logo on login
+ *
+ *-------------------------------------------------------------------------------------*/
+
+
+
+function login_css() {
+	wp_enqueue_style( 'login_css', get_template_directory_uri() . '/css/login.css' );
+}
+add_action('login_head', 'login_css');
+
+
+/*--------------------------------------------------------------------------------------
+ *
+ *	remove_footer_admin
+ *	- this function removes the default footer of wordpress admin and replaces it
+ *	with other text. in this case, GUADEC.
+ *
+ *-------------------------------------------------------------------------------------*/
+
+function remove_footer_admin() {
+  echo 'GUADEC 2013';
+}
+
+add_filter('admin_footer_text', 'remove_footer_admin');
+
+/*--------------------------------------------------------------------------------------
+ *
+ *	change_footer_version
+ *	- this function removes the default versioning in the footer of wp-admin.
+ *
+ *-------------------------------------------------------------------------------------*/
+
+function change_footer_version() {
+  return '';
+}
+
+add_filter('update_footer', 'change_footer_version', 9999);
+
+
+
+/*--------------------------------------------------------------------------------------
+ *
+ *	my_admin_bar_render
+ *	- hides items from the wp-admin top bar. hides the wp-logo, the comments link and
+ *	the new-content tab.
+ *
+ *-------------------------------------------------------------------------------------*/
+
+function my_admin_bar_render() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('wp-logo');
+	$wp_admin_bar->remove_menu('comments');
+	$wp_admin_bar->remove_menu('new-content');
+}
+add_action( 'wp_before_admin_bar_render', 'my_admin_bar_render' );
 
 
 ?>
