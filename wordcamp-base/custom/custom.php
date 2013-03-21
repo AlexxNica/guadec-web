@@ -158,7 +158,7 @@ function my_reset_password_message($content, $key) {
 	
 	ob_start();
 	
-	$email_subject = imp_retrieve_password_title();
+	$email_subject = "[GUADEC 2013] Your password reset";;
 ?>
 
 	<html>
