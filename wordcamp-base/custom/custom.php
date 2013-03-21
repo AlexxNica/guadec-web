@@ -159,9 +159,8 @@ function my_reset_password_message($content, $key) {
 	ob_start();
 	
 	$email_subject = imp_retrieve_password_title();
-	
-	?>
-	
+?>
+
 	<html>
 		<head>
 			<title>Your password reset for GUADEC 2013</title>
@@ -184,8 +183,7 @@ function my_reset_password_message($content, $key) {
 		</body>
 	</html>
 	
-	?>
-	
+<?php	
 	$message = ob_get_contents();
 
 	ob_end_clean();
