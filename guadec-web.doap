@@ -10,7 +10,7 @@
 	GUADEC is the annual GNOME Conference. This is the website for that.
   </description>
   <homepage rdf:resource="http://www.guadec.org" />
-  <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/guadec" />
+  <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/guadec-list" />
   <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=website" />
 
   <category rdf:resource="http://api.gnome.org/doap-extensions#desktop" />
