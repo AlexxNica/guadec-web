@@ -22,11 +22,4 @@
       <gnome:userid>andreasn</gnome:userid>
     </foaf:Person>
   </maintainer>
-  <maintainer>
-    <foaf:Person>
-      <foaf:name>Andrea Veri</foaf:name>
-      <foaf:mbox rdf:resource="mailto:av@gnome.org" />
-      <gnome:userid>av</gnome:userid>
-    </foaf:Person>
-  </maintainer>
 </Project>
