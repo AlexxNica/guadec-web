@@ -8,8 +8,8 @@
   <shortdesc xml:lang="en">GUADEC Website</shortdesc>
   <description>
 	GUADEC is the annual GNOME Conference. This is the website for that.
-</description>
-  <homepage rdf:resource="http://live.gnome.org/GnomeShell" />
+  </description>
+  <homepage rdf:resource="http://www.guadec.org" />
   <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/guadec" />
   <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=website" />
 
