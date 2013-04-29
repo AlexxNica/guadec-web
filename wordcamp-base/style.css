@@ -1364,15 +1364,41 @@ code {
 
 /* Custom stuff */
 
-#header {
-	height: 100px !important;
-}
-
 .event-logo {
-	width: 244px;
-	display: block;
+	width: 230px;
+	display: table-cell;
 	background: url("images/logo.png") no-repeat center center;
 	height: 65px;
+}
+
+.event-logo-link {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+.main_navigation {
+	display: table-cell;	
+}
+
+.main_navigation li {
+	list-style: none;
+	display: inline;
+	padding-right: 0.25em;
+	padding-top: 40px;
+	padding-bottom: 20px;
+	font-size: large;
+	color: #6b8e9f;
+	vertical-align: middle;
+}
+
+.main_navigation li:before {
+	content: "• ";
+}
+
+.main_navigation a:link,
+.main_navigation a:visited {
+	color: #6b8e9f;
 }
 
 .event-location,
@@ -1395,7 +1421,7 @@ code {
     height: 177px;
 	widht: 940px;
 	background: url("images/buildings.png");
-	margin-top: 30px;
+	margin-bottom: 20px;
 }
 
 ul {
@@ -1438,6 +1464,10 @@ body, input, textarea, .page-title span, .pingback a.url, h3#comments-title, h3#
 
 #colophon a {
 	color: #fff;
+}
+
+#content-row {
+	padding-top: 0 !important;
 }
 
 #content-row,
