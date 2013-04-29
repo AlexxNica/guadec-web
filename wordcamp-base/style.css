@@ -1377,13 +1377,8 @@ code {
 	width: 100%;
 }
 
-.main_navigation {
-	display: table-cell;	
-}
-
-.main_navigation li {
-	list-style: none;
-	display: inline;
+.menu-item {
+	display: table-cell;
 	padding-right: 0.25em;
 	padding-top: 40px;
 	padding-bottom: 20px;
@@ -1392,12 +1387,12 @@ code {
 	vertical-align: middle;
 }
 
-.main_navigation li:before {
+.menu-item:before {
 	content: "• ";
 }
 
-.main_navigation a:link,
-.main_navigation a:visited {
+.menu-item a:link,
+.menu-item a:visited {
 	color: #6b8e9f;
 }
 
