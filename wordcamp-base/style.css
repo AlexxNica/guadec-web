@@ -1418,9 +1418,10 @@ code {
 }
 
 .branding-buildings {
-    height: 177px;
+	height: 177px;
 	widht: 940px;
 	background: url("images/buildings.png");
+	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
