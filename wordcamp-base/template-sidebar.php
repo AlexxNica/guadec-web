@@ -1,20 +1,9 @@
 <?php
-
 /**
- * The template for displaying all pages.
+ * Template Name: 2-Column Layout (With Sidebar)
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site will use a
- * different template.
- *
- * @package WordPress
- * @subpackage Twenty_Ten
- * @since Twenty Ten 1.0
+ * A custom page template with sidebar.
  */
-
-$structure = wcb_get('structure');
-$structure->full_width_content();
 
 get_header(); ?>
 
@@ -46,3 +35,4 @@ get_header(); ?>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
+?>
