@@ -16,6 +16,9 @@ class WCB_Header extends WCB_Element {
 		?>
 		<div class="clear"></div>
 		<div class="grid_12 branding-buildings">&nbsp;</div>
+		<div class="clear"></div>
+		<div class="event-date">August 1 — 8, 2013</div>
+		<div class="event-location">Brno, Czech Republic</div>
 	</div>
     <?php
 	}

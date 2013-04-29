@@ -1398,26 +1398,19 @@ code {
 
 .event-location,
 .event-date {
-	padding-top: 38px;
-	font-size: large;
+	display: inline;
+	font-size: small;
 	color: #6b8e9f;
-	text-shadow: 0 1px #fff;
-}
-
-.event-location {
-	text-align: right;
-}
-
-.event-date {
-	text-align: left;
+	margin-right: 10px;
+	float: right;
 }
 
 .branding-buildings {
 	height: 177px;
 	widht: 940px;
 	background: url("images/buildings.png");
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 ul {
