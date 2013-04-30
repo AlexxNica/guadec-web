@@ -1372,6 +1372,15 @@ code {
 	margin-bottom: 0 !important;
 }
 
+.entry-content, .entry-content p {
+	font-size: 14px !important;
+}
+
+.entry-meta {
+    font-weight: normal !important;
+	border-bottom: 1px solid #ddd;
+}
+
 #content .entry-title {
 	color: #6b8e9f !important;
 	padding-top: 10px;
@@ -1489,7 +1498,7 @@ body {
 
 #content h3 {
 	color: #6b8e9f !important;
-	margin-bottom: 24px;
+	margin-bottom: 24px !important;
 }
 
 #content p {
