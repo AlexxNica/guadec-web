@@ -525,7 +525,7 @@ div.menu li {
 	background: #f2f7fc;
 }
 .hentry {
-	margin: 0 0 48px 0;
+	margin: 0;
 }
 .home .sticky {
 	background: #f2f7fc;
@@ -1364,38 +1364,71 @@ code {
 
 /* Custom stuff */
 
-#header {
-	height: 100px !important;
+.entry-title a {
+	color: #6b8e9f !important;
+}
+
+.entry-content {
+	margin-bottom: 0 !important;
+}
+
+#content .entry-title {
+	color: #6b8e9f !important;
+	padding-top: 10px;
 }
 
 .event-logo {
-	width: 244px;
-	display: block;
+	width: 230px;
+	display: table-cell;
 	background: url("images/logo.png") no-repeat center center;
 	height: 65px;
 }
 
-.event-location,
-.event-date {
-	padding-top: 38px;
+.event-logo-link {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+.menu-item {
+	display: table-cell;
+	padding-right: 1em;
+	padding-top: 40px;
+	padding-bottom: 20px;
 	font-size: large;
 	color: #6b8e9f;
-	text-shadow: 0 1px #fff;
+	vertical-align: middle;
 }
 
-.event-location {
-	text-align: right;
+.menu-item:before {
+	content: "• ";
+	padding-right: .5em;
 }
 
+#header li {
+	padding-left: .5em;
+}
+
+.menu-item a:link,
+.menu-item a:visited {
+	color: #6b8e9f;
+}
+
+.event-location,
 .event-date {
-	text-align: left;
+	display: inline;
+	font-size: small;
+	color: #6b8e9f;
+	margin-right: 10px;
+	float: right;
 }
 
 .branding-buildings {
-    height: 177px;
+	height: 177px;
 	widht: 940px;
 	background: url("images/buildings.png");
-	margin-top: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 ul {
@@ -1429,12 +1462,19 @@ body, input, textarea, .page-title span, .pingback a.url, h3#comments-title, h3#
 
 #footer-wrapper {
 	background: #6b8e9f;
-	color: red;
 }
 
 #colophon {
 	border-top: none;
 	color: #fff;
+}
+
+#colophon a {
+	color: #fff;
+}
+
+#content-row {
+	padding-top: 0 !important;
 }
 
 #content-row,
@@ -1445,4 +1485,21 @@ body, input, textarea, .page-title span, .pingback a.url, h3#comments-title, h3#
 
 body {
 	background: #f5f5f4 !important;
+}
+
+#content h3 {
+	color: #6b8e9f !important;
+	margin-bottom: 24px;
+}
+
+#content p {
+	text-align: justify;
+}
+
+#after-header-container {
+	display: none;
+}
+
+h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access div.menu ul, #access a.button, h3#comments-title, h3#reply-title, .entry-title, .entry-meta, .entry-utility, .widget-title, .callout {
+	font-family: sans-serif;
 }

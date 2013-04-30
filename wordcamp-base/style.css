@@ -525,7 +525,7 @@ div.menu li {
 	background: #f2f7fc;
 }
 .hentry {
-	margin: 0 0 48px 0;
+	margin: 0;
 }
 .home .sticky {
 	background: #f2f7fc;
@@ -1364,6 +1364,19 @@ code {
 
 /* Custom stuff */
 
+.entry-title a {
+	color: #6b8e9f !important;
+}
+
+.entry-content {
+	margin-bottom: 0 !important;
+}
+
+#content .entry-title {
+	color: #6b8e9f !important;
+	padding-top: 10px;
+}
+
 .event-logo {
 	width: 230px;
 	display: table-cell;
@@ -1379,7 +1392,7 @@ code {
 
 .menu-item {
 	display: table-cell;
-	padding-right: 0.25em;
+	padding-right: 1em;
 	padding-top: 40px;
 	padding-bottom: 20px;
 	font-size: large;
@@ -1389,6 +1402,11 @@ code {
 
 .menu-item:before {
 	content: "• ";
+	padding-right: .5em;
+}
+
+#header li {
+	padding-left: .5em;
 }
 
 .menu-item a:link,
@@ -1480,4 +1498,8 @@ body {
 
 #after-header-container {
 	display: none;
+}
+
+h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access div.menu ul, #access a.button, h3#comments-title, h3#reply-title, .entry-title, .entry-meta, .entry-utility, .widget-title, .callout {
+	font-family: sans-serif !important;
 }

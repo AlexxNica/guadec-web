@@ -15,7 +15,7 @@ function twentyten_posted_on() {
 		)
 	);
 
-	$meta['sep'] = ' <span class="meta-sep meta-sep-bull">&bull;</span> ';
+	$meta['sep'] = ' <span class="meta-sep meta-sep-bull">&bull;</span> ';	
 	$meta['comments'] = array(
 		'before'    => '<span class="comments-link">',
 		'after'     => '</span>',
@@ -32,7 +32,7 @@ function twentyten_posted_on() {
 
 	$meta['br'] = '<br />'; // Just to have.
 
-	$meta['order'] = array( 'author', 'sep', 'comments', 'edit' );
+	$meta['order'] = array( 'author', 'edit' );
 
 	$meta = apply_filters( 'wcb_entry_meta', $meta );
 
@@ -51,6 +51,8 @@ function twentyten_posted_on() {
 				if ( isset( $meta['sep'] ) )
 					$content['before'] = $meta['sep'] . $content['before'];
 				edit_post_link( $content['title'], $content['before'], $content['after'] );
+				break;
+			case 'category':
 				break;
 			default:
 				echo $content;
