@@ -17,7 +17,6 @@ $structure = wcb_get('structure');
 $structure->full_width_content();
 
 get_header(); ?>
-
 		<div id="container">
 			<div id="content" role="main">
 
