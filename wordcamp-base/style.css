@@ -1586,7 +1586,7 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
     float: right;
 }
 
-.sponsors-list-title {
+.sponsors-list-title, .travel-title {
     border-bottom: solid 1px #ddd;
     padding-bottom: 5px;
 }
