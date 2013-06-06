@@ -84,7 +84,7 @@ add_action('admin_menu', 'remove_menus');
  *
  *-------------------------------------------------------------------------------------*/
 
-
+add_filter('login_headerurl', 'get_site_url');
 
 function login_css() {
 	wp_enqueue_style( 'login_css', get_template_directory_uri() . '/css/login.css' );
