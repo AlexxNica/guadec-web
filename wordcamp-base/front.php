@@ -32,8 +32,12 @@ while ( have_posts() ) : the_post();
         </div>
 
         <div class="sponsors-bar">
-            <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-google.png" alt="Google" />
-            <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-redhat.png" alt="Red Hat" />
+            <div class="sponsors-bar-title">Sponsored by</div>
+            <div class="sponsors-level">
+              <div class="sponsors-level-title">Gold</div>
+              <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-redhat.png" alt="Red Hat" />
+              <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-google.png" alt="Google" />
+            </div>
             <a href="<?php echo get_permalink(get_page_by_title( 'Sponsors' )); ?>" class="become-sponsor">Become a sponsor too!</a>
         </div>
 	</div>
