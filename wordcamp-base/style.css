@@ -1604,14 +1604,35 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
     float: right;
 }
 
+.sponsors-row {
+    display: table;
+    padding: 15px 0;
+}
+
 .sponsors-list-title, .sub-section-title {
     border-bottom: solid 1px #ddd;
     padding-bottom: 5px;
 }
 
 .sponsors-list-item {
-    display: inline-block;
-    padding-right: 30px;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100px;
+}
+
+.sponsor-logo {
+    width: 250px;
+    height: 86px;
+    padding: 20px 20px;
+}
+.sponsor-redhat {
+    background: url("images/sponsor-redhat.png") no-repeat center center;
+}
+.sponsor-google {
+    background: url("images/sponsor-google.png") no-repeat center center;
+}
+.sponsor-canonical {
+    background: url("images/sponsor-canonical.png") no-repeat center center;
 }
 
 .image {
