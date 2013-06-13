@@ -38,6 +38,10 @@ while ( have_posts() ) : the_post();
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-redhat.png" alt="Red Hat" />
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-google.png" alt="Google" />
             </div>
+            <div class="sponsors-level">
+              <div class="sponsors-level-title">Silver</div>
+              <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-canonical.png" alt="Canonical" />
+            </div>
             <a href="<?php echo get_permalink(get_page_by_title( 'Sponsors' )); ?>" class="become-sponsor">Become a sponsor too!</a>
         </div>
 	</div>
