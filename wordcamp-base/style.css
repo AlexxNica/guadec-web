@@ -1614,8 +1614,11 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
 }
 
 .sponsors-level-title, .sponsors-list-item {
-    display: table-cell;
     vertical-align: middle;
+}
+
+.sponsors-level-title-table {
+    display: table-cell;
     width: 100px;
 }
 
