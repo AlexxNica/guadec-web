@@ -1628,6 +1628,11 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
     padding: 20px 20px;
 }
 
+.sponsors-row p {
+    margin-bottom: 0px !important;
+    line-height: 0px !important;
+}
+
 .image {
    position: relative;
    margin-bottom: 20px;
