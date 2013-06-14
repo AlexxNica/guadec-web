@@ -1625,6 +1625,19 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
     padding: 20px 20px;
 }
 
+.sponsor-redhat {
+    background: url("images/sponsor-redhat.png") no-repeat center center;
+}
+
+.sponsor-google {
+    background: url("images/sponsor-google.png") no-repeat center center;
+}
+
+.sponsor-canonical {
+    background: url("images/sponsor-canonical.png") no-repeat center center;
+}
+
+
 .image {
    position: relative;
    margin-bottom: 20px;
