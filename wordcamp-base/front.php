@@ -35,8 +35,8 @@ while ( have_posts() ) : the_post();
             <div class="sponsors-bar-title">Sponsored by</div>
             <div class="sponsors-level">
               <div class="sponsors-level-title">Gold</div>
-              <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-redhat.png" alt="Red Hat" />
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-google.png" alt="Google" />
+              <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-redhat.png" alt="Red Hat" />
             </div>
             <div class="sponsors-level">
               <div class="sponsors-level-title">Silver</div>
