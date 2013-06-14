@@ -1613,7 +1613,7 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
     padding-bottom: 5px;
 }
 
-.sponsors-list-item {
+.sponsors-level-title, .sponsors-list-item {
     display: table-cell;
     vertical-align: middle;
     width: 100px;
