@@ -200,4 +200,11 @@ function my_reset_password_message($content, $key) {
 	return $message;
 }
 
+
+function create_registration_role()
+{
+  add_role('registration', 'Registration', array('read' => true));
+}
+add_action('init', 'create_registration_role');
+
 ?>
