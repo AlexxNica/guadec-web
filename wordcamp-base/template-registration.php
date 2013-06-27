@@ -258,18 +258,19 @@ class Registration {
     $date = new DateTime(null, new DateTimeZone('Europe/Prague'));
     $date = $date->format('d.m.Y');
 
-    $text = "Zjednodušený daňový doklad č. (simplified tax document #): $tax_doc_number\n";
-    $text .= "\nProdávající (vendor):\nLiberix, o.p.s.\nErbenova 270/2\n779 00 Olomouc\nDIČ (tax identification number): CZ26860015\n\n";
-    $text .= "Předmět plnění (items purchased):\n";
-    $text .= "1x conference fee - $this->registration_type\n";
+    $rn = "\r\n";
+    $text = "Zjednodušený daňový doklad č. (simplified tax document #): $tax_doc_number".$rn;
+    $text .= $rn."Prodávající (vendor):".$rn."Liberix, o.p.s.".$rn."Erbenova 270/2".$rn."779 00 Olomouc".$rn."DIČ (tax identification number): CZ26860015".$rn.$rn;
+    $text .= "Předmět plnění (items purchased):".$rn;
+    $text .= "1x conference fee - $this->registration_type".$rn;
     if ($this->tshirt) {
-      $text .= "1x GUADEC t-shirt\n";
+      $text .= "1x GUADEC t-shirt".$rn;
     }
     if ($this->lunch) {
-      $text .= "4x lunch voucher\n";
+      $text .= "4x lunch voucher".$rn;
     }
-    $text .= "\nDatum vystavení (issued on): $date\n";
-    $text .= "Cena včetně 21% DPH (price including 21% VAT): $this->total_payed Kč (CZK)\n";
+    $text .= $rn."Datum vystavení (issued on): $date".$rn;
+    $text .= "Cena včetně 21% DPH (price including 21% VAT): $this->total_payed Kč (CZK)".$rn;
 
     $updated = $wpdb->update($table_name, array(
       'tax_doc_number' => $tax_doc_number,
@@ -642,8 +643,10 @@ function send_registration_email($reg)
 {
   global $current_user;
 
+  $msg = get_registration_confirmation($reg) . "<p>Cheers,<br>The GUADEC 2013 Team</p>";
+
   add_filter('wp_mail_content_type', 'set_html_content_type');
-  wp_mail($current_user->user_email, '[GUADEC 2013] Registration successful', get_registration_confirmation($reg));
+  wp_mail($current_user->user_email, '[GUADEC 2013] Registration successful', $msg);
   // reset content-type to to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
   remove_filter('wp_mail_content_type', 'set_html_content_type');
 }
