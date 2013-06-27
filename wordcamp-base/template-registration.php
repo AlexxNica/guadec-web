@@ -651,6 +651,11 @@ function send_registration_email($reg)
   remove_filter('wp_mail_content_type', 'set_html_content_type');
 }
 
+function set_plain_utf8_content_type()
+{
+  return 'text/plain; charset=UTF-8';
+}
+
 function send_tax_document($reg)
 {
   global $current_user;
@@ -659,7 +664,9 @@ function send_tax_document($reg)
     return;
   }
 
+  add_filter('wp_mail_content_type', 'set_plain_utf8_content_type');
   wp_mail($current_user->user_email, '[GUADEC 2013] Registration tax document', $reg->tax_document);
+  remove_filter('wp_mail_content_type', 'set_plain_utf8_content_type');
 }
 
 
