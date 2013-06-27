@@ -631,6 +631,8 @@ function get_registration_confirmation($reg)
     $msg .= ".</p>";
   }
 
+  $msg .= "<p>If any of the above isn't correct, please contact us.</p>";
+
   $msg .= "<p>See you in Brno!</p>";
 
   return $msg;
