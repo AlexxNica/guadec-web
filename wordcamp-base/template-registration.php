@@ -454,7 +454,7 @@ function put_registration_form($reg, $info)
     return;
   }
 
-  echo "<p>$current_user->first_name $current_user->last_name</p>";
+  echo "<p><strong>$current_user->first_name</strong>, great that you are coming to GUADEC!</p>";
   echo "<form action=$this_url method=post>";
   include 'registration-form.php';
 
@@ -628,8 +628,10 @@ function get_registration_confirmation($reg)
     if ($reg->breakfast) {
       $msg .= ", including breakfast";
     }
-    $msg .= "</p>";
+    $msg .= ".</p>";
   }
+
+  $msg .= "<p>See you in Brno!</p>";
 
   return $msg;
 }

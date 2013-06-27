@@ -1,7 +1,7 @@
 <div style='width: 50%'>
 
 <p>
-  <h3 class="sub-section-title">Registration fee</h3>
+  <h3 class="sub-section-title">Registration type</h3>
   <select size=1 name=registration_type>
     <option <?php if ($reg->registration_type == 'professional') { echo 'selected'; } ?> value='professional'>Professional — 3750 CZK</option>
     <option <?php if ($reg->registration_type == 'hobbyist') { echo 'selected'; } ?> value='hobbyist'>Hobbyist — 500 CZK</option>
@@ -31,14 +31,14 @@
 
 <p>
   <h3 class="sub-section-title">T-Shirt</h3>
-  GUADEC 2013 T-Shirt:
   <input type=checkbox name=tshirt <?php if ($reg->tshirt) { echo 'checked=true'; } ?>/>
+  I want a GUADEC 2013 t-shirt
   <span style='float: right'>400 CZK</span>
   <span id=tshirt_span style='display: none'>
     <br>
     Type:
-    <input type=radio name=tshirt_gender value='male' <?php if ($reg->tshirt_gender == 'male') { echo 'checked=true'; } ?> /> Man
-    <input type=radio name=tshirt_gender value='female' <?php if ($reg->tshirt_gender == 'female') { echo 'checked=true'; } ?> /> Woman
+    <input type=radio name=tshirt_gender value='male' <?php if ($reg->tshirt_gender == 'male') { echo 'checked=true'; } ?> /> Men's
+    <input type=radio name=tshirt_gender value='female' <?php if ($reg->tshirt_gender == 'female') { echo 'checked=true'; } ?> /> Women's
     <?php if ($info->tshirt_gender) { ?>
       <br>
       <span style='color: red'>*</span> Please specify a T-Shirt type
@@ -53,37 +53,39 @@
       <option <?php if ($reg->tshirt_size == 'xxl') { echo 'selected'; } ?> value='xxl'>XXL</option>
     </select>
     <br>
-    I am a GNOME Foundation member:
     <input type=checkbox name=foundation <?php if ($reg->foundation) { echo 'checked=true'; } ?>/>
+    I am a GNOME Foundation member
     <span style='float: right'>-100 CZK</span>
   </span>
 </p>
 
 <p>
   <h3 class="sub-section-title">Meals</h3>
-  Lunch at the venue for the core days (Aug. 1 to 4):
   <input type=checkbox name=lunch <?php if ($reg->lunch) { echo 'checked=true'; } ?>/>
-  <span style='float: right'>4×110 CZK</span>
+  I'll have lunch at the venue in the core days (Aug. 1 to 4)
+  <span style='float: right'>440 CZK</span>
   <span id=lunch_span style='display: none'>
     <br>
-    Vegetarian:
     <input type=checkbox name=vegetarian <?php if ($reg->vegetarian) { echo 'checked=true'; } ?>/>
+    Vegetarian
   </span>
 </p>
 
 <p>
   <h3 class="sub-section-title">Accommodation</h3>
-  Staying at the <a href='https://www.guadec.org/?page_id=695#taufer'>Taufer dormitory</a>:
   <input type=checkbox name=dormitory <?php if ($reg->dormitory) { echo 'checked=true'; } ?>/>
+  Please, book me accommodation at the <a href='https://www.guadec.org/?page_id=695#taufer'>Taufer dormitory</a>
   <span id=dormitory_span style='display: none'>
 
   <div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >
   • We will book a room and optionally breakfast for you but the
   payment shall be done directly to the Taufer dormitory on
-  check-out.</div>
+  check-out.<br>• Prices are 310 CZK night/person in a shared room,
+  420 CZK night/person in a single room and the optional breakfast is
+  100 CZK day/person.</div>
 
-    Breakfast:
     <input type=checkbox name=breakfast <?php if ($reg->breakfast) { echo 'checked=true'; } ?>/>
+    Breakfast
     <div style='display: table'>
       <div style='display: table-row'>
       <span style='display: table-cell'>Check-in date:</span>
@@ -114,13 +116,13 @@
     <?php } ?>
     <span id=double_room_span style='display: none'>
       <br>
-      Roommate:
+      Preferred roommate:
       <input type=text name=roommate <?php if ($reg->roommate) { echo "value=$reg->roommate"; } ?> />
 
   <div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >
-  • If you enter a GUADEC participant's name we'll put both of you in
-  the same room.<br>• Leave empty if you don't mind us choosing a same
-  gender participant at random who also doesn't specify a
+  • If you enter a GUADEC participant's name we'll book a shared room
+  for both of you.<br>• Leave empty if you don't mind us choosing a
+  same gender participant at random who also doesn't specify a
   roommate.</div>
 
     </span>
@@ -129,8 +131,11 @@
 
 <p>
   <h3 class="sub-section-title" style='margin-bottom: 0 !important'>Notes for the Organization</h3>
-  <br>
-  <textarea name=notes rows=8 cols=40><?php if ($reg->notes) { echo "$reg->notes"; } ?></textarea>
+
+  <div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >
+  • Like dietary preferences, allergies, disabilities, children…</div>
+
+  <textarea name=notes rows=5 cols=40><?php if ($reg->notes) { echo "$reg->notes"; } ?></textarea>
 </p>
 
 </div>
