@@ -3,13 +3,12 @@
 Template Name: Registration
 */
 
-define('GOID', 8881354867);
-define('SECURE_KEY', "BcGk8p8EWRhNwHQnz5wpkZFY");
-
 require_once(WP_CONTENT_DIR . '/gopay-api/gopay_config.php');
 require_once(WP_CONTENT_DIR . '/gopay-api/gopay_helper.php');
 require_once(WP_CONTENT_DIR . '/gopay-api/gopay_soap.php');
 GopayConfig::init(GopayConfig::TEST);
+
+require_once('gopay-credentials.php');
 
 class ValidationInfo {
   var $valid = true;
