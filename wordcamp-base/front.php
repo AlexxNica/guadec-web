@@ -44,5 +44,20 @@ while ( have_posts() ) : the_post();
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-canonical.png" alt="Canonical" />
             </div>
             <a href="<?php echo get_permalink(get_page_by_title( 'Sponsors' )) . "#become_sponsor"; ?>" class="become-sponsor">Become a sponsor too!</a>
+
+            <div class="clear"></div>
+
+            <div class="sponsors-bar-title">Partners</div>
+            <div class="sponsors-level">
+              <div class="sponsors-level-title">Collaborators</div>
+              <img src="<?php echo get_bloginfo('template_url')?>/images/partner-fit.png" alt="Faculty of Information Technology of Brno University of Technology" />
+              <img src="<?php echo get_bloginfo('template_url')?>/images/partner-liberix.png" alt="Liberix" />
+            </div>
+            <div class="sponsors-level">
+              <div class="sponsors-level-title">Media</div>
+              <img src="<?php echo get_bloginfo('template_url')?>/images/partner-linuxexpres.png" alt="Linux EXPRES" />
+              <img src="<?php echo get_bloginfo('template_url')?>/images/partner-root.png" alt="ROOT.CZ" />
+            </div>
         </div>
+
 	</div>
