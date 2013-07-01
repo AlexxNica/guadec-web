@@ -55,6 +55,7 @@ while ( have_posts() ) : the_post();
             </div>
             <div class="sponsors-level">
               <div class="sponsors-level-title">Media</div>
+              <img src="<?php echo get_bloginfo('template_url')?>/images/partner-abclinuxu.png" alt="ABC Linuxu" />
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-linuxexpres.png" alt="Linux EXPRES" />
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-root.png" alt="ROOT.CZ" />
             </div>
