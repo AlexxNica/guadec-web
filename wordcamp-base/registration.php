@@ -1,0 +1,625 @@
+<?php
+require_once(WP_CONTENT_DIR . '/gopay-api/gopay_config.php');
+require_once(WP_CONTENT_DIR . '/gopay-api/gopay_helper.php');
+require_once(WP_CONTENT_DIR . '/gopay-api/gopay_soap.php');
+
+require_once('gopay-credentials.php');
+
+class ValidationInfo {
+  var $valid = true;
+  var $registration_code = false;
+  var $tshirt_gender = false;
+  var $check_in_out_dates = false;
+  var $gender = false;
+  var $room = false;
+}
+
+class Registration {
+  var $ID = null;
+  var $user_ID = null;
+
+  var $registration_type = 'hobbyist';
+  var $registration_code = null;
+
+  var $tshirt = false;
+  var $tshirt_gender = null;
+  var $tshirt_size = null;
+  var $foundation = null;
+
+  var $lunch = false;
+  var $vegetarian = null;
+
+  var $dormitory = false;
+  var $breakfast = null;
+  var $check_in_date = null;
+  var $check_out_date = null;
+  var $gender = null;
+  var $room = null;
+  var $roommate = null;
+
+  var $completed = false;
+  var $total_payed = null;
+
+  var $payment_session_id = null;
+
+  var $notes = null;
+
+  var $tax_doc_number = null;
+  var $tax_document = null;
+
+  function get_amount_to_pay() {
+    $total = 0;
+
+    switch ($this->registration_type) {
+      case 'professional';
+        $total += 3750;
+        break;
+      case 'hobbyist';
+        $total += 500;
+        break;
+      case 'student';
+        $total += 250;
+        break;
+    }
+
+    if ($this->tshirt) {
+      if ($this->foundation) {
+        $total += 300;
+      } else {
+        $total += 400;
+      }
+    }
+
+    if ($this->lunch) {
+      $total += 440;
+    }
+
+    return $total;
+  }
+
+  function validate() {
+    $info = new ValidationInfo();
+
+    if ($this->registration_type != 'code') {
+      $this->registration_code = null;
+    } else if (!validate_code($this->registration_code)) {
+      $info->valid = false;
+      $info->registration_code = true;
+    }
+
+    if ($this->tshirt) {
+      if (!($this->tshirt_gender == 'male' || $this->tshirt_gender == 'female')) {
+        $info->valid = false;
+        $info->tshirt_gender = true;
+      }
+    } else {
+      $this->tshirt_gender = null;
+      $this->tshirt_size = null;
+      $this->foundation = null;
+    }
+
+    if (!$this->lunch) {
+      $this->vegetarian = null;
+    }
+
+    if ($this->dormitory) {
+      try {
+        $in = new DateTime($this->check_in_date);
+        $out = new DateTime($this->check_out_date);
+        $delta = $out->diff($in);
+        if ($delta->invert == 0 || $delta->d == 0) {
+          throw new Exception();
+        }
+        $delta = $out->diff(new DateTime('2013-08-18'));
+        if ($delta->invert == 1) {
+          throw new Exception();
+        }
+        $delta = $in->diff(new DateTime('2013-07-13'));
+        if ($delta->invert == 0) {
+          throw new Exception();
+        }
+        $this->check_in_date = $in->format('Y-m-d');
+        $this->check_out_date = $out->format('Y-m-d');
+      } catch (Exception $e) {
+        $info->valid = false;
+        $info->check_in_out_dates = true;
+      }
+
+      if (!($this->gender == 'male' || $this->gender == 'female')) {
+        $info->valid = false;
+        $info->gender = true;
+      }
+      if (!($this->room == 'single' || $this->room == 'double')) {
+        $info->valid = false;
+        $info->room = true;
+      }
+      if ($this->room == 'single') {
+        $this->roommate = null;
+      }
+    } else {
+      $this->breakfast = null;
+      $this->check_in_date = null;
+      $this->check_out_date = null;
+      $this->gender = null;
+      $this->room = null;
+      $this->roommate = null;
+    }
+
+    return $info;
+  }
+
+  function insert($user_id) {
+    global $wpdb;
+
+    if ($this->validate()->valid == false) {
+      error_page("data validation failed on insert for user $user_id");
+    }
+
+    $this->user_ID = $user_id;
+    $this->completed = false;
+    $this->total_payed = $this->get_amount_to_pay();
+
+    $inserted = $wpdb->insert(get_table_name(), array(
+      'user_ID' => $this->user_ID,
+
+      'registration_type' => $this->registration_type,
+      'registration_code' => $this->registration_code,
+
+      'tshirt' => $this->tshirt,
+      'tshirt_gender' => $this->tshirt_gender,
+      'tshirt_size' => $this->tshirt_size,
+      'foundation' => $this->foundation,
+
+      'lunch' => $this->lunch,
+      'vegetarian' => $this->vegetarian,
+
+      'dormitory' => $this->dormitory,
+      'breakfast' => $this->breakfast,
+      'check_in_date' => $this->check_in_date,
+      'check_out_date' => $this->check_out_date,
+      'gender' => $this->gender,
+      'room' => $this->room,
+      'roommate' => $this->roommate,
+
+      'completed' => $this->completed,
+      'total_payed' => $this->total_payed,
+
+      'notes' => $this->notes
+    ));
+
+    if (!$inserted) {
+      error_page("couldn't insert registration for user $this->user_ID");
+    }
+
+    $this->ID = $wpdb->insert_id;
+  }
+
+  function update_secrets($payment_session_id) {
+    global $wpdb;
+
+    $updated = $wpdb->update(get_table_name(), array(
+      'payment_session_id' => $payment_session_id
+    ),
+    array('ID' => $this->ID));
+
+    if (!$updated) {
+      error_page("couldn't update secrets for registration $this->ID");
+    }
+
+    $this->payment_session_id = $payment_session_id;
+  }
+
+  function delete() {
+    global $wpdb;
+    $table_name = get_table_name();
+
+    $deleted = $wpdb->query($wpdb->prepare("delete from $table_name where ID = %d", $this->ID));
+
+    if (!$deleted) {
+      error_page("couldn't delete registration $this->ID");
+    }
+  }
+
+  function set_completed() {
+    global $wpdb;
+    $table_name = get_table_name();
+
+    $updated = $wpdb->update($table_name, array(
+      'completed' => true
+    ),
+    array('ID' => $this->ID));
+
+    if (!$updated) {
+      error_page("couldn't set registration $this->ID as completed");
+    }
+
+    $this->completed = true;
+
+    if ($this->total_payed == 0) {
+      return;
+    }
+
+    $wpdb->query("lock tables $table_name write");
+
+    $tax_doc_number_base = 20130000;
+    $tax_doc_number = $wpdb->get_var("select max(tax_doc_number) from $table_name");
+    if ($tax_doc_number == null || $tax_doc_number < $tax_doc_number_base) {
+      $tax_doc_number = $tax_doc_number_base;
+    }
+    $tax_doc_number += 1;
+
+    $date = new DateTime(null, new DateTimeZone('Europe/Prague'));
+    $date = $date->format('d.m.Y');
+
+    $rn = "\r\n";
+    $text = "Zjednodušený daňový doklad č. (simplified tax document #): $tax_doc_number".$rn;
+    $text .= $rn."Prodávající (vendor):".$rn."Liberix, o.p.s.".$rn."Erbenova 270/2".$rn."779 00 Olomouc".$rn."DIČ (tax identification number): CZ26860015".$rn.$rn;
+    $text .= "Předmět plnění (items purchased):".$rn;
+    $text .= "1x conference fee - $this->registration_type".$rn;
+    if ($this->tshirt) {
+      $text .= "1x GUADEC t-shirt".$rn;
+    }
+    if ($this->lunch) {
+      $text .= "4x lunch voucher".$rn;
+    }
+    $text .= $rn."Datum vystavení (issued on): $date".$rn;
+    $text .= "Cena včetně 21% DPH (price including 21% VAT): $this->total_payed Kč (CZK)".$rn;
+
+    $updated = $wpdb->update($table_name, array(
+      'tax_doc_number' => $tax_doc_number,
+      'tax_document' => $text
+    ),
+    array('ID' => $this->ID));
+
+    if (!$updated) {
+      error_log("couldn't set the tax document for registration $this->ID");
+    } else {
+      $this->tax_doc_number = $tax_doc_number;
+      $this->tax_document = $text;
+    }
+
+    $wpdb->query("unlock tables");
+  }
+}
+
+function error_page($msg, $url = null)
+{
+  if ($url == null) {
+    $url = get_permalink(get_page_by_title('Registration Error')->ID);
+  }
+
+  error_log($msg);
+  header('Location: ' . $url);
+  exit;
+}
+
+function is_post()
+{
+  return $_SERVER['REQUEST_METHOD'] == 'POST';
+}
+
+function get_table_name()
+{
+  global $wpdb;
+  return $wpdb->prefix . 'guadec_registration';
+}
+
+function get_codes_table_name()
+{
+  global $wpdb;
+  return $wpdb->prefix . 'guadec_registration_codes';
+}
+
+function validate_code($code)
+{
+  global $wpdb;
+  $table_name = get_table_name();
+  $codes_table_name = get_codes_table_name();
+
+  $wpdb->get_row("select * from $codes_table_name where code like '$code'");
+  if ($wpdb->num_rows == 0) {
+    return false;
+  }
+
+  $wpdb->get_row("select * from $table_name where registration_code like '$code'");
+  if ($wpdb->num_rows > 0) {
+    return false;
+  }
+
+  return true;
+}
+
+function complete_registration($reg)
+{
+  $user = get_userdata($reg->user_ID);
+
+  $reg->set_completed();
+  send_tax_document($reg, $user);
+  send_registration_email($reg, $user);
+  header('Location: ' . get_permalink());
+}
+
+function check_gopay_params()
+{
+  if (empty($_GET['paymentSessionId'])
+  || empty($_GET['targetGoId'])
+  || empty($_GET['orderNumber'])
+  || empty($_GET['encryptedSignature'])) {
+    return false;
+  }
+
+  return true;
+}
+
+function maybe_finish_payment($reg)
+{
+  $returnedPaymentSessionId = $_GET['paymentSessionId'];
+  $returnedGoId = $_GET['targetGoId'];
+  $returnedOrderNumber = $_GET['orderNumber'];
+  $returnedEncryptedSignature = $_GET['encryptedSignature'];
+
+  if ($returnedOrderNumber != $reg->ID
+  ||  $returnedPaymentSessionId != $reg->payment_session_id) {
+    error_page("got wrong secrets from gopay to finish registration $returnedOrderNumber with session $returnedPaymentSessionId");
+  }
+
+  try {
+    GopayHelper::checkPaymentIdentity((float)$returnedGoId,
+                                      (float)$returnedPaymentSessionId,
+                                      null,
+                                      $returnedOrderNumber,
+                                      $returnedEncryptedSignature,
+                                      (float)GOID,
+                                      $reg->ID,
+                                      SECURE_KEY);
+    $result = GopaySoap::isPaymentDone((float)$returnedPaymentSessionId,
+                                       (float)GOID,
+                                       $reg->ID,
+                                       $reg->total_payed * 100,
+                                       'CZK',
+                                       'GUADEC 2013',
+                                       SECURE_KEY);
+    switch ($result["sessionState"]) {
+      case GopayHelper::PAID:
+        complete_registration($reg);
+        break;
+      case GopayHelper::AUTHORIZED:
+      case GopayHelper::PAYMENT_METHOD_CHOSEN:
+        // do nothing, we'll wait for further notifications or manual invervention
+        header('Location: ' . get_permalink());
+        break;
+      default:
+        $reg->delete();
+        error_page("payment for registration $reg->ID unsuccessful: " . $result["sessionState"]);
+    }
+  } catch (Exception $e) {
+    error_page($e->getMessage());
+  }
+}
+
+function fill_registration_data_from_post()
+{
+  $reg = new Registration();
+
+  if (!empty($_POST['registration_type'])) {
+    $reg->registration_type = htmlspecialchars($_POST['registration_type']);
+  }
+  if (!empty($_POST['registration_code'])) {
+    $reg->registration_code = htmlspecialchars($_POST['registration_code']);
+  }
+  if (!empty($_POST['tshirt'])) {
+    $reg->tshirt = (bool)$_POST['tshirt'];
+  }
+  if (!empty($_POST['tshirt_gender'])) {
+    $reg->tshirt_gender = htmlspecialchars($_POST['tshirt_gender']);
+  }
+  if (!empty($_POST['tshirt_size'])) {
+    $reg->tshirt_size = htmlspecialchars($_POST['tshirt_size']);
+  }
+  if (!empty($_POST['foundation'])) {
+    $reg->foundation = (bool)$_POST['foundation'];
+  }
+  if (!empty($_POST['lunch'])) {
+    $reg->lunch = (bool)$_POST['lunch'];
+  }
+  if (!empty($_POST['vegetarian'])) {
+    $reg->vegetarian = (bool)$_POST['vegetarian'];
+  }
+  if (!empty($_POST['dormitory'])) {
+    $reg->dormitory = (bool)$_POST['dormitory'];
+  }
+  if (!empty($_POST['breakfast'])) {
+    $reg->breakfast = (bool)$_POST['breakfast'];
+  }
+  if (!empty($_POST['check_in_date'])) {
+    $reg->check_in_date = htmlspecialchars($_POST['check_in_date']);
+  }
+  if (!empty($_POST['check_out_date'])) {
+    $reg->check_out_date = htmlspecialchars($_POST['check_out_date']);
+  }
+  if (!empty($_POST['gender'])) {
+    $reg->gender = htmlspecialchars($_POST['gender']);
+  }
+  if (!empty($_POST['room'])) {
+    $reg->room = htmlspecialchars($_POST['room']);
+  }
+  if (!empty($_POST['roommate'])) {
+    $reg->roommate = htmlspecialchars($_POST['roommate']);
+  }
+  if (!empty($_POST['notes'])) {
+    $reg->notes = htmlspecialchars($_POST['notes']);
+  }
+
+  return $reg;
+}
+
+function get_registration_data_from_request()
+{
+  if (is_post()) {
+    return fill_registration_data_from_post();
+  }
+
+  return new Registration();
+}
+
+function fill_registration_data_from_db_row($row)
+{
+  $reg = new Registration();
+
+  $reg->ID = $row->ID;
+  $reg->user_ID = $row->user_ID;
+
+  $reg->registration_type = $row->registration_type;
+  $reg->registration_code = $row->registration_code;
+
+  $reg->tshirt = $row->tshirt;
+  $reg->tshirt_gender = $row->tshirt_gender;
+  $reg->tshirt_size = $row->tshirt_size;
+  $reg->foundation = $row->foundation;
+
+  $reg->lunch = $row->lunch;
+  $reg->vegetarian = $row->vegetarian;
+
+  $reg->dormitory = $row->dormitory;
+  $reg->breakfast = $row->breakfast;
+  $reg->check_in_date = $row->check_in_date;
+  $reg->check_out_date = $row->check_out_date;
+  $reg->gender = $row->gender;
+  $reg->room = $row->room;
+  $reg->roommate = $row->roommate;
+
+  $reg->completed = $row->completed;
+  $reg->total_payed = $row->total_payed;
+
+  $reg->payment_session_id = $row->payment_session_id;
+
+  $reg->notes = $row->notes;
+
+  $reg->tax_doc_number = $row->tax_doc_number;
+  $reg->tax_document = $row->tax_document;
+
+  return $reg;
+}
+
+function get_registration_data_for_user_id($id)
+{
+  global $wpdb;
+  $table_name = get_table_name();
+
+  $row = $wpdb->get_row("select * from $table_name where user_ID = $id");
+  if ($wpdb->num_rows != 1) {
+    return new Registration();
+  }
+
+  return fill_registration_data_from_db_row($row);
+}
+
+function get_registration_data_for_payment_session_id($id)
+{
+  global $wpdb;
+  $table_name = get_table_name();
+
+  $row = $wpdb->get_row("select * from $table_name where payment_session_id like '$id'");
+  if ($wpdb->num_rows != 1) {
+    return new Registration();
+  }
+
+  return fill_registration_data_from_db_row($row);
+}
+
+function get_registration_data_string($reg)
+{
+  $msg = "<p>Registration type: ";
+  switch ($reg->registration_type) {
+    case 'professional';
+    $msg .= "Professional";
+    break;
+    case 'hobbyist';
+    $msg .= "Hobbyist";
+    break;
+    case 'student';
+    $msg .= "Student";
+    break;
+    case 'code';
+    $msg .= "Sponsored";
+    break;
+  }
+  $msg .= "</p>";
+
+  if ($reg->tshirt || $reg->lunch) {
+    $msg .= "<p>When picking your badge you will receive:";
+    $msg .= "<ul>";
+
+    if ($reg->tshirt) {
+      $msg .= "<li>A ";
+      if ($reg->tshirt_gender == 'male') {
+        $msg .= "men's";
+      } else {
+        $msg .= "women's";
+      }
+      $msg .= " T-Shirt, size ";
+      $msg .= strtoupper($reg->tshirt_size) . "</li>";
+    }
+
+    if ($reg->lunch) {
+      $msg .= "<li>Vouchers for lunch at the venue for August 1, 2, 3 and 4</li>";
+    }
+
+    $msg .= "</ul></p>";
+  }
+
+  if ($reg->dormitory) {
+    $msg .= "<p>You have asked us to book a $reg->room room at the Taufer dormitory for the period ";
+    $msg .= "$reg->check_in_date to $reg->check_out_date";
+    if ($reg->breakfast) {
+      $msg .= ", including breakfast";
+    }
+    $msg .= ".</p>";
+  }
+
+  $msg .= "<p>If any of the above isn't correct, please contact us.</p>";
+
+  return $msg;
+}
+
+function get_registration_confirmation($reg, $user)
+{
+  $msg = "<p>$user->first_name, you are successfully registered for GUADEC 2013.</p>";
+  $msg .= get_registration_data_string($reg);
+  $msg .= "<p>See you in Brno!</p>";
+
+  return $msg;
+}
+
+function set_html_content_type()
+{
+  return 'text/html';
+}
+
+function send_registration_email($reg, $user)
+{
+  $msg = get_registration_confirmation($reg, $user) . "<p>Cheers,<br>The GUADEC 2013 Team</p>";
+
+  add_filter('wp_mail_content_type', 'set_html_content_type');
+  wp_mail($user->user_email, '[GUADEC 2013] Registration successful', $msg);
+  // reset content-type to to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
+  remove_filter('wp_mail_content_type', 'set_html_content_type');
+}
+
+function set_plain_utf8_content_type()
+{
+  return 'text/plain; charset=UTF-8';
+}
+
+function send_tax_document($reg, $user)
+{
+  if ($reg->tax_document == null || $reg->tax_doc_number == null) {
+    return;
+  }
+
+  add_filter('wp_mail_content_type', 'set_plain_utf8_content_type');
+  wp_mail($user->user_email, '[GUADEC 2013] Registration tax document', $reg->tax_document);
+  remove_filter('wp_mail_content_type', 'set_plain_utf8_content_type');
+}
+
+?>
