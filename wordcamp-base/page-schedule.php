@@ -112,7 +112,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>16:20 - 18:00</td>
-                <td class="special-event" colspan="2">Foundation Annual General Meeting</td>
+                <td class="special-event" colspan="2">Foundation Annual General Meeting @ Room 3</td>
             </tr>
         </table>
 
@@ -205,7 +205,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>16:20 - 18:00</td>
-                <td class="special-event" colspan="2">Lightning talks</td>
+                <td class="special-event" colspan="2">Lightning Talks @ Room 3</td>
             </tr>
         </table>
 
