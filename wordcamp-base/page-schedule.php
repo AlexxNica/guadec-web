@@ -7,7 +7,11 @@ get_header(); ?>
 
 <div id="container">
 	<div id="content" role="main">
-	    <div class="schedule-nav">
+	    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <?php the_content(); ?>
+        <?php endwhile; endif; ?>
+	
+	    <div class="schedule-nav">	        
     	    <a href="#day1">Day 1</a> | <a href="#day2">Day 2</a> | <a href="#day3">Day 3</a> | <a href="#day4">Day 4</a>
         </div>
 
@@ -15,8 +19,14 @@ get_header(); ?>
 
         <table class="schedule">
             <tr>
+                <td></td>
+                <td class="room-name">Room 1</td>
+                <td class="room-name">Room 2</td>
+            </tr>
+        
+            <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote</td>
+                <td class="keynote" colspan="2">Keynote @ Room 3</td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -66,7 +76,7 @@ get_header(); ?>
         <table class="schedule">
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote</td>
+                <td class="keynote" colspan="2">Keynote @ Room 3</td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -110,7 +120,7 @@ get_header(); ?>
         <table class="schedule">
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote</td>
+                <td class="keynote" colspan="2">Keynote @ Room 3</td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -159,7 +169,7 @@ get_header(); ?>
         <table class="schedule">
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote</td>
+                <td class="keynote" colspan="2">Keynote @ Room 3</td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>

@@ -1663,10 +1663,14 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
     border: 1px solid #f5f5f4 !important;
 }
 
-.schedule tr td:first-child {
+.schedule tr td:first-child, .room-name {
     font-weight: bold;
     width: 20%;
     text-align: center;
+}
+
+.room-name {
+    border-bottom: 3px solid white !important;
 }
 
 .schedule tr td:nth-child(2), .schedule tr td:last-child {
@@ -1682,7 +1686,7 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
 }
 
 .schedule-nav {
-    padding: 40px 0;
+    padding: 0 0 20px 0;
     text-align: center;
     color: #ccc;
 }
