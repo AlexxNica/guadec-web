@@ -1653,3 +1653,58 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
    padding: 20px;
    display: block;
 }
+
+.speaker-name {
+    font-size: 12px;
+    font-style: italic;
+    display: block;
+}
+
+.schedule, .schedule tr, .schedule tr td {
+    border: 1px solid #f5f5f4 !important;
+}
+
+.schedule tr td:first-child {
+    font-weight: bold;
+    width: 20%;
+    text-align: right;
+}
+
+.schedule tr td:nth-child(2), .schedule tr td:last-child {
+    width: 40%;
+}
+
+.schedule tr td:nth-child(2) {
+    background-color: #ccc;
+}
+
+.schedule tr td:last-child {
+    background-color: #ddd;
+}
+
+.schedule-nav {
+    padding: 40px 0;
+    text-align: center;
+    color: #ccc;
+}
+
+.schedule-nav a {
+    color: #6b8e9f !important;
+}
+
+.lunch, .break {
+    background: #b0c4de !important;
+}
+
+.lunch {
+    background: rgba(107, 142, 159, 0.7) !important;
+}
+
+.break {
+    background: rgba(107, 142, 159, 0.3) !important;
+}
+
+.keynote, .special-event {
+    background: #6b8e9f !important;
+    color: white;
+}
