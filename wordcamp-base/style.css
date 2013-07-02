@@ -1667,7 +1667,7 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
 .schedule tr td:first-child {
     font-weight: bold;
     width: 20%;
-    text-align: right;
+    text-align: center;
 }
 
 .schedule tr td:nth-child(2), .schedule tr td:last-child {
