@@ -34,7 +34,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>10:40 - 11:25</td>
-                <td><a class="talk" href="session/the-future-of-gnome-3">The Future of GNOME 3</a><span class="speaker-name">Allan Day</span></td>
+                <td><a class="talk" href="../session/the-future-of-gnome-3">The Future of GNOME 3</a><span class="speaker-name">Allan Day</span></td>
                 <td><a class="talk" href="session/news-from-the-gnome-ostree-project">"News from the GNOME OSTree project</a> <span class="speaker-name">Colin Walters</span></td>
             </tr>
             <tr>
