@@ -57,10 +57,7 @@ a img {
 	border: none;
 }
 
-br {
-    height: 10px;
-    margin-bottom: 20px;
-}
+
 
 /* =Layout
 -------------------------------------------------------------- */
@@ -1736,4 +1733,8 @@ h1, h2, h3, h4, h5, h6, #site-title, #site-description, #access .menu, #access d
 .save-the-date {
     color: #6b8e9f; 
     font-weight: bold;
+}
+
+.talk-description br {
+    margin-bottom: 10px;
 }

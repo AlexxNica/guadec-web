@@ -11,9 +11,9 @@ get_header(); ?>
 
 		<div id="container">
 			<div id="content" role="main">
-			
-			<img alt="Photo of a talk at GUADEC 2010, with speaker talking and several attendees with laptops" src="https://www.guadec.org/wp-content/themes/wordcamp-base/images/pages/talks.jpg" />
-            <span class="image-credits">By Mario Sánchez Prada [<a href="http://creativecommons.org/licenses/by-sa/2.0">CC-BY-SA-2.0</a>], <a href="https://www.flickr.com/photos/mariosp/4840482146/in/photostream/">via Flickr</a></span>
+			<div class="entry-content">
+			    <img alt="Photo of a talk at GUADEC 2010, with speaker talking and several attendees with laptops" src="https://www.guadec.org/wp-content/themes/wordcamp-base/images/pages/talks.jpg" />
+                <span class="image-credits">By Mario Sánchez Prada [<a href="http://creativecommons.org/licenses/by-sa/2.0">CC-BY-SA-2.0</a>], <a href="https://www.flickr.com/photos/mariosp/4840482146/in/photostream/">via Flickr</a></span>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
@@ -29,14 +29,14 @@ get_header(); ?>
 						<?php wcb_entry_meta(); ?>
 					</div>
 
-					<div class="entry-content">
+					<div class="talk-description">
 						<?php the_content(); ?>
 						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'wordcampbase' ), 'after' => '</div>' ) ); ?>
-					</div><!-- .entry-content -->
+					</div><!-- .talk-description -->
 				</div><!-- #post-## -->
 
 <?php endwhile; // end of the loop. ?>
-
+            </div>
 			</div><!-- #content -->
 		</div><!-- #container -->
 

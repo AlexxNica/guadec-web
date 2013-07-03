@@ -8,9 +8,12 @@ get_header(); ?>
 <div id="container">
 	<div id="content" role="main">
 	    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+	    <div class="entry-content">
             <?php the_content(); ?>
+        </div>
         <?php endwhile; endif; ?>
-	
+	    
+	   
 	    <div class="schedule-nav">	        
     	    <a href="#day1">Day 1</a> | <a href="#day2">Day 2</a> | <a href="#day3">Day 3</a> | <a href="#day4">Day 4</a>
         </div>
