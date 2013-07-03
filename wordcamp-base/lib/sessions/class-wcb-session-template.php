@@ -93,8 +93,6 @@ function wcb_get_session_track() {
 
 function wcb_session_entry_meta( $meta ) {
 	if ( get_post_type() == WCB_SESSION_POST_TYPE ) {
-		$track  = wcb_get_session_track();
-
 		$meta['speakers']   = sprintf( __('Presented by %s', 'wordcampbase'), wcb_get_session_speakers() );
 
 		$meta['order']  = array('speakers', 'edit');
