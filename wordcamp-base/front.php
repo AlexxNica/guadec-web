@@ -10,7 +10,7 @@
 
         <div class="news-posts">
 <?php
-query_posts('posts_per_page=3');
+query_posts('posts_per_page=8');
 
 while ( have_posts() ) : the_post();
 ?>
@@ -21,7 +21,7 @@ while ( have_posts() ) : the_post();
 
 		        <div class="entry-meta"><?php twentyten_posted_on(); ?></div>
 
-		        <div class="entry-summary front-summary"><?php the_excerpt(); ?></div>
+		        <div class="entry-summary front-summary"><?php the_content(); ?></div>
 
 		        <div class="entry-utility">
 			        <?php edit_post_link( __( 'Edit', 'wordcampbase' ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
