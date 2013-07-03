@@ -11,6 +11,9 @@ get_header(); ?>
 
 		<div id="container">
 			<div id="content" role="main">
+			
+			<img alt="Photo of a talk at GUADEC 2010, with speaker talking and several attendees with laptops" src="https://www.guadec.org/wp-content/themes/wordcamp-base/images/pages/talks.jpg" />
+            <span class="image-credits">By Mario Sánchez Prada [<a href="http://creativecommons.org/licenses/by-sa/2.0">CC-BY-SA-2.0</a>], <a href="https://www.flickr.com/photos/mariosp/4840482146/in/photostream/">via Flickr</a></span>
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
