@@ -97,19 +97,7 @@ function wcb_session_entry_meta( $meta ) {
 
 		$meta['speakers']   = sprintf( __('Presented by %s', 'wordcampbase'), wcb_get_session_speakers() );
 
-		if ( empty( $track ) ) {
-			$meta['order']  = array('speakers', 'edit');
-
-		} else {
-			$meta['track'] = sprintf( __('%s Track', 'wordcampbase'), $track );
-
-			$link = get_term_link( $track, WCB_TRACK_TAXONOMY );
-			if ( ! is_wp_error( $link ) ) {
-				$meta['track'] = "<a href='$link'>{$meta['track']}</a>";
-			}
-
-			$meta['order']  = array('speakers', 'sep', 'track', 'edit');
-		}
+		$meta['order']  = array('speakers', 'edit');
 	}
 
 	return $meta;

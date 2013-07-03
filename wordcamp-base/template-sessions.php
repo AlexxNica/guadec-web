@@ -13,7 +13,6 @@ $sessions = wcb_session_query();
 wcb_suppress_sharing();
 
 get_header(); ?>
-
 		<div id="container">
 			<div id="content" role="main">
 				<div class="callout lead"><?php
