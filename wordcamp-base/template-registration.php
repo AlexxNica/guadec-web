@@ -84,16 +84,19 @@ function put_registration_form($reg, $info)
   echo "</form>";
 }
 
+function put_header()
+{
+  $structure = wcb_get('structure');
+  $structure->full_width_content();
 
-$structure = wcb_get('structure');
-$structure->full_width_content();
+  get_header();
 
-get_header();
+  echo "<div id='container'>";
+  echo "<div id='content' role='main'>";
+  echo "<div class='page type-page status-publish hentry'>";
+  echo "<div id='entry-content'>";
+}
 
-echo "<div id='container'>";
-echo "<div id='content' role='main'>";
-echo "<div class='page type-page status-publish hentry'>";
-echo "<div id='entry-content'>";
 
 if (is_user_logged_in()) {
   global $wpdb;
@@ -114,6 +117,7 @@ if (is_user_logged_in()) {
   $pending_registration = ($wpdb->num_rows > 0 && !$completed);
 
   if ($completed) {
+    put_header();
     $reg = get_registration_data_for_user_id($current_user->ID);
     echo get_registration_confirmation($reg, $current_user);
   } else if (!$pending_registration) {
@@ -123,12 +127,14 @@ if (is_user_logged_in()) {
     if (is_post() && $info->valid && !empty($_POST['finish'])) {
       do_payment($reg);
     } else {
+      put_header();
       put_registration_form($reg, $info);
     }
   } else if ($pending_registration) {
     $reg = get_registration_data_for_user_id($current_user->ID);
 
     if (is_post() || !check_gopay_params()) {
+      put_header();
       echo "<p>Your payment is still pending.</p>";
       echo get_registration_data_string($reg);
     } else {
@@ -136,6 +142,7 @@ if (is_user_logged_in()) {
     }
   }
 } else {
+  put_header();
   wp_login_form();
   wp_register("Don't have a GUADEC account yet? ", "");
 }
