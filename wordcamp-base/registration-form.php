@@ -1,4 +1,4 @@
-<div style='width: 60%'>
+<div style='width: 55%'>
 
 <p>
   <h3 class="sub-section-title">Registration type</h3>
