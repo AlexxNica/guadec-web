@@ -53,6 +53,8 @@ while ( have_posts() ) : the_post();
               <div class="sponsors-level-title">Collaborators</div>
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-fit.png" alt="Faculty of Information Technology of Brno University of Technology" />
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-liberix.png" alt="Liberix" />
+              <img src="<?php echo get_bloginfo('template_url')?>/images/partner-sufit.png" alt="Student Union of FIT Technical University Brno" />
+              <img src="<?php echo get_bloginfo('template_url')?>/images/partner-linuxvbrne.png" alt="Linux v Brně" />
             </div>
             <div class="sponsors-level">
               <div class="sponsors-level-title">Media</div>
