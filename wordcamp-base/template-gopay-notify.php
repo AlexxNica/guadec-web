@@ -17,6 +17,6 @@ if ($reg->completed) {
   exit;
 }
 
-maybe_finish_payment($reg);
+maybe_finish_payment($reg, true);
 
 ?>

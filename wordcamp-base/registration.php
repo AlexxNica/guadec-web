@@ -282,13 +282,14 @@ class Registration {
   }
 }
 
-function error_page($msg, $url = null)
+function error_page($msg, $redirect = true)
 {
-  if ($url == null) {
-    $url = get_permalink(get_page_by_title('Registration Error')->ID);
+  error_log($msg);
+  if (!$redirect) {
+    exit;
   }
 
-  error_log($msg);
+  $url = get_permalink(get_page_by_title('Registration Error')->ID);
   header('Location: ' . $url);
   exit;
 }
@@ -329,13 +330,16 @@ function validate_code($code)
   return true;
 }
 
-function complete_registration($reg)
+function complete_registration($reg, $redirect = true)
 {
   $user = get_userdata($reg->user_ID);
 
   $reg->set_completed();
   send_tax_document($reg, $user);
   send_registration_email($reg, $user);
+  if (!$redirect) {
+    exit;
+  }
   header('Location: ' . get_permalink());
 }
 
@@ -351,7 +355,7 @@ function check_gopay_params()
   return true;
 }
 
-function maybe_finish_payment($reg)
+function maybe_finish_payment($reg, $gopay_notify = false)
 {
   $returnedPaymentSessionId = $_GET['paymentSessionId'];
   $returnedGoId = $_GET['targetGoId'];
@@ -360,7 +364,7 @@ function maybe_finish_payment($reg)
 
   if ($returnedOrderNumber != $reg->ID
   ||  $returnedPaymentSessionId != $reg->payment_session_id) {
-    error_page("got wrong secrets from gopay to finish registration $returnedOrderNumber with session $returnedPaymentSessionId");
+    error_page("got wrong secrets from gopay to finish registration $returnedOrderNumber with session $returnedPaymentSessionId", !$gopay_notify);
   }
 
   try {
@@ -381,19 +385,21 @@ function maybe_finish_payment($reg)
                                        SECURE_KEY);
     switch ($result["sessionState"]) {
       case GopayHelper::PAID:
-        complete_registration($reg);
+        complete_registration($reg, !$gopay_notify);
         break;
       case GopayHelper::AUTHORIZED:
       case GopayHelper::PAYMENT_METHOD_CHOSEN:
         // do nothing, we'll wait for further notifications or manual invervention
-        header('Location: ' . get_permalink());
+        if (!$gopay_notify) {
+          header('Location: ' . get_permalink());
+        }
         break;
       default:
         $reg->delete();
-        error_page("payment for registration $reg->ID unsuccessful: " . $result["sessionState"]);
+        error_page("payment for registration $reg->ID unsuccessful: " . $result["sessionState"], !$gopay_notify);
     }
   } catch (Exception $e) {
-    error_page($e->getMessage());
+    error_page($e->getMessage(), !$gopay_notify);
   }
 }
 
