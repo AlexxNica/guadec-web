@@ -80,9 +80,10 @@
   <div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >
   • We will book a room and optionally breakfast for you but the
   payment shall be done directly to the Taufer dormitory on
-  check-out.<br>• Prices are 310 CZK night/person in a shared room,
-  420 CZK night/person in a single room and the optional breakfast is
-  100 CZK day/person.</div>
+  check-in.<br>• Prices are 310 CZK or 12,5 EUR night/person in a
+  shared room, 420 CZK or 17 EUR night/person in a single room and the
+  optional breakfast is 100 CZK or 4 EUR day/person.<br>• Payments can
+  be done via credit card or by cash in CZK or EUR.</div>
 
     <input type=checkbox name=breakfast <?php if ($reg->breakfast) { echo 'checked=true'; } ?>/>
     Breakfast
