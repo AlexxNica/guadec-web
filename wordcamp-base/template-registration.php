@@ -77,6 +77,13 @@ function put_registration_form($reg, $info)
     echo "<input type=submit name=update value='Update'/>";
     echo "<span style='margin: 0 3em'>Amount to pay: <strong>$amount CZK</strong></span>";
     echo "<input type=submit name=finish value='Finish'/>";
+    echo "<div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >"
+         "• You'll be taken to gopay.cz, a Czech on-line payments service "
+         "whose terms of contract, protection principles of personal data "
+         "privacy and AML rules are available in Czech only. If you are not "
+         "confortable with this and don't want to rely on an on-line "
+         "translation service please contact us at the above mentioned address."
+         "</div>";
   } else {
     echo "<input type=submit name=submit value='Submit'/>";
   }
