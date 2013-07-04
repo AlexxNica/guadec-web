@@ -68,7 +68,7 @@ function put_registration_form($reg, $info)
     return;
   }
 
-  echo "<p><strong>$current_user->first_name</strong>, great that you are coming to GUADEC!</p>";
+  echo "<p><strong>$current_user->first_name</strong>, it's great that you are coming to GUADEC!</p>";
   echo "<form action=$this_url method=post>";
   include 'registration-form.php';
 

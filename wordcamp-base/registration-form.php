@@ -1,4 +1,4 @@
-<div style='width: 50%'>
+<div style='width: 60%'>
 
 <p>
   <h3 class="sub-section-title">Registration type</h3>
@@ -18,14 +18,17 @@
   </span>
 
   <div style='font-size: 80%; line-height: 130%; margin-top: 1.5em' >
-  • The GUADEC registration fee is there to cover the conference
-  costs. Any remaining funds, if any, are donated to the GNOME
-  Foundation.<br>• By registering as Professional your contribution
-  will be recognized by an invitation to a special networking
-  event.<br>• We have included hobbyist and student levels to make
-  GUADEC more affordable for those who need it. If even these fees are
-  a hardship for you, please contact us. We don't want anyone to be
-  excluded due to registration fees.</div>
+  • The GUADEC registration fee covers the conference costs. Any
+  remaining funds, if any, are donated to the GNOME Foundation.<br>•
+  By registering as Professional your contribution will be recognized
+  by an invitation to a special networking event.<br>• We have
+  included hobbyist and student levels to make GUADEC more affordable
+  for those who need it. If even these fees are a hardship for you,
+  please contact us. We don't want anyone to be excluded due to
+  registration fees.<br>• If you have problems paying on-line, would
+  rather pay in cash at the conference or want to change anything
+  after registering drop us an e-mail to <a class="email"
+  href="mailto:guadec-organization@gnome.org">guadec-organization@gnome.org</a>.</div>
 
 </p>
 
@@ -80,10 +83,10 @@
   <div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >
   • We will book a room and optionally breakfast for you but the
   payment shall be done directly to the Taufer dormitory on
-  check-in.<br>• Prices are 310 CZK or 12,5 EUR night/person in a
+  check-in.<br>• Payments can be done via credit card or by cash in
+  CZK or EUR.<br>• Prices are 310 CZK or 12,5 EUR night/person in a
   shared room, 420 CZK or 17 EUR night/person in a single room and the
-  optional breakfast is 100 CZK or 4 EUR day/person.<br>• Payments can
-  be done via credit card or by cash in CZK or EUR.</div>
+  optional breakfast is 100 CZK or 4 EUR day/person.</div>
 
     <input type=checkbox name=breakfast <?php if ($reg->breakfast) { echo 'checked=true'; } ?>/>
     Breakfast
