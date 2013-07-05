@@ -10,7 +10,7 @@
   </select>
   <span id=code_span style='display: none'>
     <br>
-    <input type=text name=registration_code <?php if ($reg->registration_code) { echo "value=$reg->registration_code"; } ?> />
+    <input type=text name=registration_code <?php if ($reg->registration_code) { echo "value='$reg->registration_code'"; } ?> />
     <?php if ($info->registration_code) { ?>
       <br>
       <span style='color: red'>*</span> This code isn't valid
@@ -93,11 +93,11 @@
     <div style='display: table'>
       <div style='display: table-row'>
       <span style='display: table-cell'>Check-in date:</span>
-      <input style='display: table-cell' type=text name=check_in_date id=check_in_date <?php if ($reg->check_in_date) { echo "value=$reg->check_in_date"; } ?> />
+      <input style='display: table-cell' type=text name=check_in_date id=check_in_date <?php if ($reg->check_in_date) { echo "value='$reg->check_in_date'"; } ?> />
       </div>
       <div style='display: table-row'>
       <span style='display: table-cell'>Check-out date:</span>
-      <input style='display: table-cell' type=text name=check_out_date id=check_out_date <?php if ($reg->check_out_date) { echo "value=$reg->check_out_date"; } ?> />
+      <input style='display: table-cell' type=text name=check_out_date id=check_out_date <?php if ($reg->check_out_date) { echo "value='$reg->check_out_date'"; } ?> />
       </div>
     </div>
     <?php if ($info->check_in_out_dates) { ?>
@@ -121,7 +121,7 @@
     <span id=double_room_span style='display: none'>
       <br>
       Preferred roommate:
-      <input type=text name=roommate <?php if ($reg->roommate) { echo "value=$reg->roommate"; } ?> />
+      <input type=text name=roommate <?php if ($reg->roommate) { echo "value='$reg->roommate'"; } ?> />
 
   <div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >
   • If you enter a GUADEC participant's name we'll book a shared room
