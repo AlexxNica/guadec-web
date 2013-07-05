@@ -114,14 +114,6 @@ if (is_user_logged_in()) {
   global $current_user;
   get_currentuserinfo();
 
-  $u = wp_get_current_user();
-  foreach ($u->roles as $r) {
-    if ($r != 'registration') {
-      echo "<p>Registration isn't available at this time.</p>";
-      goto out;
-    }
-  }
-
   $completed = (bool)$wpdb->get_var("select completed from $table_name where user_ID = $current_user->ID");
   $pending_registration = ($wpdb->num_rows > 0 && !$completed);
 
@@ -156,7 +148,6 @@ if (is_user_logged_in()) {
   wp_register("Don't have a GUADEC account yet? ", "");
 }
 
-out:
 echo "</div></div></div></div>";
 
 get_sidebar();
