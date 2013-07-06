@@ -1,7 +1,12 @@
 	<div class="grid_12 alpha omega front-display">
 	    <div class="image">
 	        <img src="<?php echo get_bloginfo('template_url')?>/images/guadec2012.png" alt="Photo of the GNOME community at GUADEC 2012" />
-	        <h2 class="image-label"><span>GUADEC is the annual conference of the GNOME community, held in Europe since 2000. GUADEC 2013 will be held in Brno, Czech Republic, a city which has played host to several other successful GNOME-related hackfests in the past.</span></h2>
+	        <h2 class="image-label">
+                  <span>GUADEC is the annual conference of the GNOME community, held in Europe since 2000. GUADEC 2013 will be held in Brno, Czech Republic, a city which has played host to several other successful GNOME-related hackfests in the past.</span>
+                  <span style="font-size: 10px; padding: 0; line-height: 1em; position: absolute; bottom: 0; right: 0">
+                    By Ana Rey [<a style="color: white" href="http://creativecommons.org/licenses/by-sa/2.0">CC-BY-SA-2.0</a>], <a style="color: white" href="http://www.flickr.com/photos/anarey/7670088838/in/photostream/">via Flickr</a>
+                  </span>
+                </h2>
 	    </div>
 
 	    <div class="clear"></div>
