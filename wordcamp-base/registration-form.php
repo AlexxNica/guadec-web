@@ -71,6 +71,10 @@
     <br>
     <input type=checkbox name=vegetarian <?php if ($reg->vegetarian) { echo 'checked=true'; } ?>/>
     Vegetarian
+
+  <div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >
+  • Note that this is vegetarian, not vegan.</div>
+
   </span>
 </p>
 
