@@ -66,7 +66,7 @@
   <h3 class="sub-section-title">Meals</h3>
   <input type=checkbox name=lunch <?php if ($reg->lunch) { echo 'checked=true'; } ?>/>
   I'll have lunch at the venue in the core days (Aug. 1 to 4)
-  <span style='float: right'>440 CZK</span>
+  <span style='float: right'>4×110 CZK</span>
   <span id=lunch_span style='display: none'>
     <br>
     <input type=checkbox name=vegetarian <?php if ($reg->vegetarian) { echo 'checked=true'; } ?>/>
