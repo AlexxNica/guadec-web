@@ -64,33 +64,11 @@ function put_registration_form($reg, $info)
   if (strlen(trim($current_user->first_name)) < 1
   ||  strlen(trim($current_user->last_name)) < 1) {
     $url = get_edit_user_link();
-    echo "Please fill in your first and last name on your <a href=$url>profile</a> before registering.";
+    echo "<p>Please fill in your first and last name on your <a href=$url>profile</a> before registering.</p>";
     return;
   }
 
-  echo "<p><strong>$current_user->first_name</strong>, it's great that you are coming to GUADEC!</p>";
-  echo "<form action=$this_url method=post>";
   include 'registration-form.php';
-
-  if (is_post() && $info->valid) {
-    $amount = $reg->get_amount_to_pay();
-    echo "<input type=submit name=update value='Update'/>";
-    echo "<span style='margin: 0 3em'>Amount to pay: <strong>$amount CZK</strong></span>";
-    echo "<input type=submit name=finish value='Finish'/>";
-    if ($amount > 0) {
-      echo "<div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em; width: 55%' >" .
-        "• You'll be taken to gopay.cz, a Czech on-line payments service " .
-        "whose terms of contract, protection principles of personal data " .
-        "privacy and AML rules are available in Czech only. If you are not " .
-        "confortable with this and don't want to rely on an on-line " .
-        "translation service please contact us at the above mentioned address." .
-        "</div>";
-    }
-  } else {
-    echo "<input type=submit name=submit value='Submit'/>";
-  }
-
-  echo "</form>";
 }
 
 function put_header()

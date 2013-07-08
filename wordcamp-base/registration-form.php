@@ -1,4 +1,5 @@
-<div style='width: 55%'>
+<p><strong><?php echo $current_user->first_name; ?></strong>, it's great that you are coming to GUADEC!</p>
+<form action="<?php echo $this_url . '#attention'; ?>" method=post style='width: 55%'>
 
 <p>
   <h3 class="sub-section-title">Registration type</h3>
@@ -10,11 +11,17 @@
   </select>
   <span id=code_span style='display: none'>
     <br>
+    <div
+    <?php if ($info->registration_code) { ?>
+    id=attention style="border-style: dashed; border-color: red; border-width: 1px"
+    <?php } ?>
+    >
     <input type=text name=registration_code <?php if ($reg->registration_code) { echo "value='$reg->registration_code'"; } ?> />
     <?php if ($info->registration_code) { ?>
       <br>
-      <span style='color: red'>*</span> This code isn't valid
+      <strong style='font-size: 80%'>This code isn't valid</strong>
     <?php } ?>
+    </div>
   </span>
 
   <div style='font-size: 80%; line-height: 130%; margin-top: 1.5em' >
@@ -39,14 +46,19 @@
   <span style='float: right'>400 CZK</span>
   <span id=tshirt_span style='display: none'>
     <br>
+    <div
+    <?php if ($info->tshirt_gender) { ?>
+    id=attention style="border-style: dashed; border-color: red; border-width: 1px"
+    <?php } ?>
+    >
     Type:
     <input type=radio name=tshirt_gender value='male' <?php if ($reg->tshirt_gender == 'male') { echo 'checked=true'; } ?> /> Men's
     <input type=radio name=tshirt_gender value='female' <?php if ($reg->tshirt_gender == 'female') { echo 'checked=true'; } ?> /> Women's
     <?php if ($info->tshirt_gender) { ?>
       <br>
-      <span style='color: red'>*</span> Please specify a T-Shirt type
+      <strong style='font-size: 80%'>Please specify a T-Shirt type</strong>
     <?php } ?>
-    <br>
+    </div>
     Size:
     <select size=1 name=tshirt_size>
       <option <?php if ($reg->tshirt_size == 's') { echo 'selected'; } ?> value='s'>S</option>
@@ -94,6 +106,11 @@
 
     <input type=checkbox name=breakfast <?php if ($reg->breakfast) { echo 'checked=true'; } ?>/>
     Breakfast
+    <div
+    <?php if ($info->check_in_out_dates) { ?>
+    id=attention style="border-style: dashed; border-color: red; border-width: 1px"
+    <?php } ?>
+    >
     <div style='display: table'>
       <div style='display: table-row'>
       <span style='display: table-cell'>Check-in date:</span>
@@ -105,25 +122,36 @@
       </div>
     </div>
     <?php if ($info->check_in_out_dates) { ?>
-      <span style='color: red'>*</span> These dates must delimit a non-empty interval between 2013-07-14 and 2013-08-17
-      <br>
+      <strong style='font-size: 80%'>These dates must delimit a non-empty interval between 2013-07-14 and 2013-08-17</strong>
     <?php } ?>
+    </div>
+    <div
+    <?php if ($info->gender) { ?>
+    id=attention style="border-style: dashed; border-color: red; border-width: 1px"
+    <?php } ?>
+    >
     Gender:
     <input type=radio name=gender value='male' <?php if ($reg->gender == 'male') { echo 'checked=true'; } ?> /> Male
     <input type=radio name=gender value='female' <?php if ($reg->gender == 'female') { echo 'checked=true'; } ?> /> Female
     <?php if ($info->gender) { ?>
       <br>
-      <span style='color: red'>*</span> Please specify your gender
+      <strong style='font-size: 80%'>Please specify your gender</strong>
     <?php } ?>
-    <br>
+    </div>
+    <div
+    <?php if ($info->room) { ?>
+    id=attention style="border-style: dashed; border-color: red; border-width: 1px"
+    <?php } ?>
+    >
     Room type:
     <input type=radio name=room value=single <?php if ($reg->room == 'single') { echo 'checked=true'; } ?> /> Single
     <input type=radio name=room value=double <?php if ($reg->room == 'double') { echo 'checked=true'; } ?> /> Double
     <?php if ($info->room) { ?>
-      <br><span style='color: red'>*</span> Please specify a room type
-    <?php } ?>
-    <span id=double_room_span style='display: none'>
       <br>
+      <strong style='font-size: 80%'>Please specify a room type</strong>
+    <?php } ?>
+    </div>
+    <span id=double_room_span style='display: none'>
       Preferred roommate:
       <input type=text name=roommate <?php if ($reg->roommate) { echo "value='$reg->roommate'"; } ?> />
 
@@ -146,7 +174,27 @@
   <textarea name=notes rows=5 cols=40><?php if ($reg->notes) { echo "$reg->notes"; } ?></textarea>
 </p>
 
-</div>
+<?php
+if (is_post() && $info->valid) {
+  $amount = $reg->get_amount_to_pay();
+?>
+        <input type=submit name=update value='Update'/>
+        <span style='margin: 0 3em'>Amount to pay: <strong><?php echo $amount; ?> CZK</strong></span>
+        <input id=attention type=submit name=finish value='Finish'/>
+        <?php if ($amount > 0) { ?>
+                <div style='font-size: 80%; line-height: 130%; margin: 1em 0 1em' >
+                • You'll be taken to gopay.cz, a Czech on-line payments service
+                whose terms of contract, protection principles of personal data
+                privacy and AML rules are available in Czech only. If you are not
+                confortable with this and don't want to rely on an on-line
+                translation service please contact us at the above mentioned address.
+                </div>
+        <?php } ?>
+<?php } else { ?>
+        <input type=submit name=submit value='Submit'/>
+<?php } ?>
+
+</form>
 
 <link rel="stylesheet" <?php echo "href=$jquery_url/themes/base/jquery.ui.all.css"; ?> />
 <script <?php echo "src=$jquery_url/jquery-1.9.1.js"; ?> ></script>
