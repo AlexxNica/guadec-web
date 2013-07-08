@@ -33,7 +33,7 @@ function do_payment($reg)
                                                  'Postal code',
                                                  'Country code',
                                                  $current_user->user_email,
-                                                 'Phone nr.',
+                                                 '606' . (string) mt_rand(100000, 999999),
                                                  null,
                                                  null,
                                                  null,
