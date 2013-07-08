@@ -40,14 +40,24 @@ while ( have_posts() ) : the_post();
             <div class="sponsors-bar-title">Sponsored by</div>
             <div class="sponsors-level">
               <div class="sponsors-level-title">Gold</div>
+              <a href="http://www.google.com">
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-google.png" alt="Google" />
+              </a>
+              <a href="http://www.redhat.com">
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-redhat.png" alt="Red Hat" />
+              </a>
             </div>
             <div class="sponsors-level">
               <div class="sponsors-level-title">Silver</div>
+              <a href="http://www.ubuntu.com">
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-canonical.png" alt="Canonical" />
+              </a>
+              <a href="http://www.collabora.com">
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-collabora.png" alt="Collabora" />
+              </a>
+              <a href="http://www.igalia.com">
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-igalia.png" alt="Igalia" />
+              </a>
             </div>
             <a href="<?php echo get_permalink(get_page_by_title( 'Sponsors' )) . "#become_sponsor"; ?>" class="become-sponsor">Become a sponsor too!</a>
 
@@ -56,16 +66,30 @@ while ( have_posts() ) : the_post();
             <div class="sponsors-bar-title">Partners</div>
             <div class="sponsors-level">
               <div class="sponsors-level-title">Collaborators</div>
+              <a href="http://www.fit.vutbr.cz">
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-fit.png" alt="Faculty of Information Technology of Brno University of Technology" />
+              </a>
+              <a href="http://liberix.cz">
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-liberix.png" alt="Liberix" />
+              </a>
+              <a href="http://www.su.fit.vutbr.cz/yaps">
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-sufit.png" alt="Student Union of FIT Technical University Brno" />
+              </a>
+              <a href="http://www.lvb.cz">
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-linuxvbrne.png" alt="Linux v Brně" />
+              </a>
             </div>
             <div class="sponsors-level">
               <div class="sponsors-level-title">Media</div>
+              <a href="http://www.abclinuxu.cz">
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-abclinuxu.png" alt="ABC Linuxu" />
+              </a>
+              <a href="http://www.linuxexpres.cz">
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-linuxexpres.png" alt="Linux EXPRES" />
+              </a>
+              <a href="http://www.root.cz">
               <img src="<?php echo get_bloginfo('template_url')?>/images/partner-root.png" alt="ROOT.CZ" />
+              </a>
             </div>
         </div>
 
