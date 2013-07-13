@@ -42,7 +42,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>11:35 - 12:20</td>
-                <td><a class="talk" href="../session/first-steps-towards-contributing/">First steps towards contributing</a> <span class="speaker-name">Ekaterina Gerasimova</span></td>
+                <td><a class="talk" href="../session/first-steps-towards-contributing/">First steps towards contributing</a> <span class="speaker-name">Ekaterina Gerasimova and Sindhu Sundar</span></td>
                 <td><a class="talk" href="../session/web-the-future-is-now/">Web, the future is now</a> <span class="speaker-name">Claudio Saavedra</span></td>
             </tr>
             <tr>
