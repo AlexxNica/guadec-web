@@ -37,7 +37,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>10:40 - 11:25</td>
-                <td><a class="talk" href="../session/the-future-of-gnome-3">The Future of GNOME 3</a><span class="speaker-name">Allan Day</span></td>
+                <td><a class="talk" href="../session/the-future-of-gnome-3">The future of GNOME 3</a><span class="speaker-name">Allan Day</span></td>
                 <td><a class="talk" href="../session/news-from-the-gnome-ostree-project">News from the GNOME OSTree project</a> <span class="speaker-name">Colin Walters</span></td>
             </tr>
             <tr>
@@ -56,8 +56,8 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>14:55 - 15:40</td>
-                <td><a class="talk" href="../session/prototyping-in-the-4th-dimension/">Prototyping in the 4th Dimension</a> <span class="speaker-name">Jakub Steiner</span></td>
-                <td><a class="talk" href="../session/gnome-in-the-open-source-community/">GNOME in the Open Source Community</a> <span class="speaker-name">Meg Ford</span></td>
+                <td><a class="talk" href="../session/prototyping-in-the-4th-dimension/">Prototyping in the 4th dimension</a> <span class="speaker-name">Jakub Steiner</span></td>
+                <td><a class="talk" href="../session/gnome-in-the-open-source-community/">GNOME in the Open Source community</a> <span class="speaker-name">Meg Ford</span></td>
                 </tr>
             <tr>
                 <td>15:40 - 16:20</td>
@@ -66,7 +66,7 @@ get_header(); ?>
             <tr>
                 <td>16:20 - 17:05</td>
                 <td><a class="talk" href="../session/sandboxed-applications-for-gnome/">Sandboxed applications for GNOME</a> <span class="speaker-name">Lennart Poettering</span></td>
-                <td><a class="talk" href="../session/gnome-outreach-from-three-point-zero-to-hero/">GNOME Outreach: from Three Point Zero to Hero</a> <span class="speaker-name">Sriram Ramkrishna</span></td>
+                <td><a class="talk" href="../session/gnome-outreach-from-three-point-zero-to-hero/">GNOME Outreach: from three point zero to hero</a> <span class="speaker-name">Sriram Ramkrishna</span></td>
             </tr>
             <tr>
                 <td>17:15 - 18:00</td>
@@ -87,13 +87,13 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>10:40 - 11:25</td>
-                <td><a class="talk" href="../session/whats-cooking-in-gstreamer/">What's Cooking in GStreamer</a> <span class="speaker-name">Sebastian Dröge and Tim-Philipp Müller</span></td>
-                <td><a class="talk" href="../session/future-in-the-past-designing-and-implementing-the-gtk-scene-graph/">Future in the Past: designing and implementing the GTK scene graph</a> <span class="speaker-name">Emmanuele Bassi</span></td>
+                <td><a class="talk" href="../session/whats-cooking-in-gstreamer/">What's cooking in GStreamer</a> <span class="speaker-name">Sebastian Dröge and Tim-Philipp Müller</span></td>
+                <td><a class="talk" href="../session/future-in-the-past-designing-and-implementing-the-gtk-scene-graph/">Future in the past: designing and implementing the GTK scene graph</a> <span class="speaker-name">Emmanuele Bassi</span></td>
             </tr>
             <tr>
                 <td>11:35 - 12:20</td>
                 <td><a class="talk" href="../session/cogl-having-fun-with-gpu-graphics/">Cogl: Having fun with GPU graphics</a> <span class="speaker-name">Robert Bragg</span></td>
-                <td><a class="talk" href="../session/ui-developer-experience-with-gladegtkbuilder/">UI Developer Experience with Glade/GtkBuilder</a> <span class="speaker-name">Tristan van Berkom</span></td>
+                <td><a class="talk" href="../session/ui-developer-experience-with-gladegtkbuilder/">UI developer experience with Glade/GtkBuilder</a> <span class="speaker-name">Tristan van Berkom</span></td>
             </tr>
             <tr>
                 <td>12:30 - 14:00</td>
@@ -101,7 +101,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>14:00 - 14:45</td>
-                <td><a class="talk" href="../session/compositing-for-free-reducing-copies-on-the-desktop/">Compositing for Free: Reducing Copies on the Desktop</a> <span class="speaker-name">Keith Packard</span></td>
+                <td><a class="talk" href="../session/compositing-for-free-reducing-copies-on-the-desktop/">Compositing for free: reducing copies on the desktop</a> <span class="speaker-name">Keith Packard</span></td>
                 <td><a class="talk" href="../session//gtk-for-application-developers/">GTK for application developers</a> <span class="speaker-name">Matthias Clasen</span></td>
             </tr>
             <tr>
@@ -132,7 +132,7 @@ get_header(); ?>
             <tr>
                 <td>10:40 - 11:25</td>
                 <td><a class="talk" href="../session/evolution-as-email-service-for-the-gnome-desktop/">Evolution as email service for the GNOME desktop</a> <span class="speaker-name">Srinivasa Ragavan</td>
-                <td><a class="talk" href="../session/foss-education/">FOSS & Education</a> <span class="speaker-name">Emily Gonyer</span></td>
+                <td><a class="talk" href="../session/foss-education/">FOSS & education</a> <span class="speaker-name">Emily Gonyer</span></td>
             </tr>
             <tr>
                 <td>11:35 - 12:20</td>
@@ -150,8 +150,8 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>14:55 - 15:40</td>
-                <td><a class="talk" href="../session/the-ways-of-tracker/">The Ways of Tracker</a> <span class="speaker-name">Carlos Garnacho and Aleksander Morgado</span></td>
-                <td><a class="talk" href="../session/documentation-state-of-the-union/">Documentation: State of the Union</a> <span class="speaker-name">Ekaterina Gerasimova</span></td>
+                <td><a class="talk" href="../session/the-ways-of-tracker/">The ways of Tracker</a> <span class="speaker-name">Carlos Garnacho and Aleksander Morgado</span></td>
+                <td><a class="talk" href="../session/documentation-state-of-the-union/">Documentation: state of the union</a> <span class="speaker-name">Ekaterina Gerasimova</span></td>
             </tr>
             <tr>
                 <td>15:40 - 16:20</td>
@@ -160,12 +160,12 @@ get_header(); ?>
             <tr>
                 <td>16:20 - 17:05</td>
                 <td><a class="talk" href="../session/writing-multimedia-applications-with-grilo/">Writing multimedia applications with Grilo</a> <span class="speaker-name">Juan A. Suarez</span></td>
-                <td><a class="talk" href="../session/crowdfunding-the-gnome-desktop-what-we-learned/">Crowdfunding the GNOME Desktop: what we learned</a> <span class="speaker-name">Jim Nelson</span></td>
+                <td>Empty</td>
             </tr>
             <tr>
                 <td>17:15 - 18:00</td>
                 <td><a class="talk" href="../session/extreme-containment-measures-keeping-your-bug-reports-under-control/">Extreme containment measures: keeping your bug reports under control</a> <span class="speaker-name">Jeff Fortin</span></td>
-                <td><a class="talk" href="../session/the-gnome-infrastructure/">The GNOME Infrastructure</a> <span class="speaker-name">Sriram Ramkrishna and Andrea Veri</span></td>
+                <td><a class="talk" href="../session/the-gnome-infrastructure/">The GNOME infrastructure</a> <span class="speaker-name">Sriram Ramkrishna and Andrea Veri</span></td>
             </tr>
         </table>
 
@@ -181,8 +181,8 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>10:40 - 11:25</td>
-                <td><a class="talk" href="../session/rich-custom-user-interfaces-with-glade-and-css/">Rich custom User Interfaces with Glade and CSS</a> <span class="speaker-name">Juan Pablo Ugarte</span></td>
-                <td><a class="talk" href="../session/more-secure-with-less-security/">More secure with less “security</a> <span class="speaker-name">Stef Walter</span></td>
+                <td><a class="talk" href="../session/rich-custom-user-interfaces-with-glade-and-css/">Rich custom user interfaces with Glade and CSS</a> <span class="speaker-name">Juan Pablo Ugarte</span></td>
+                <td><a class="talk" href="../session/more-secure-with-less-security/">More secure with less "security"</a> <span class="speaker-name">Stef Walter</span></td>
             </tr>
             <tr>
                 <td>11:35 - 12:20</td>
