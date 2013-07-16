@@ -167,6 +167,10 @@ get_header(); ?>
                 <td><a class="talk" href="../session/extreme-containment-measures-keeping-your-bug-reports-under-control/">Extreme containment measures: keeping your bug reports under control</a> <span class="speaker-name">Jeff Fortin</span></td>
                 <td><a class="talk" href="../session/the-gnome-infrastructure/">The GNOME infrastructure</a> <span class="speaker-name">Sriram Ramkrishna and Andrea Veri</span></td>
             </tr>
+            <tr>
+                <td>18:00 - 19:00</td>
+                <td class="special-event" colspan="2">Lightning talks @ Room 3</td>
+            </tr>
         </table>
 
         <h3 id="day4" class="sub-section-title">Day 4: Sunday, August 4th</h3>
@@ -181,12 +185,11 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>10:40 - 11:25</td>
-                <td><a class="talk" href="../session/rich-custom-user-interfaces-with-glade-and-css/">Rich custom user interfaces with Glade and CSS</a> <span class="speaker-name">Juan Pablo Ugarte</span></td>
-                <td><a class="talk" href="../session/more-secure-with-less-security/">More secure with less "security"</a> <span class="speaker-name">Stef Walter</span></td>
+                <td><a class="talk" href="../session/rich-custom-user-interfaces-with-glade-and-css/">Rich custom user interfaces with Glade and CSS</a> <span class="speaker-name">Juan Pablo Ugarte</span></td>             <td><a class="talk" href="../session/tag-your-pdf-is-it/">Tag, your PDF is it</a> <span class="speaker-name">Alejandro Piñeiro Iglesias and Joanmarie Diggs</span></td>
             </tr>
             <tr>
                 <td>11:35 - 12:20</td>
-                <td><a class="talk" href="../session/tag-your-pdf-is-it/">Tag, your PDF is it</a> <span class="speaker-name">Alejandro Piñeiro Iglesias and Joanmarie Diggs</span></td>
+                <td><a class="talk" href="../session/more-secure-with-less-security/">More secure with less "security"</a> <span class="speaker-name">Stef Walter</span></td>
                 <td><a class="talk" href="../session/predictive-input-methods-why-how/">Predictive input methods: why? And how?</a> <span class="speaker-name">Anish Patil and Mike Fabian</span></td>
             </tr>
             <tr>
@@ -209,7 +212,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>16:20 - 18:00</td>
-                <td class="special-event" colspan="2">Lightning Talks @ Room 3</td>
+                <td class="special-event" colspan="2">Interns lightning talks @ Room 3</td>
             </tr>
         </table>
 
