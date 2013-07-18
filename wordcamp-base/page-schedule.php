@@ -137,7 +137,7 @@ get_header(); ?>
             <tr>
                 <td>11:35 - 12:20</td>
                 <td><a class="talk" href="../session/testing-online-services/">Testing online services</a> <span class="speaker-name">Philip Withnall</td>
-                <td><a class="talk" href="../session/gnome-and-owncloud-desktop-plus-web-for-a-holisic-experience/">Gnome and ownCloud: desktop plus web for a holisic experience</a> <span class="speaker-name">Jan-Christoph Borchardt</span></td>
+                <td><a class="talk" href="../session/gnome-and-owncloud-desktop-plus-web-for-a-holisic-experience/">GNOME and ownCloud: desktop plus web for a holisic experience</a> <span class="speaker-name">Jan-Christoph Borchardt</span></td>
             </tr>
             <tr>
                 <td>12:30 - 14:00</td>
