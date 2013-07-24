@@ -23,13 +23,13 @@ get_header(); ?>
         <table class="schedule">
             <tr>
                 <td></td>
-                <td class="room-name">Room 1</td>
-                <td class="room-name">Room 2</td>
+                <td class="room-name">E112</td>
+                <td class="room-name">D0206</td>
             </tr>
         
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote @ Room 3</td>
+                <td class="keynote" colspan="2">Keynote @ D105</td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -78,8 +78,13 @@ get_header(); ?>
         <h3 id="day2" class="sub-section-title">Day 2: Friday, August 2st</h3>
         <table class="schedule">
             <tr>
+                <td></td>
+                <td class="room-name">E112</td>
+                <td class="room-name">D0206</td>
+            </tr>
+            <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote @ Room 3</td>
+                <td class="keynote" colspan="2">Keynote @ D105</td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -115,15 +120,20 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>16:20 - 18:00</td>
-                <td class="special-event" colspan="2">Foundation Annual General Meeting @ Room 3</td>
+                <td class="special-event" colspan="2">Foundation Annual General Meeting @ D105</td>
             </tr>
         </table>
 
         <h3 id="day3" class="sub-section-title">Day 3: Saturday, August 3rd</h3>
         <table class="schedule">
             <tr>
+                <td></td>
+                <td class="room-name">E112</td>
+                <td class="room-name">D0206</td>
+            </tr>
+            <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote @ Room 3</td>
+                <td class="keynote" colspan="2">Keynote @ D105</td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -169,15 +179,20 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>18:00 - 19:00</td>
-                <td class="special-event" colspan="2">Lightning talks @ Room 3</td>
+                <td class="special-event" colspan="2">Lightning talks @ D105</td>
             </tr>
         </table>
 
         <h3 id="day4" class="sub-section-title">Day 4: Sunday, August 4th</h3>
         <table class="schedule">
             <tr>
+                <td></td>
+                <td class="room-name">E112</td>
+                <td class="room-name">D0206</td>
+            </tr>
+            <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote @ Room 3</td>
+                <td class="keynote" colspan="2">Keynote @ D105</td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -212,7 +227,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>16:20 - 18:00</td>
-                <td class="special-event" colspan="2">Interns lightning talks @ Room 3</td>
+                <td class="special-event" colspan="2">Interns lightning talks @ D105</td>
             </tr>
         </table>
 
