@@ -29,7 +29,7 @@ get_header(); ?>
         
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote @ D105</td>
+                <td class="keynote" colspan="2">Keynote: Ethan Lee <span style="float: right">D105</span></td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -84,7 +84,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote @ D105</td>
+                <td class="keynote" colspan="2">Keynote: Matt Dalio <span style="float: right">D105</span></td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -120,7 +120,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>16:20 - 18:00</td>
-                <td class="special-event" colspan="2">Foundation Annual General Meeting @ D105</td>
+                <td class="special-event" colspan="2">Foundation Annual General Meeting <span style="float: right">D105</span></td>
             </tr>
         </table>
 
@@ -133,7 +133,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote @ D105</td>
+                <td class="keynote" colspan="2">Keynote: The Board Bites Back <span style="float: right">D105</span></td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -179,7 +179,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>18:00 - 19:00</td>
-                <td class="special-event" colspan="2">Lightning talks @ D105</td>
+                <td class="special-event" colspan="2">Lightning talks <span style="float: right">D105</span></td>
             </tr>
         </table>
 
@@ -192,7 +192,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote @ D105</td>
+                <td class="keynote" colspan="2">Keynote: Cathy Malmrose <span style="float: right">D105</span></td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
@@ -227,7 +227,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>16:20 - 18:00</td>
-                <td class="special-event" colspan="2">Interns lightning talks @ D105</td>
+                <td class="special-event" colspan="2">Interns lightning talks <span style="float: right">D105</span></td>
             </tr>
         </table>
 
