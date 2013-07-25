@@ -17,7 +17,7 @@ class WCB_Footer extends WCB_Element {
 
 				<div id="site-generator">
 					<?php do_action( 'twentyten_credits' ); ?>
-					<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'wordcampbase' ) ); ?>" title="<?php esc_attr_e( 'Semantic Personal Publishing Platform', 'wordcampbase' ); ?>" rel="generator"><?php printf( 'Powered by WordPress' ); ?></a>
+                                        <a href="mailto:guadec-organization@gnome.org" class="email">Contact us</a>
 				</div><!-- #site-generator -->
 
 			</div><!-- #colophon -->
