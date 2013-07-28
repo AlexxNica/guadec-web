@@ -52,7 +52,7 @@ get_header(); ?>
             <tr>
                 <td>14:00 - 14:45</td>
                 <td><a class="talk" href="../session/how-to-not-report-your-ux-bug/">How to not report your UX bug</a> <span class="speaker-name">Fabiana Simões</span></td>
-                <td><a class="talk" href="../session/libreoffice-gnome/">LibreOffice and GNOME</a> <span class="speaker-name">Michael Meeks</span></td>
+                <td><a class="talk" href="../session/floss-communities-outreaches/">FLOSS Communities outreaches</a> <span class="speaker-name">Flavia Weisghizzi</span></td>
             </tr>
             <tr>
                 <td>14:55 - 15:40</td>
@@ -71,7 +71,7 @@ get_header(); ?>
             <tr>
                 <td>17:15 - 18:00</td>
                 <td><a class="talk" href="../session/high-resolution-display-support-in-gnome/">High resolution display support in GNOME</a> <span class="speaker-name">Alex Larsson</span></td>
-                <td><a class="talk" href="../session/floss-communities-outreaches/">FLOSS Communities outreaches</a> <span class="speaker-name">Flavia Weisghizzi</span></td>
+                <td><a class="talk" href="../session/libreoffice-gnome/">LibreOffice and GNOME</a> <span class="speaker-name">Michael Meeks</span></td>
             </tr>
         </table>
 
