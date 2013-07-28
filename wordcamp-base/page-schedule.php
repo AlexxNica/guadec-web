@@ -133,7 +133,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>09:00 - 10:00</td>
-                <td class="keynote" colspan="2">Keynote: The Board Bites Back <span style="float: right">D105</span></td>
+                <td class="keynote" colspan="2">Q&A with the board <span style="float: right">D105</span></td>
             </tr>
             <tr>
                 <td>10:00 - 10:40</td>
