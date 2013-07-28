@@ -74,6 +74,13 @@ get_header(); ?>
                 <td><a class="talk" href="../session/libreoffice-gnome/">LibreOffice and GNOME</a> <span class="speaker-name">Michael Meeks</span></td>
             </tr>
         </table>
+        <table class="schedule">
+            <tr>
+                <td>17:00 - 19:00</td>
+                <td></td>
+                <td><a class="talk" href="https://wiki.gnome.org/GUADEC/2013/NewcomersWorkshop">Newcomers Workshop</a> <span style="float: right">D0207</span></td>
+            </tr>
+        </table>
 
         <h3 id="day2" class="sub-section-title">Day 2: Friday, August 2st</h3>
         <table class="schedule">
