@@ -77,8 +77,7 @@ get_header(); ?>
         <table class="schedule">
             <tr>
                 <td>17:00 - 19:00</td>
-                <td></td>
-                <td><a class="talk" href="https://wiki.gnome.org/GUADEC/2013/NewcomersWorkshop">Newcomers Workshop</a> <span style="float: right">D0207</span></td>
+                <td style="width: 80%"><a class="talk" href="https://wiki.gnome.org/GUADEC/2013/NewcomersWorkshop">Newcomers Workshop</a> <span style="float: right">D0207</span></td>
             </tr>
         </table>
 
