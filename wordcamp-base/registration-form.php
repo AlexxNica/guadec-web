@@ -74,6 +74,7 @@
   </span>
 </p>
 
+<!--
 <p>
   <h3 class="sub-section-title">Meals</h3>
   <input type=checkbox name=lunch <?php if ($reg->lunch) { echo 'checked=true'; } ?>/>
@@ -89,6 +90,7 @@
 
   </span>
 </p>
+-->
 
 <p>
   <h3 class="sub-section-title">Accommodation</h3>
