@@ -112,12 +112,12 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>14:00 - 14:45</td>
-                <td><a class="talk" href="#day2">Panel discussion: Wayland, the road ahead</a> <span class="speaker-name">Kristian Høgsberg, Robert Bradford</span></td>
+                <td><a class="talk" href="../session/wayland-the-future-of-linux-graphics-is-here/">Wayland: The future of Linux graphics is here</a> <span class="speaker-name">Robert Bradford</span></td>
                 <td><a class="talk" href="../session//gtk-for-application-developers/">GTK for application developers</a> <span class="speaker-name">Matthias Clasen</span></td>
             </tr>
             <tr>
                 <td>14:55 - 15:40</td>
-                <td><a class="talk" href="../session/wayland-the-future-of-linux-graphics-is-here/">Wayland: The future of Linux graphics is here</a> <span class="speaker-name">Robert Bradford</span></td>
+                <td><a class="talk" href="#day2">Panel discussion: Wayland, the road ahead</a> <span class="speaker-name">Kristian Høgsberg, Robert Bradford</span></td>
                 <td><a class="talk" href="../session/gtk-to-infinity-and-beyond/">GTK: to infinity and beyond</a> <span class="speaker-name">Benjamin Otte</span></td>
             </tr>
             <tr>
