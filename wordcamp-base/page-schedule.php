@@ -176,7 +176,7 @@ get_header(); ?>
             <tr>
                 <td>16:20 - 17:05</td>
                 <td><a class="talk" href="../session/writing-multimedia-applications-with-grilo/">Writing multimedia applications with Grilo</a> <span class="speaker-name">Juan A. Suarez</span></td>
-                <td>Empty</td>
+                <td><a class="talk" href="../session/where-am-i-where-to-grab-lunch/">Where am I? Where to grab lunch?</a> <span class="speaker-name">Zeeshan Ali and Andreas Nilsson</span></td>
             </tr>
             <tr>
                 <td>17:15 - 18:00</td>
@@ -224,7 +224,7 @@ get_header(); ?>
             </tr>
             <tr>
                 <td>14:55 - 15:40</td>
-                <td><a class="talk" href="../session/where-am-i-where-to-grab-lunch/">Where am I? Where to grab lunch?</a> <span class="speaker-name">Zeeshan Ali and Andreas Nilsson</span></td>
+                <td>Empty</td>
                 <td><a class="talk" href="../session/pitivi-and-ges-towards-1-x/">PiTiVi and GES, towards 1.x</a> <span class="speaker-name">Jeff Fortin</span></td>
             </tr>
             <tr>
