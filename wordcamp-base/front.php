@@ -59,6 +59,12 @@ while ( have_posts() ) : the_post();
               <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-igalia.png" alt="Igalia" />
               </a>
             </div>
+            <div class="sponsors-level">
+              <div class="sponsors-level-title">Bronze</div>
+              <a href="https://www.mozilla.org">
+              <img src="<?php echo get_bloginfo('template_url')?>/images/sponsor-mozilla.png" alt="Mozilla" />
+              </a>
+            </div>
             <a href="<?php echo get_permalink(get_page_by_title( 'Sponsors' )) . "#become_sponsor"; ?>" class="become-sponsor">Become a sponsor too!</a>
 
             <div class="clear"></div>
