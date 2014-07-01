@@ -29,6 +29,7 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <![endif]-->
 <?php wp_head(); ?>
+<script type="text/javascript" src="<?php bloginfo('stylesheet_directory'); ?>/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('stylesheet_directory'); ?>/js/calculate-total.js"></script>
 </head>
 
