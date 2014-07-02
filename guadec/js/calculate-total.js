@@ -1,5 +1,7 @@
 /*calculate-total.js*/
-/*Jquery file to calculate net amount during registration */
+/*Jquery file to calculate net amount during registration
+  GUADEC 2014
+  Author: Saumya Dwivedi */
 
 function callTotalCalculate() {
 	$.ajax({
@@ -11,6 +13,7 @@ function callTotalCalculate() {
 		result = result.trim();
        if(result != 'error' ) {
         	$(".total").html(result);
+        	$('[name=tfee]').prop('value', result);
         }
         else {
             console.log(result);
@@ -29,6 +32,7 @@ function callLunchCalculate() {
 		result = result.trim();
         if(result != 'error' ) {
 	    	$(".lunchfee").html(result);
+	    	$('[name=lfee]').prop('value', result);
         }
         else {
             console.log(result);
@@ -48,6 +52,7 @@ function callAccomCalculate() {
 		result = result.trim();
         if(result != 'error' ) {
         	$(".accomfee").html(result);
+        	$('[name=afee]').prop('value', result);
         }
         else {
             console.log(result);
@@ -55,6 +60,27 @@ function callAccomCalculate() {
 	}
 	});	
 	callTotalCalculate();
+}
+function enableDisableA(obj) {
+	if ($(obj).is(":checked")) {
+		$("#arrive").prop("disabled", false);
+		$("#depart").prop("disabled", false);
+	}
+	else {
+		$("#arrive").prop("disabled", true);
+		$("#depart").prop("disabled", true);
+	}
+}
+
+function enableDisableL(obj) {
+	if ($(obj).is(":checked")) {
+		$("form input[value*='lunch_']").prop("disabled", false);
+		
+	}
+	else {
+		$("form input[value*='lunch_']").prop("disabled", true);
+		
+	}
 }
 $(function() {
 	
@@ -99,6 +125,18 @@ $(function() {
 	  // Update value
 	   $(this).val(sanitized);
 
+	});
+	$(document).ready(function() {
+		enableDisableA(this);
+		$("[name=accommodation]").click(function() {
+			enableDisableA(this);	
+		});
+	});
+	$(document).ready(function() {
+		enableDisableL(this);
+		$("[name=lunch]").click(function() {
+			enableDisableL(this);	
+		});
 	});
 });
 

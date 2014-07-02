@@ -1,7 +1,8 @@
+
 <?php
 
-    define('day_fee', 2);
-    define('lunch_fee', 3);
+    define('day_fee', 25);
+    define('lunch_fee', 8.5);
 
     function dayParser($arrive_string, $depart_string){
        $result = ""; 
