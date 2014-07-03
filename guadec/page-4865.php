@@ -79,7 +79,7 @@ if (!empty($_POST)) {
 	    <input type="hidden" name="currency_code" value="GBP">
 	    <input type="hidden" name="item_name" value="Digital Download">
 	    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
-	    <input type="hidden" name="return" value="http://localhost/wordpress/?page_id=4823">
+	    <input type="hidden" name="return" value="https://www.guadec.org/?page_id=1323&preview=true">
 	    <input type="hidden" name="custom" value="<?php echo $registerInfo; ?>">
 	    <input type="hidden" name="notify_url" value="http://web.iiit.ac.in/~saumya.dwivedi/test/ipn.php">
 	    <input type="image" src="http://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
