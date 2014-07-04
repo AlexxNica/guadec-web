@@ -141,15 +141,23 @@ $(function() {
 		});
 	});
 	// Enable Disable the submit button
-	$('input[type="submit"]').attr('disabled','disabled');
+	$('input[name=regsub]').attr('disabled','disabled');
      $('input[name="policy"]').click(function() {
         if($(this).is(':checked')) {
-           $('input[type="submit"]').removeAttr('disabled');
+           $('input[name=regsub]').removeAttr('disabled');
         }
         else {
-    		$('input[type="submit"]').attr('disabled','disabled');
-        	
+    		$('input[name=regsub]').attr('disabled','disabled');
         }
      });
+     $('form[name=registration]').submit(function(event){
+     	if($("[value=accommodation]").is(':checked')){
+			if(!$("[name=contact_country]").val()){
+				alert("Make sure you enter the birth country, date of birth and agree to anti-harassment policy");
+   				event.preventDefault();
+			}
+		}
+     });
+     
 });
 

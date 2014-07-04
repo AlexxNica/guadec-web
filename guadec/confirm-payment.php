@@ -1,4 +1,9 @@
 <?php
+/*
+Template Name: Confirm Payment
+*/
+?>
+<?php
 //require_once('../../../wp-load.php')
 
 $application_submitted = false;
@@ -21,6 +26,8 @@ if (!empty($_POST)) {
 	$lamount = (isset($_POST['lfee']))?($_POST['lfee']):'0';
 	$aamount = (isset($_POST['lfee']))?($_POST['afee']):'0';
 	$tamount = (isset($_POST['lfee']))?($_POST['tfee']):'0';
+	$bday = (isset($_POST['bday']))?($_POST['tfee']):'NA';
+	$student =  ($_POST['student'] == true)?"YES":"NA";
 
 	$obfuscated_email = str_replace("@", " AT ", $email);
 	
@@ -79,7 +86,9 @@ if (!empty($_POST)) {
   				 'irc' => $irc,
   				 'gender' => $gender,
   				 'country' => $country,
-  				 'payment_status' => $payment)); 	
+  				 'payment_status' => $payment,
+  				 'student' => $student,
+  				 'bday' => $bday)); 	
 	}
 }
 	

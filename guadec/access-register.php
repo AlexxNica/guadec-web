@@ -1,4 +1,9 @@
 <?php
+/*
+Template Name: Access Registration
+*/
+?>
+<?php
 // Restricted Admin Access. View Registration details.
 global $wpdb;
 function display_result($result){
