@@ -85,6 +85,7 @@ function enableDisableL(obj) {
 $(function() {
 	
 	/*Dropdown triggered event*/
+
 	$('#arrive').on('change' , function(){
 		callAccomCalculate();
 	})
@@ -126,6 +127,7 @@ $(function() {
 	   $(this).val(sanitized);
 
 	});
+	//Enable Disable Accomodation and Lunch Selection
 	$(document).ready(function() {
 		enableDisableA(this);
 		$("[name=accommodation]").click(function() {
@@ -138,5 +140,16 @@ $(function() {
 			enableDisableL(this);	
 		});
 	});
+	// Enable Disable the submit button
+	$('input[type="submit"]').attr('disabled','disabled');
+     $('input[name="policy"]').click(function() {
+        if($(this).is(':checked')) {
+           $('input[type="submit"]').removeAttr('disabled');
+        }
+        else {
+    		$('input[type="submit"]').attr('disabled','disabled');
+        	
+        }
+     });
 });
 
