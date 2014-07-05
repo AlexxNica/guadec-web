@@ -66,6 +66,9 @@
                    else{ 
                      $total_days = dayParser($_POST['arguments'][0], $_POST['arguments'][1]);
                      $aResult = (int)($total_days) * day_fee;
+                     if ($total_days == "Incorrect dates"){
+                      $aResult = $total_days;
+                     }
                      
                   }
                }
@@ -88,6 +91,10 @@
                      $accom = 0;
                    }
                   $aResult = $accom + $lunch + (int)($_POST['arguments'][3]);
+                  if ($total_days == "Incorrect dates"){
+                      $aResult = $total_days;
+                  }
+                     
                }
                break;
             
