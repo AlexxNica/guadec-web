@@ -4,14 +4,39 @@ Template Name: Confirm Payment
 */
 ?>
 <?php
-//require_once('../../../wp-load.php')
+ $application_submitted = false;
+ $mailContent = '';
+ $table_name = $wpdb->prefix .'registration';
 
-$application_submitted = false;
-$mailContent = '';
 global $wpdb;
+$sql = "CREATE TABLE $table_name (
+  id mediumint(9) NOT NULL AUTO_INCREMENT,
+  timeofregistration datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  name tinytext NOT NULL,
+  email VARCHAR(55) NOT NULL,
+  accom VARCHAR(10) DEFAULT 'NO' NOT NULL,
+  arrive VARCHAR(20) DEFAULT 'NA' NOT NULL,
+  depart VARCHAR(20) DEFAULT 'NA' NOT NULL,
+  sponsored VARCHAR(10) DEFAULT 'NO' NOT NULL,
+  lunchdays VARCHAR(60) DEFAULT 'NA',
+  dietrestrict VARCHAR(60),
+  entryfee real DEFAULT 0 NOT NULL,
+  lunchfee real DEFAULT 0 NOT NULL,
+  accomfee real DEFAULT 0 NOT NULL,
+  totalfee real DEFAULT 0 NOT NULL,
+  irc text,
+  gender text,
+  country text,
+  student VARCHAR(10) DEFAULT 'NO',
+  payment VARCHAR(10) DEFAULT 'NoPayment',
+  bday date,
+  UNIQUE KEY id (id)
+);";
+
+require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+dbDelta( $sql );
 
 if (!empty($_POST)) {
-
 	$application_submitted = true;
 	$errors = false;
 
@@ -26,7 +51,7 @@ if (!empty($_POST)) {
 	$lamount = (isset($_POST['lfee']))?($_POST['lfee']):'0';
 	$aamount = (isset($_POST['lfee']))?($_POST['afee']):'0';
 	$tamount = (isset($_POST['lfee']))?($_POST['tfee']):'0';
-	$bday = (isset($_POST['bday']))?($_POST['tfee']):'NA';
+	$bday = (isset($_POST['bday']))?($_POST['bday']):'NA';
 	$student =  ($_POST['student'] == true)?"YES":"NA";
 
 	$obfuscated_email = str_replace("@", " AT ", $email);
@@ -51,9 +76,9 @@ if (!empty($_POST)) {
 			$x = $x + 1;
 		}
 	}
-	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NA";
-	$payment = ($tamount > 0)?"Pending":"NoPayment-0";
-	$accom = ($_POST['accommodation'] == true)?"YES":"NA";
+	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
+	$payment = ($tamount > 0)?"Pending":"NoPayment";
+	$accom = ($_POST['accommodation'] == true)?"YES":"NO";
 	if ($errors == false) {
 		/* This variable not be changed: goes to a restricted field to Paypal API */
 		$registerInfo = 
@@ -70,8 +95,9 @@ if (!empty($_POST)) {
 		;
 		$mailContent .= $registerInfo;
 	
-		$table_name = "registered";
-  		$wpdb->insert($table_name, array('name' => $name,
+	//	$table_name = "registered";
+  		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
+  				 'name' => $name,
   				 'email' => $email,
   				 'accom' => $accom,
   				 'arrive' => $arrive,
@@ -86,7 +112,7 @@ if (!empty($_POST)) {
   				 'irc' => $irc,
   				 'gender' => $gender,
   				 'country' => $country,
-  				 'payment_status' => $payment,
+  				 'payment' => $payment,
   				 'student' => $student,
   				 'bday' => $bday)); 	
 	}
