@@ -6,7 +6,7 @@ Template Name: Confirm Payment
 <?php
  $application_submitted = false;
  $mailContent = '';
- $table_name = $wpdb->prefix .'registration';
+ $table_name = $wpdb->prefix .'guadec2014_registrations';
 
 global $wpdb;
 $sql = "CREATE TABLE $table_name (
