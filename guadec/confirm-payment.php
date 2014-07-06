@@ -54,6 +54,10 @@ if (!empty($_POST)) {
 	$bday = (isset($_POST['bday']))?($_POST['bday']):'NA';
 	$student =  ($_POST['student'] == true)?"YES":"NA";
 
+	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
+	$payment = ($tamount > 0)?"Pending":"NoPayment";
+	$accom = ($_POST['accommodation'] == true)?"YES":"NO";
+
 	$obfuscated_email = str_replace("@", " AT ", $email);
 	
 	if (empty($name) || empty($email)) {
@@ -76,9 +80,6 @@ if (!empty($_POST)) {
 			$x = $x + 1;
 		}
 	}
-	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
-	$payment = ($tamount > 0)?"Pending":"NoPayment";
-	$accom = ($_POST['accommodation'] == true)?"YES":"NO";
 	if ($errors == false) {
 		/* This variable not be changed: goes to a restricted field to Paypal API */
 		$registerInfo = 
@@ -94,8 +95,6 @@ if (!empty($_POST)) {
 		"Total Fee: ".$tamount."\n"
 		;
 		$mailContent .= $registerInfo;
-	
-	//	$table_name = "registered";
   		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
   				 'name' => $name,
   				 'email' => $email,
@@ -128,9 +127,62 @@ if (!empty($_POST)) {
 	<?php if ($errors == true): ?>
 	<div> "Invalid name or email. Please check."<a href="http://localhost/wordpress/?page_id=4787"> Go back to Registration </a>
 	<?php else: ?>
-		<?php echo $registerInfo; ?>
+		<?php //echo $registerInfo; ?>
+		<div class="section group">
+		<div class="col span_1_of_2">Name</div>
+		<div class="col span_1_of_2"><?php echo $name;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Email</div>
+		<div class="col span_1_of_2"><?php echo $email;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Sponsored</div>
+		<div class="col span_1_of_2"><?php echo $sponsor_check;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Accommodation</div>
+		<div class="col span_1_of_2"><?php echo $accom;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Arrival</div>
+		<div class="col span_1_of_2"><?php echo $arrive;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Departure</div>
+		<div class="col span_1_of_2"><?php echo $depart;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Lunch-Days</div>
+		<div class="col span_1_of_2"><?php echo $lunch_days;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Dietary-Restrictions</div>
+		<div class="col span_1_of_2"><?php echo $diet;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Student</div>
+		<div class="col span_1_of_2"><?php echo $student;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Accommodation-Fee</div>
+		<div class="col span_1_of_2">€<?php echo $aamount;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Lunch-Fee</div>
+		<div class="col span_1_of_2">€<?php echo $lamount;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Entry-Fee</div>
+		<div class="col span_1_of_2">€<?php echo $entry;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Total</div>
+		<div class="col span_1_of_2">€<?php echo $tamount;?></div>
+		</div>
+		
 		<?php if ($tamount > 0): ?>
-			<div>Your details have been stored. Proceed to pay.</div>
+			<div>Your details have been stored. Proceed to pay €<?php echo $tamount;?>.</div>
 				
 			<form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 		    <input type="hidden" name="cmd" value="_xclick">
@@ -139,14 +191,14 @@ if (!empty($_POST)) {
 		    <input type="hidden" name="item_name" value="Digital Download">
 		    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
 		    <!-- Redirect to thank you after successful payment -->
-		    <input type="hidden" name="return" value="http://localhost/wordpress/?page_id=4823">
+		    <input type="hidden" name="return" value=" https://www.guadec.org/thank-you">
 		    <input type="hidden" name="custom" value="<?php echo $registerInfo; ?>">
 
 			<!-- <Address of notification url. Can not be localhost	     -->
 		    <input type="hidden" name="notify_url" value="http://web.iiit.ac.in/~saumya.dwivedi/test/ipn.php">
 
 		    <!-- Redirect to thank you after cancelled payment -->
-		    <input type="hidden" name="cancel_return" value="http://localhost/wordpress/?page_id=4823">
+		    <input type="hidden" name="cancel_return" value="https://www.guadec.org/cancel-registration/">
 		    
 		    <input type="image" src="http://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 			</form>
