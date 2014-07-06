@@ -63,8 +63,8 @@ function callAccomCalculate() {
 }
 function enableDisableA(obj) {
 	if ($(obj).is(":checked")) {
-		$("#arrive").prop("disabled", false);
-		$("#depart").prop("disabled", false);
+		$("[name=arrival]").prop("disabled", false);
+		$("[name=departure]").prop("disabled", false);
 		$('[name=bday]').prop("disabled", false);
 		$("[name=sponsored]").prop("disabled", false);
 		$("[name=student]").prop("disabled", false);
@@ -72,8 +72,8 @@ function enableDisableA(obj) {
 
 	}
 	else {
-		$("#arrive").prop("disabled", true);
-		$("#depart").prop("disabled", true);
+		$("[name=arrival]").prop("disabled", true);
+		$("[name=departure]").prop("disabled", true);
 		$("[name=bday]").prop("disabled", true);
 		$("[name=sponsored]").prop("disabled", true);
 		$("[name=student]").prop("disabled", true);
