@@ -122,10 +122,10 @@ if (!empty($_POST)) {
 
 <div>
 <?php if(!($application_submitted == true)): ?>
-	<div> "Invalid Submission. Please go through registration page first."</div>
+	<div class="section group"> "Invalid Submission. Please go through registration page first."</div>
 <?php else: ?>
 	<?php if ($errors == true): ?>
-	<div> "Invalid name or email. Please check."<a href="http://localhost/wordpress/?page_id=4787"> Go back to Registration </a>
+	<div class="section group"> "Invalid name or email. Please check."<a href="https://www.guadec.org/registration-form/"> Go back to Registration </a></div>
 	<?php else: ?>
 		<?php //echo $registerInfo; ?>
 		<div class="section group">
@@ -182,26 +182,27 @@ if (!empty($_POST)) {
 		</div>
 		
 		<?php if ($tamount > 0): ?>
-			<div>Your details have been stored. Proceed to pay €<?php echo $tamount;?>.</div>
-				
-			<form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-		    <input type="hidden" name="cmd" value="_xclick">
-		    <input type="hidden" name="business" value="saumya.zero-facilitator@gmail.com">
-		    <input type="hidden" name="currency_code" value="EUR">
-		    <input type="hidden" name="item_name" value="Digital Download">
-		    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
-		    <!-- Redirect to thank you after successful payment -->
-		    <input type="hidden" name="return" value=" https://www.guadec.org/thank-you">
-		    <input type="hidden" name="custom" value="<?php echo $registerInfo; ?>">
+			<div class="section_group>">Your details have been stored. Proceed to pay €<?php echo $tamount;?>.</div>
+			<div class="col span_1_of_2">	
+				<form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+			    <input type="hidden" name="cmd" value="_xclick">
+			    <input type="hidden" name="business" value="saumya.zero-facilitator@gmail.com">
+			    <input type="hidden" name="currency_code" value="EUR">
+			    <input type="hidden" name="item_name" value="Digital Download">
+			    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
+			    <!-- Redirect to thank you after successful payment -->
+			    <input type="hidden" name="return" value=" https://www.guadec.org/thank-you">
+			    <input type="hidden" name="custom" value="<?php echo $registerInfo; ?>">
 
-			<!-- <Address of notification url. Can not be localhost	     -->
-		    <input type="hidden" name="notify_url" value="http://web.iiit.ac.in/~saumya.dwivedi/test/ipn.php">
+				<!-- <Address of notification url. Can not be localhost	     -->
+			    <input type="hidden" name="notify_url" value="http://www.guadec.org/wp-content/themes/guadec/ipn.php">
 
-		    <!-- Redirect to thank you after cancelled payment -->
-		    <input type="hidden" name="cancel_return" value="https://www.guadec.org/cancel-registration/">
-		    
-		    <input type="image" src="http://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-			</form>
+			    <!-- Redirect to thank you after cancelled payment -->
+			    <input type="hidden" name="cancel_return" value="https://www.guadec.org/cancel-registration/">
+			    
+			    <input type="image" src="http://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+				</form>
+			</div>
 		<?php else: ?>
 			<div>Your details have been stored. An email confirming your registration will be sent to you shortly. Thank you.</div>
 			<!-- Send a confirm registration mail to the registered -->
