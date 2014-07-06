@@ -49,14 +49,15 @@ else{
 
 	if(isset($_POST['viewtype']) && !empty($_POST['viewtype'])) {
 	    $action = $_POST['viewtype'];
+
 	    switch($action) {
 
 	        case 'showall' :
-	            $result = $wpdb->get_results('SELECT * FROM registered', ARRAY_A);
-	        	echo display_result($result);
+	      		$result = $wpdb->get_results('SELECT * FROM wp_guadec2014_registration', ARRAY_A);
+	           	echo display_result($result);
 	        	break;
 	     	case 'showcomplete' :
-	    		$result = $wpdb->get_results("SELECT * FROM registered WHERE payment_status = 'Completed' OR payment_status ='NoPayment-0'", ARRAY_A);
+	    		$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registration WHERE payment = 'Completed' OR payment ='NoPayment'", ARRAY_A);
 	     		echo display_result($result);
 	        	break;
 		    

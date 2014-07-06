@@ -95,6 +95,9 @@ if (!empty($_POST)) {
 		"Total Fee: ".$tamount."\n"
 		;
 		$mailContent .= $registerInfo;
+		$subject = "From GUADEC 2014 Registration";
+		$headers = "From: GUADEC 2014 Registration Script <some-address@gnome.org>";
+
   		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
   				 'name' => $name,
   				 'email' => $email,
@@ -206,7 +209,12 @@ if (!empty($_POST)) {
 		<?php else: ?>
 			<div>Your details have been stored. An email confirming your registration will be sent to you shortly. Thank you.</div>
 			<!-- Send a confirm registration mail to the registered -->
-			<?php mail($email, $mailContent); ?>
+			<?php $mail = mail($email, $subject, $mailContent, $headers); ?>
+			<?php if($mail): ?>
+ 				 <div>"Mail sent"</div>
+			<?php else: ?>
+  				 <div>"Mail sending failed."</div> 
+  			<?php endif; ?>
 		<?php endif; ?>
 	<?php endif; ?>
 <?php endif; ?>	
