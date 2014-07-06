@@ -125,7 +125,7 @@ if (!empty($_POST)) {
 	<div class="section group"> "Invalid Submission. Please go through registration page first."</div>
 <?php else: ?>
 	<?php if ($errors == true): ?>
-	<div class="section group"> "Invalid name or email. Please check."<a href="https://www.guadec.org/registration-form/"> Go back to Registration </a></div>
+	<div class="section group"> "Invalid name or email. Please check."<a href="https://www.guadec.org/registration-form/"> Go back to Registration page</a></div>
 	<?php else: ?>
 		<?php //echo $registerInfo; ?>
 		<div class="section group">

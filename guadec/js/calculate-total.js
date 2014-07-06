@@ -77,7 +77,8 @@ function enableDisableA(obj) {
 		$("[name=bday]").prop("disabled", true);
 		$("[name=sponsored]").prop("disabled", true);
 		$("[name=student]").prop("disabled", true);
-
+		$("[name=sponsored]").prop("checked", false);
+		$("[name=student]").prop("checked", false);
 		$(".box-options-accom").addClass("disabled");
 
 	}
@@ -92,6 +93,7 @@ function enableDisableL(obj) {
 	}
 	else {
 		$("form input[value*='lunch_']").prop("disabled", true);
+		$("form input[value*='lunch_']").prop("checked", false);
 		$("[name=diet]").prop("disabled", true);
 		$(".box-options-lunch").addClass("disabled");
 		
