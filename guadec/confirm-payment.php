@@ -211,7 +211,7 @@ if (!empty($_POST)) {
 			<!-- Send a confirm registration mail to the registered -->
 			<?php $mail = mail($email, $subject, $mailContent, $headers); ?>
 			<?php if($mail): ?>
- 				 <div>"Mail sent"</div>
+ 				 <div>"Mail sent."</div>
 			<?php else: ?>
   				 <div>"Mail sending failed."</div> 
   			<?php endif; ?>

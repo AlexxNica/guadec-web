@@ -29,7 +29,7 @@ function display_result($result){
 		echo "<td>"; echo $results['lunchfee']; echo "</td>";
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
 		echo "<td>"; echo $results['totalfee']; echo "</td>";
-		echo "<td>"; echo $results['payment_status']; echo "</td>";
+		echo "<td>"; echo $results['payment']; echo "</td>";
 		echo "</tr>";
 	}
 	echo "</table>";
@@ -49,12 +49,12 @@ else{
 
 	if(isset($_POST['viewtype']) && !empty($_POST['viewtype'])) {
 	    $action = $_POST['viewtype'];
-
+	   // $table_name = $wpdb->prefix .'guadec2014_registration';
 	    switch($action) {
 
 	        case 'showall' :
-	      		$result = $wpdb->get_results('SELECT * FROM wp_guadec2014_registration', ARRAY_A);
-	           	echo display_result($result);
+	            $result = $wpdb->get_results('SELECT * FROM wp_guadec2014_registration', ARRAY_A);
+	        	echo display_result($result);
 	        	break;
 	     	case 'showcomplete' :
 	    		$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registration WHERE payment = 'Completed' OR payment ='NoPayment'", ARRAY_A);
