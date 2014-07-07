@@ -53,7 +53,7 @@ else{
 	    switch($action) {
 
 	        case 'showall' :
-	            $result = $wpdb->get_results('SELECT * FROM $wp_guadec2014_registrations', ARRAY_A);
+	            $result = $wpdb->get_results('SELECT * FROM wp_guadec2014_registrations', ARRAY_A);
 	        	echo display_result($result);
 	        	break;
 	     	case 'showcomplete' :

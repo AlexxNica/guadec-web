@@ -40,6 +40,7 @@ if ($verified) {
     $customInfo = $_POST['custom'];     // access custom information
     $csplit = explode('&',$customInfo);
     $cvar = array(); $i = 0;
+    $headers = "From: GUADEC 2014 Registration Script <membership-committee@gnome.org>\n";
 
     while(($i < 9) && ($csplit[$i] != null)){
         $dsplit =  explode('=',$csplit[$i]);
@@ -114,8 +115,8 @@ if ($verified) {
         $body .= "Registration Payment Successful for ";
         $body .= $_POST['custom'];
         error_log($body);
-        mail($_POST['receiver_email'], 'GUADEC 2014 Registration Successful', $body);
-        mail($_POST['payer_email'], 'GUADEC 2014 Registration Successful', $body);
+        mail($_POST['receiver_email'], 'GUADEC 2014 Registration Successful', $body, $headers);
+        mail($_POST['payer_email'], 'GUADEC 2014 Registration Successful', $body, $headers);
     
     }
 } 
