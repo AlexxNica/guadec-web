@@ -35,7 +35,7 @@ try {
 if ($verified) {
     // : Implement additional fraud checks and MySQL storage
  error_log("verified!\n");   
-   
+/*   
     $errmsg = '';   // stores errors from fraud checks
     
     $customInfo = $_POST['custom']; // access custom information
@@ -120,7 +120,7 @@ if ($verified) {
         mail($_POST['receiver_email'], 'Registration Successful', $body, $headers);
         mail($_POST['payer_email'], 'Registration Successful', $body, $headers);
     
-    }
+    }*/
 } 
 else {
     // manually investigate the invalid IPN
