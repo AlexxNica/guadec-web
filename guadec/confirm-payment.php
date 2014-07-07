@@ -83,17 +83,16 @@ if (!empty($_POST)) {
 	if ($errors == false) {
 		/* This variable not be changed: goes to a restricted field to Paypal API */
 		$registerInfo = 
-		"Name: " . $name . "\n".
-		"Email: " . $obfuscated_email . "\n" .
-		"Arrive :  ". $arrive . "\n".
-		"Depart:  ". $depart . "\n".
-		"Sponsored: ". $sponsor_check . "\n".
-		"Lunch Days: ". $x. "\n".
-		"Entry Fee: ". $entry ."\n".
-		"Lunch Fee: ".$lamount."\n".
-		"Accom Fee: ".$aamount."\n".
-		"Total Fee: ".$tamount."\n"
-		;
+		"name=" . $name . "&".
+		"email=" . $email . "&" .
+		"time=" . date("Y-m-d H:i:s"). "&".
+		"arrive=". $arrive . "&".
+		"depart=". $depart . "&".
+		"entryfee=". $entry ."&".
+		"lunchfee=".$lamount."&".
+		"accomfee=".$aamount."&".
+		"totalfee=".$tamount
+				;
 		$mailContent .= $registerInfo;
 		$subject = "From GUADEC 2014 Registration";
 		$headers = "From: GUADEC 2014 Registration Script <some-address@gnome.org>";

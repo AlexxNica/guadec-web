@@ -19,6 +19,9 @@ $listener = new IpnListener();
 // tell the IPN listener to use the PayPal test sandbox
 $listener->use_sandbox = true;
 
+//variable to update the database
+global $wpdb;
+
 // try to process the IPN POST
 try {
     $listener->requirePostMethod();
@@ -34,11 +37,27 @@ if ($verified) {
     // TODO: Implement additional fraud checks and MySQL storage
 
     $errmsg = '';   // stores errors from fraud checks
+    $customInfo = $_POST['custom'];     // access custom information
+    $csplit = explode('&',$customInfo);
+    $cvar = array(); $i = 0;
+
+    while(($i < 9) && ($csplit[$i] != null)){
+        $dsplit =  explode('=',$csplit[$i]);
+        $ckey = $dsplit[0];
+        $cvalue = ($dsplit[1] =='')?'0': $dsplit[1];
+        $cvar[$ckey] = $cvalue;
+        error_log("dsjnfsdjnfdjsjbsf\n");       
+        error_log($cvar[$ckey]);
+        error_log($ckey);
+//      error_log($cvalue);
+//      error_log($csplit[$i]);
+        $i = $i + 1;
+        } 
     
     // 1. Make sure the payment status is "Completed" 
     if ($_POST['payment_status'] != 'Completed') { 
         $errmsg .= "'Payment status' does not match: ";
-        $errmsg .= $_POST['receiver_email']."\n";
+        $errmsg .= $_POST['payment_status']."\n";
         // simply ignore any IPN that is not completed
         exit(0); 
     }
@@ -79,6 +98,18 @@ if ($verified) {
         
         
     } else {
+        $reg_email = $cvar['email'];
+        $table_name = $wpdb->prefix .'guadec2014_registration';
+        
+        $wpdb->update(
+        $table_name,
+        array(
+            'payment' => 'Completed'
+            ),
+        array(
+            'email' => $reg_email
+            ) 
+        );
         $body .= $listener->getTextReport();
         $body .= "Registration Payment Successful for ";
         $body .= $_POST['custom'];

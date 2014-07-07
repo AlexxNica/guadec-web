@@ -49,11 +49,11 @@ else{
 
 	if(isset($_POST['viewtype']) && !empty($_POST['viewtype'])) {
 	    $action = $_POST['viewtype'];
-	   // $table_name = $wpdb->prefix .'guadec2014_registration';
+	    $table_name = $wpdb->prefix .'guadec2014_registrations';
 	    switch($action) {
 
 	        case 'showall' :
-	            $result = $wpdb->get_results('SELECT * FROM wp_guadec2014_registrations', ARRAY_A);
+	            $result = $wpdb->get_results('SELECT * FROM $wp_guadec2014_registrations', ARRAY_A);
 	        	echo display_result($result);
 	        	break;
 	     	case 'showcomplete' :
