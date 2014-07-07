@@ -23,6 +23,8 @@ $listener->use_sandbox = true;
 try {
     $listener->requirePostMethod();
     $verified = $listener->processIpn();
+
+    error_log("atleast in try block");
 } catch (Exception $e) {
     error_log($e->getMessage());
     exit(0);
@@ -32,7 +34,8 @@ try {
 
 if ($verified) {
     // : Implement additional fraud checks and MySQL storage
-
+ error_log("verified!\n");   
+   
     $errmsg = '';   // stores errors from fraud checks
     
     $customInfo = $_POST['custom']; // access custom information
