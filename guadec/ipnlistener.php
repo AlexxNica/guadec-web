@@ -13,7 +13,7 @@
  *  @version    2.1.0
  */
 
-include_once(dirname(__FILE__) . '/wp-load.php');
+echo site_url();
 
 global $wpdb;    
     
