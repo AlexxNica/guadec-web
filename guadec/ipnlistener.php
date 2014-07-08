@@ -13,9 +13,9 @@
  *  @version    2.1.0
  */
 
-global $wpdb;
+
 class IpnListener {
-    
+    global $wpdb;    
     /**
      *  If true, the recommended cURL PHP library is used to send the post back 
      *  to PayPal. If flase then fsockopen() is used. Default true.
@@ -311,9 +311,9 @@ class IpnListener {
     }
     public function updateCompleted($reg_email='dummy@mail.com') {
     
-        $table_name = $wpdb->prefix .'guadec2014_registrations';
+        $table_name = ($this->$wpdb)->prefix .'guadec2014_registrations';
      //   error_log($table_name);     // check if the wpdb is accessible
-        $up = $wpdb->update(
+        $up = ($this->$wpdb)->update(
         $table_name,
         array(
             'payment' => 'Completed'
@@ -327,3 +327,4 @@ class IpnListener {
         }
     }
 }
+?>
