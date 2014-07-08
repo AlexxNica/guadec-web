@@ -13,7 +13,7 @@
  *  @version    2.1.0
  */
 
-echo ($_SERVER['DOCUMENT_ROOT']."/wp-load.php"); 
+require_once($_SERVER['DOCUMENT_ROOT']."/wp-load.php"); 
 
 global $wpdb;    
     
