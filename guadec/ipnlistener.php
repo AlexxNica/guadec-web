@@ -13,8 +13,7 @@
  *  @version    2.1.0
  */
 
-<?= ABSPATH?>
-require_once( ABSPATH . 'wp-load.php' );
+<?php include_once(dirname(__FILE__) . '/wp-load.php') ?>
 
 global $wpdb;    
     
