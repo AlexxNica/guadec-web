@@ -102,6 +102,7 @@ if ($verified) {
         var_dump($wpdb);
         $table_name = $wpdb->prefix .'guadec2014_registration';
         error_log($table_name);     // check if the wpdb is accessible
+        $listener->updateCompleted($reg_email);
         // $wpdb->update(
         // $table_name,
         // array(

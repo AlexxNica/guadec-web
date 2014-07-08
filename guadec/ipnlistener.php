@@ -12,6 +12,8 @@
  *  @copyright  (c) 2012 - Micah Carrick
  *  @version    2.1.0
  */
+
+global $wpdb;
 class IpnListener {
     
     /**
@@ -305,6 +307,23 @@ class IpnListener {
         if ($_SERVER['REQUEST_METHOD'] && $_SERVER['REQUEST_METHOD'] != 'POST') {
             header('Allow: POST', true, 405);
             throw new Exception("Invalid HTTP request method.");
+        }
+    }
+    public function updateCompleted($reg_email='dummy@mail.com') {
+    
+        $table_name = $wpdb->prefix .'guadec2014_registration';
+     //   error_log($table_name);     // check if the wpdb is accessible
+        $up = $wpdb->update(
+        $table_name,
+        array(
+            'payment' => 'Completed'
+            ),
+        array(
+            'email' => $reg_email
+            ) 
+        );
+        if(!($up)){
+            throw new Exception("Database Error: Not Updated");
         }
     }
 }
