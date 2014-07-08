@@ -12,6 +12,8 @@
  *  @copyright  (c) 2012 - Micah Carrick
  *  @version    2.1.0
  */
+
+echo ABSPATH
 require_once( ABSPATH . 'wp-load.php' );
 
 global $wpdb;    
