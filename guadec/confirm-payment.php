@@ -94,7 +94,7 @@ if (!empty($_POST)) {
 		"totalfee=".$tamount
 				;
 		$mailContent .= $registerInfo;
-		$subject = "From GUADEC 2014 Registration";
+		$subject = "GUADEC 2014 Registration";
 		$headers = "From: GUADEC 2014 Registration Script <some-address@gnome.org>";
 
   		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),

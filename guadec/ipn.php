@@ -27,8 +27,6 @@ global $wpdb;
 try {
     $listener->requirePostMethod();
     $verified = $listener->processIpn();
-
-    error_log("atleast in try block");
 } catch (Exception $e) {
     error_log($e->getMessage());
     exit(0);
@@ -38,7 +36,6 @@ try {
 
 if ($verified) {
     // : Implement additional fraud checks and MySQL storage
- error_log("verified!\n");   
    
     $errmsg = '';   // stores errors from fraud checks
     
@@ -51,11 +48,6 @@ if ($verified) {
     $ckey = $dsplit[0];
     $cvalue = ($dsplit[1] == null)?'0': $dsplit[1];
     $cvar[$ckey] = $cvalue;
-    error_log("dsjnfsdjnfdjsjbsf\n");   
-    error_log($cvar[$ckey]);
-    error_log($ckey);
-//  error_log($cvalue);
-//  error_log($csplit[$i]);
     $i = $i + 1;
     }    
     $headers = "From: GUADEC 2014 Registration Script <membership-committee@gnome.org>\n";
@@ -92,15 +84,17 @@ if ($verified) {
     if (!empty($errmsg)) {
     
         // manually investigate errors from the fraud checking
-        $body = "IPN failed fraud checks: \n$errmsg\n\n";
-        $body .= $listener->getTextReport();
-
         $body .= "Registration Payment Successful-with fraud warning ";
+        $body = "IPN failed fraud checks: \n$errmsg\n\n";
+
         //append with the real payment details
         $body .= $cvar['name'];
+        $body .= " with email ";
+        $body .= $cvar['email'];
+        $body .= $listener->getTextReport();
         error_log($body);
         mail($_POST['receiver_email'], 'IPN Fraud Warning', $body, $headers);
-        mail($_POST['payer_email'], 'IPN Fraud Warning', $body, $headers);
+        mail($_POST['payer_email'], 'GUADEC-2014 Registration Payment:Waiting for Confirmation', $body, $headers);
         
     } else {
 
@@ -123,9 +117,21 @@ if ($verified) {
         $body .= $cvar['email'];
         $body .= $listener->getTextReport();
         error_log($body);
-        mail($_POST['receiver_email'], 'Registration Successful', $body, $headers);
-        mail($_POST['payer_email'], 'Registration Successful', $body, $headers);
-        mail($cvar['email'], 'Registration Successful', $body, $headers);
+        mail($_POST['receiver_email'], 'GUADEC-2014 Registration Payment Successful', $body, $headers);
+        mail($_POST['payer_email'], 'GUADEC-2014 Registration Successful', $body, $headers);
+        $email_content =
+        "Name: " . $cvar['name'] . "\r\n".
+        "Email: " . $email . "\r\n" .
+        "Time: " . date("Y-m-d H:i:s"). "\r\n".
+        "Arrival: ". $arrive . "\r\n".
+        "Departure: ". $depart . "\r\n".
+        "Entry-Fee Paid: ". $entry ."\r\n".
+        "Lunch-Fee Paid: ".$lamount."\r\n".
+        "Accomodation-Fee Paid: ".$aamount."\r\n".
+        "Total Amount Paid: ".$tamount
+        ;
+        $body .= $email_content;
+        mail($cvar['email'], 'GUADEC-2014 Registration Successful', $body, $headers);
     }
 } 
 else {
