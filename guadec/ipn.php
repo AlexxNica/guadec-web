@@ -19,6 +19,7 @@ $listener = new IpnListener();
 // tell the IPN listener to use the PayPal test sandbox
 $listener->use_sandbox = true;
 
+require_once( ABSPATH . 'wp-load.php' );
 // update database variable
 global $wpdb;
 
@@ -104,6 +105,7 @@ if ($verified) {
     } else {
 
         $reg_email = $cvar['email'];
+        var_dump($wpdb);
         $table_name = $wpdb->prefix .'guadec2014_registration';
         
         $wpdb->update(
