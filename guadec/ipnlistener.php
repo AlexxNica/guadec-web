@@ -13,7 +13,7 @@
  *  @version    2.1.0
  */
 
-echo site_url();
+echo ($_SERVER['DOCUMENT_ROOT']."/wp-load.php"); 
 
 global $wpdb;    
     
