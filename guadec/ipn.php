@@ -19,7 +19,7 @@ $listener = new IpnListener();
 // tell the IPN listener to use the PayPal test sandbox
 $listener->use_sandbox = true;
 
-require_once( ABSPATH . 'wp-load.php' );
+//require_once( ABSPATH . 'wp-load.php' );
 // update database variable
 global $wpdb;
 
@@ -108,21 +108,24 @@ if ($verified) {
         var_dump($wpdb);
         $table_name = $wpdb->prefix .'guadec2014_registration';
         
-        $wpdb->update(
-        $table_name,
-        array(
-            'payment' => 'Completed'
-            ),
-        array(
-            'email' => $reg_email
-            ) 
-        );
+        // $wpdb->update(
+        // $table_name,
+        // array(
+        //     'payment' => 'Completed'
+        //     ),
+        // array(
+        //     'email' => $reg_email
+        //     ) 
+        // );
         $body .= "Registration Payment Successful for ";
         $body .= $cvar['name'];
+        $body .= " with email ";
+        $body .= $cvar['email'];
         $body .= $listener->getTextReport();
         error_log($body);
         mail($_POST['receiver_email'], 'Registration Successful', $body, $headers);
         mail($_POST['payer_email'], 'Registration Successful', $body, $headers);
+        mail($cvar['email'], 'Registration Successful', $body, $headers);
     }
 } 
 else {
