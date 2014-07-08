@@ -13,7 +13,7 @@
  *  @version    2.1.0
  */
 
-echo ABSPATH
+<?= ABSPATH?>
 require_once( ABSPATH . 'wp-load.php' );
 
 global $wpdb;    
