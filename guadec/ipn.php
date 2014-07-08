@@ -84,15 +84,15 @@ if ($verified) {
     if (!empty($errmsg)) {
     
         // manually investigate errors from the fraud checking
-        $body .= "Registration Payment Successful-with fraud warning ";
-        $body = "IPN failed fraud checks: \n$errmsg\n\n";
+        $body = "Registration Payment Successful-with fraud warning ";
+        $body .= "IPN failed fraud checks: \n$errmsg\n\n";
 
         //append with the real payment details
         $body .= $cvar['name'];
         $body .= " with email ";
         $body .= $cvar['email'];
         $body .= $listener->getTextReport();
-        error_log($body);
+        error_log($body); // Transcript copy in the error log
         mail($_POST['receiver_email'], 'IPN Fraud Warning', $body, $headers);
         mail($_POST['payer_email'], 'GUADEC-2014 Registration Payment:Waiting for Confirmation', $body, $headers);
         
@@ -101,7 +101,7 @@ if ($verified) {
         $reg_email = $cvar['email'];
         var_dump($wpdb);
         $table_name = $wpdb->prefix .'guadec2014_registration';
-        
+        error_log($table_name);     // check if the wpdb is accessible
         // $wpdb->update(
         // $table_name,
         // array(
@@ -111,7 +111,7 @@ if ($verified) {
         //     'email' => $reg_email
         //     ) 
         // );
-        $body .= "Registration Payment Successful for ";
+        $body = "Registration Payment Successful for ";
         $body .= $cvar['name'];
         $body .= " with email ";
         $body .= $cvar['email'];
@@ -121,14 +121,14 @@ if ($verified) {
         mail($_POST['payer_email'], 'GUADEC-2014 Registration Successful', $body, $headers);
         $email_content =
         "Name: " . $cvar['name'] . "\r\n".
-        "Email: " . $email . "\r\n" .
-        "Time: " . date("Y-m-d H:i:s"). "\r\n".
-        "Arrival: ". $arrive . "\r\n".
-        "Departure: ". $depart . "\r\n".
-        "Entry-Fee Paid: ". $entry ."\r\n".
-        "Lunch-Fee Paid: ".$lamount."\r\n".
-        "Accomodation-Fee Paid: ".$aamount."\r\n".
-        "Total Amount Paid: ".$tamount
+        "Email: " . $cvar['email'] . "\r\n" .
+        "Time: " . $cvar['time']. "\r\n".
+        "Arrival: ". $cvar['arrive'] . "\r\n".
+        "Departure: ". $cvar['depart'] . "\r\n".
+        "Entry-Fee Paid: ". $cvar['entryfee'] ."\r\n".
+        "Lunch-Fee Paid: ".$cvar['lunchfee']."\r\n".
+        "Accomodation-Fee Paid: ".$cvar['accomfee']."\r\n".
+        "Total Amount Paid: ".$cvar['totalfee']
         ;
         $body .= $email_content;
         mail($cvar['email'], 'GUADEC-2014 Registration Successful', $body, $headers);

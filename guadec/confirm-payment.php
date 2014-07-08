@@ -6,7 +6,7 @@ Template Name: Confirm Payment
 <?php
  $application_submitted = false;
  $mailContent = '';
- $table_name = $wpdb->prefix .'guadec2014_registrations';
+ $table_name = $wpdb->prefix .'guadec2014_registration';
 
 global $wpdb;
 $sql = "CREATE TABLE $table_name (
@@ -47,23 +47,29 @@ if (!empty($_POST)) {
 	$country = (isset($_POST['contact_country']))?(trim(stripslashes($_POST['contact_country']))) : 'NA';
 	$diet = (isset($_POST['diet']))?(trim(stripslashes($_POST['diet']))) : 'NA';
 	
-	$entry = (isset($_POST['entry-fee']))?($_POST['entry-fee']):'0';
-	$lamount = (isset($_POST['lfee']))?($_POST['lfee']):'0';
-	$aamount = (isset($_POST['lfee']))?($_POST['afee']):'0';
-	$tamount = (isset($_POST['lfee']))?($_POST['tfee']):'0';
+	$entry = (isset($_POST['entry-fee']))?(trim(stripslashes($_POST['entry-fee']))):'0';
+	$lamount = (isset($_POST['lfee']))?(trim(stripslashes($_POST['lfee']))):'0';
+	$aamount = (isset($_POST['lfee']))?(trim(stripslashes($_POST['afee']))):'0';
+	$tamount = (isset($_POST['lfee']))?(trim(stripslashes($_POST['tfee']))):'0';
 	$bday = (isset($_POST['bday']))?($_POST['bday']):'NA';
 	$student =  ($_POST['student'] == true)?"YES":"NA";
 
-	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
-	$payment = ($tamount > 0)?"Pending":"NoPayment";
-	$accom = ($_POST['accommodation'] == true)?"YES":"NO";
-
 	$obfuscated_email = str_replace("@", " AT ", $email);
+	//check if the email already registered
+	//TODO: Add the payment condition, once ipn works
+	$repeat = $wpdb->get_var($wpdb->prepare(
+		"select id from wp_guadec2014_registration
+		where email=%s",
+		$email)
+	);
 	
+
 	if (empty($name) || empty($email)) {
 		$errors = true;
 	}
-	
+	if(!empty($repeat)){
+		$errors = true;
+	}	
 	if(!isset($_POST['accommodation'])){
 		$arrive = "NA";
 		$depart = "NA";
@@ -80,6 +86,11 @@ if (!empty($_POST)) {
 			$x = $x + 1;
 		}
 	}
+	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
+	$payment = ($tamount > 0)?"Pending":"NoPayment";
+	$accom = ($_POST['accommodation'] == true)?"YES":"NO";
+	$headers = "From: GUADEC 2014 Registration Script <membership-committee@gnome.org>\n";
+        
 	if ($errors == false) {
 		/* This variable not be changed: goes to a restricted field to Paypal API */
 		$registerInfo = 
@@ -92,11 +103,10 @@ if (!empty($_POST)) {
 		"lunchfee=".$lamount."&".
 		"accomfee=".$aamount."&".
 		"totalfee=".$tamount
-				;
+		;
 		$mailContent .= $registerInfo;
-		$subject = "GUADEC 2014 Registration";
-		$headers = "From: GUADEC 2014 Registration Script <some-address@gnome.org>";
-
+		$subject = "From GUADEC 2014 Registration";
+	//	$table_name = "registered";
   		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
   				 'name' => $name,
   				 'email' => $email,
@@ -124,10 +134,10 @@ if (!empty($_POST)) {
 
 <div>
 <?php if(!($application_submitted == true)): ?>
-	<div class="section group"> "Invalid Submission. Please go through registration page first."</div>
+	<div> "Invalid Submission. Please go through registration page first."</div>
 <?php else: ?>
 	<?php if ($errors == true): ?>
-	<div class="section group"> "Invalid name or email. Please check."<a href="https://www.guadec.org/registration-form/"> Go back to Registration page</a></div>
+	<div> "Invalid/Already used email. Please make sure you are not already registered."<a href="http://localhost/wordpress/?page_id=4787"> Go back to Registration </a>
 	<?php else: ?>
 		<?php //echo $registerInfo; ?>
 		<div class="section group">
@@ -183,34 +193,35 @@ if (!empty($_POST)) {
 		<div class="col span_1_of_2">€<?php echo $tamount;?></div>
 		</div>
 		
+		
 		<?php if ($tamount > 0): ?>
-			<div class="section_group>">Your details have been stored. Proceed to pay €<?php echo $tamount;?>.</div>
-			<div class="col span_1_of_2">	
-				<form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-			    <input type="hidden" name="cmd" value="_xclick">
-			    <input type="hidden" name="business" value="saumya.zero-facilitator@gmail.com">
-			    <input type="hidden" name="currency_code" value="EUR">
-			    <input type="hidden" name="item_name" value="Digital Download">
-			    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
-			    <!-- Redirect to thank you after successful payment -->
-			    <input type="hidden" name="return" value=" https://www.guadec.org/thank-you">
-			    <input type="hidden" name="custom" value="<?php echo $registerInfo; ?>">
+			<div>Your details have been stored. Proceed to pay €<?php echo $tamount;?>.</div>
+				
+			<form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+		    <input type="hidden" name="cmd" value="_xclick">
+		    <input type="hidden" name="business" value="saumya.zero-facilitator@gmail.com">
+		    <input type="hidden" name="currency_code" value="EUR">
+		    <input type="hidden" name="item_name" value="Digital Download">
+		    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
+		    <!-- Redirect to thank you after successful payment -->
+		    <input type="hidden" name="return" value="http://localhost/wordpress/?page_id=4823">
+		    <input type="hidden" name="custom" value="<?php echo $registerInfo; ?>">
 
-				<!-- <Address of notification url. Can not be localhost	     -->
-			    <input type="hidden" name="notify_url" value="http://www.guadec.org/wp-content/themes/guadec/ipn.php">
+			<!-- <Address of notification url. Can not be localhost	     -->
+		    <input type="hidden" name="notify_url" value="http://web.iiit.ac.in/~saumya.dwivedi/test/ipn.php">
 
-			    <!-- Redirect to thank you after cancelled payment -->
-			    <input type="hidden" name="cancel_return" value="https://www.guadec.org/cancel-registration/">
-			    
-			    <input type="image" src="http://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-				</form>
-			</div>
+		    <!-- Redirect to thank you after cancelled payment -->
+		    <input type="hidden" name="cancel_return" value="http://localhost/wordpress/?page_id=4823">
+		    
+		    <input type="image" src="http://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+			</form>
 		<?php else: ?>
 			<div>Your details have been stored. An email confirming your registration will be sent to you shortly. Thank you.</div>
 			<!-- Send a confirm registration mail to the registered -->
+
 			<?php $mail = mail($email, $subject, $mailContent, $headers); ?>
 			<?php if($mail): ?>
- 				 <div>"Mail sent."</div>
+ 				 <div>"Mail sent"</div>
 			<?php else: ?>
   				 <div>"Mail sending failed."</div> 
   			<?php endif; ?>
