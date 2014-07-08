@@ -82,9 +82,11 @@ if ($verified) {
     // TODO: Check for duplicate user_id
     
     if (!empty($errmsg)) {
-    
+        $reg_email = $cvar['email'];
+        $body = $listener->updateCompleted($reg_email);
+       
         // manually investigate errors from the fraud checking
-        $body = "Registration Payment Successful-with fraud warning ";
+        $body .= "Registration Payment Successful-with fraud warning ";
         $body .= "IPN failed fraud checks: \n$errmsg\n\n";
 
         //append with the real payment details
@@ -102,7 +104,7 @@ if ($verified) {
         var_dump($wpdb);
         $table_name = $wpdb->prefix .'guadec2014_registration';
         error_log($table_name);     // check if the wpdb is accessible
-        $listener->updateCompleted($reg_email);
+        $body = $listener->updateCompleted($reg_email);
         // $wpdb->update(
         // $table_name,
         // array(
@@ -112,7 +114,7 @@ if ($verified) {
         //     'email' => $reg_email
         //     ) 
         // );
-        $body = "Registration Payment Successful for ";
+        $body .= "Registration Payment Successful for ";
         $body .= $cvar['name'];
         $body .= " with email ";
         $body .= $cvar['email'];
