@@ -197,7 +197,7 @@ if (!empty($_POST)) {
 			    <input type="hidden" name="custom" value="<?php echo $registerInfo; ?>">
 
 				<!-- <Address of notification url. Can not be localhost	     -->
-			    <input type="hidden" name="notify_url" value="https://www.guadec.org/wp-content/themes/guadec/ipn.php">
+			    <input type="hidden" name="notify_url" value="http://www.guadec.org/wp-content/themes/guadec/ipn.php">
 
 			    <!-- Redirect to thank you after cancelled payment -->
 			    <input type="hidden" name="cancel_return" value="https://www.guadec.org/cancel-registration/">

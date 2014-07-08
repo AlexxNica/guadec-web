@@ -19,6 +19,9 @@ $listener = new IpnListener();
 // tell the IPN listener to use the PayPal test sandbox
 $listener->use_sandbox = true;
 
+// update database variable
+global $wpdb;
+
 // try to process the IPN POST
 try {
     $listener->requirePostMethod();
@@ -45,7 +48,7 @@ if ($verified) {
     while(($i < 9) && ($csplit[$i] != null)){
     $dsplit =  explode('=',$csplit[$i]);
     $ckey = $dsplit[0];
-    $cvalue = ($dsplit[1] =='')?'0': $dsplit[1];
+    $cvalue = ($dsplit[1] == null)?'0': $dsplit[1];
     $cvar[$ckey] = $cvalue;
     error_log("dsjnfsdjnfdjsjbsf\n");   
     error_log($cvar[$ckey]);
@@ -59,6 +62,7 @@ if ($verified) {
     // 1. Make sure the payment status is "Completed" 
     if ($_POST['payment_status'] != 'Completed') { 
         $errmsg .= "'Payment status' does not match: ";
+        $errmsg .= $_POST['payment_status']."\n";
         $errmsg .= $_POST['receiver_email']."\n";
         // simply ignore any IPN that is not completed
         exit(0); 
@@ -90,36 +94,33 @@ if ($verified) {
         $body = "IPN failed fraud checks: \n$errmsg\n\n";
         $body .= $listener->getTextReport();
 
-    $body .= "Registration Payment Successful-with fraud warning";
-    //append with the real payment details
-        $body .= $_POST['custom'];
+        $body .= "Registration Payment Successful-with fraud warning ";
+        //append with the real payment details
+        $body .= $cvar['name'];
         error_log($body);
         mail($_POST['receiver_email'], 'IPN Fraud Warning', $body, $headers);
-
         mail($_POST['payer_email'], 'IPN Fraud Warning', $body, $headers);
         
     } else {
 
-        // $reg_email = $cvar['email'];
-        // $table_name = $wpdb->prefix .'guadec2014_registration';
+        $reg_email = $cvar['email'];
+        $table_name = $wpdb->prefix .'guadec2014_registration';
         
-        // $wpdb->update(
-        // $table_name,
-        // array(
-        //     'payment' => 'Completed'
-        //     ),
-        // array(
-        //     'email' => $reg_email
-        //     ) 
-        // );
-       
+        $wpdb->update(
+        $table_name,
+        array(
+            'payment' => 'Completed'
+            ),
+        array(
+            'email' => $reg_email
+            ) 
+        );
+        $body .= "Registration Payment Successful for ";
+        $body .= $cvar['name'];
         $body .= $listener->getTextReport();
-    $body .= "Registration Payment Successful for ";
-        $body .= $_POST['custom'];
         error_log($body);
         mail($_POST['receiver_email'], 'Registration Successful', $body, $headers);
         mail($_POST['payer_email'], 'Registration Successful', $body, $headers);
-    
     }
 } 
 else {
