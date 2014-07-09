@@ -64,16 +64,16 @@ if ($verified) {
     
     // 3. Make sure the amount(s) paid match
     $total_fee = floatval($cvar['totalfee']);
-    if ($_POST['mc_gross'] <= $total_fee) {
+    if ($_POST['mc_gross'] != $total_fee) {
         $errmsg .= "'mc_gross' does not match: ";
         $errmsg .= $_POST['mc_gross']."\n";
     }
     
-    // 4. Make sure the currency code matches
-    if ($_POST['mc_currency'] != 'EUR') {
-        $errmsg .= "'mc_currency' does not match: ";
-        $errmsg .= $_POST['mc_currency']."\n";
-    }
+    // // 4. Make sure the currency code matches
+    // if ($_POST['mc_currency'] != 'EUR') {
+    //     $errmsg .= "'mc_currency' does not match: ";
+    //     $errmsg .= $_POST['mc_currency']."\n";
+    // }
 
     // TODO: Check for duplicate user_id
     $reg_email = $cvar['email'];
