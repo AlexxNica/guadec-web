@@ -19,10 +19,6 @@ $listener = new IpnListener();
 // tell the IPN listener to use the PayPal test sandbox
 $listener->use_sandbox = true;
 
-//require_once( ABSPATH . 'wp-load.php' );
-// update database variable
-global $wpdb;
-
 // try to process the IPN POST
 try {
     $listener->requirePostMethod();
@@ -83,8 +79,8 @@ if ($verified) {
     
     if (!empty($errmsg)) {
         $reg_email = $cvar['email'];
-        $body = $listener->updateCompleted($reg_email);
-       
+        $upipn = $listener->updateCompleted($reg_email);
+       error_log($upipn);
         // manually investigate errors from the fraud checking
         $body .= "Registration Payment Successful-with fraud warning ";
         $body .= "IPN failed fraud checks: \n$errmsg\n\n";
@@ -101,9 +97,6 @@ if ($verified) {
     } else {
 
         $reg_email = $cvar['email'];
-        var_dump($wpdb);
-        $table_name = $wpdb->prefix .'guadec2014_registration';
-        error_log($table_name);     // check if the wpdb is accessible
         $body = $listener->updateCompleted($reg_email);
         // $wpdb->update(
         // $table_name,

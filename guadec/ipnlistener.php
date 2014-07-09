@@ -313,29 +313,30 @@ class IpnListener {
         }
     }
     public function updateCompleted($reg_email='dummy@mail.com') {
-        if (!$wpdb) {
-    $wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
-} else {
-    global $wpdb;
-}   
-    
+    //    if (!$wpdb) {
+    //        $wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
+    //    } else {
+            global $wpdb;
+    //    }   
+        
         $table_name = $wpdb->prefix .'guadec2014_registrations';
      //   error_log($table_name);     // check if the wpdb is accessible
         var_dump($wpdb);
         $up = $wpdb->get_results('SELECT * FROM wp_guadec2014_registrations', ARRAY_A);
              
-        // $up = $wpdb->update(
-        // $table_name,
-        // array(
-        //     'payment' => 'Completed'
-        //     ),
-        // array(
-        //     'email' => $reg_email
-        //     ) 
-        // );
+        $up = $wpdb->update(
+        $table_name,
+        array(
+            'payment' => 'Completed'
+            ),
+        array(
+            'email' => $reg_email
+            ) 
+        );
         if(!($up)){
             throw new Exception("Database Error: Not Updated");
         }
+        return (var_dump(($wpdb)));
     }
 }
 ?>
