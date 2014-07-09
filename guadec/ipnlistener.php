@@ -14,12 +14,9 @@
  */
 
 require_once($_SERVER['DOCUMENT_ROOT']."/wp-load.php"); 
+require_once( $_SERVER['DOCUMENT_ROOT'] . '/wp-config.php' );
+require_once( $_SERVER['DOCUMENT_ROOT'] . '/wp-includes/wp-db.php' );
 
-if (!$wpdb) {
-    $wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
-} else {
-    global $wpdb;
-}   
     
 class IpnListener {
     /**
@@ -316,6 +313,11 @@ class IpnListener {
         }
     }
     public function updateCompleted($reg_email='dummy@mail.com') {
+        if (!$wpdb) {
+    $wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
+} else {
+    global $wpdb;
+}   
     
         $table_name = $wpdb->prefix .'guadec2014_registrations';
      //   error_log($table_name);     // check if the wpdb is accessible
