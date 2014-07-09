@@ -63,7 +63,8 @@ if ($verified) {
     }
     
     // 3. Make sure the amount(s) paid match
-    if ($_POST['mc_gross'] <= '0.0') {
+    $total_fee = floatval($cvar['totalfee']);
+    if ($_POST['mc_gross'] <= $total_fee) {
         $errmsg .= "'mc_gross' does not match: ";
         $errmsg .= $_POST['mc_gross']."\n";
     }
@@ -80,7 +81,7 @@ if ($verified) {
         $errmsg .= "No Valid user email-address found\n";
     }        
     if (!empty($errmsg)) {
-        $status = "Fraud-check";
+        $status = "FraudCheck";
         $upipn = $listener->updateCompleted($reg_email,$status);
         error_log($upipn);
         // manually investigate errors from the fraud checking
