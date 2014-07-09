@@ -77,7 +77,7 @@ if ($verified) {
     // TODO: Check for duplicate user_id
     $reg_email = $cvar['email'];
     if(empty($reg_email)){
-        $errmsg .= "No Valid user email-address found\n"
+        $errmsg .= "No Valid user email-address found\n";
     }        
     if (!empty($errmsg)) {
         $status = "Fraud-check"
@@ -106,7 +106,7 @@ if ($verified) {
         error_log($body);
         mail($_POST['receiver_email'], 'GUADEC-2014 Registration Payment Successful', $body, $headers);
         mail($_POST['payer_email'], 'GUADEC-2014 Registration Successful', $body, $headers);
-        $body .= "Complete List of items that you have paid for\n"
+        $body .= "Complete List of items that you have paid for\n";
         $email_content =
         "Name: " . $cvar['name'] . "\r\n".
         "Email: " . $cvar['email'] . "\r\n" .
