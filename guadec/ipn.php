@@ -80,7 +80,7 @@ if ($verified) {
         $errmsg .= "No Valid user email-address found\n";
     }        
     if (!empty($errmsg)) {
-        $status = "Fraud-check"
+        $status = "Fraud-check";
         $upipn = $listener->updateCompleted($reg_email,$status);
         error_log($upipn);
         // manually investigate errors from the fraud checking
