@@ -106,8 +106,7 @@ if (!empty($_POST)) {
 		;
 		$mailContent .= $registerInfo;
 		$subject = "From GUADEC 2014 Registration";
-	//	$table_name = "registered";
-  		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
+		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
   				 'name' => $name,
   				 'email' => $email,
   				 'accom' => $accom,
@@ -137,7 +136,7 @@ if (!empty($_POST)) {
 	<div> "Invalid Submission. Please go through registration page first."</div>
 <?php else: ?>
 	<?php if ($errors == true): ?>
-	<div> "Invalid/Already used email. Please make sure you are not already registered. If you are, and want to make certain adjustments to your record, contact our system administration "provide an email address here" OR "<a href="http://localhost/wordpress/?page_id=4787"> Go back to Registration </a>
+	<div> "Invalid/Already used email. Please make sure you are not already registered. If you are, and want to make certain adjustments to your record, contact our system administration "provide an email address here" OR "<a href="https://www.guadec.org/registration-form/"> Go back to Registration </a>
 	<?php else: ?>
 		<?php //echo $registerInfo; ?>
 		<div class="section group">
@@ -204,14 +203,14 @@ if (!empty($_POST)) {
 		    <input type="hidden" name="item_name" value="Digital Download">
 		    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
 		    <!-- Redirect to thank you after successful payment -->
-		    <input type="hidden" name="return" value="http://localhost/wordpress/?page_id=4823">
+		    <input type="hidden" name="return" value="https://www.guadec.org/thank-you/">
 		    <input type="hidden" name="custom" value="<?php echo $registerInfo; ?>">
 
 			<!-- <Address of notification url. Can not be localhost	     -->
-		    <input type="hidden" name="notify_url" value="http://web.iiit.ac.in/~saumya.dwivedi/test/ipn.php">
+		    <input type="hidden" name="notify_url" value="http://www.guadec.org/wp-content/themes/guadec/ipn.php">
 
 		    <!-- Redirect to thank you after cancelled payment -->
-		    <input type="hidden" name="cancel_return" value="http://localhost/wordpress/?page_id=4823">
+		    <input type="hidden" name="cancel_return" value="https://www.guadec.org/cancel-registration/">
 		    
 		    <input type="image" src="http://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 			</form>
