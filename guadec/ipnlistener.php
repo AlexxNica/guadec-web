@@ -15,7 +15,11 @@
 
 require_once($_SERVER['DOCUMENT_ROOT']."/wp-load.php"); 
 
-global $wpdb;    
+if (!$wpdb) {
+    $wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
+} else {
+    global $wpdb;
+}   
     
 class IpnListener {
     /**
@@ -315,6 +319,7 @@ class IpnListener {
     
         $table_name = $wpdb->prefix .'guadec2014_registrations';
      //   error_log($table_name);     // check if the wpdb is accessible
+        var_dump($wpdb);
         $up = $wpdb->get_results('SELECT * FROM wp_guadec2014_registrations', ARRAY_A);
              
         // $up = $wpdb->update(
