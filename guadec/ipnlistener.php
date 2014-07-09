@@ -317,20 +317,21 @@ class IpnListener {
     public function updateCompleted($reg_email='dummy@mail.com', $status='Pending') {
         global $wpdb;
         $table_name = $wpdb->prefix .'guadec2014_registrations';
+        // check if the record exists: with a status to be changed
              
         $up = $wpdb->update(
         $table_name,
         array(
-            'payment' => 'Completed'
+            'payment' => $status
             ),
         array(
             'email' => $reg_email
             ) 
         );
-        if(!($up)){
-            throw new Exception("Database Error: Not Updated");
-        }
-        return (var_dump(($wpdb)));
+        // if(!($up)){
+        //     throw new Exception("Database Error: Not Updated");
+        // }
+        // return (var_dump(($wpdb)));
     }
 }
 ?>

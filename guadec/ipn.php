@@ -97,7 +97,7 @@ if ($verified) {
         mail($_POST['payer_email'], 'GUADEC-2014 Registration Payment:Waiting for Confirmation', $body, $headers);
         
     } else {
-        $body = $listener->updateCompleted($reg_email, $_POST['payment_status']);
+        $body = $listener->updateCompleted($reg_email, 'Completed');
         $body .= "Registration Payment Successful for ";
         $body .= $cvar['name'];
         $body .= " with email ";
