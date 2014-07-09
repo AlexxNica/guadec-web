@@ -6,7 +6,7 @@ Template Name: Confirm Payment
 <?php
  $application_submitted = false;
  $mailContent = '';
- $table_name = $wpdb->prefix .'guadec2014_registration';
+ $table_name = $wpdb->prefix .'guadec2014_registrations';
 
 global $wpdb;
 $sql = "CREATE TABLE $table_name (
@@ -58,9 +58,9 @@ if (!empty($_POST)) {
 	//check if the email already registered
 	//TODO: Add the payment condition, once ipn works
 	$repeat = $wpdb->get_var($wpdb->prepare(
-		"select id from wp_guadec2014_registration
-		where email=%s",
-		$email)
+		"select id from wp_guadec2014_registrations
+		where email=%s and payment=%s",
+		$email, 'Completed')
 	);
 	
 
@@ -137,7 +137,7 @@ if (!empty($_POST)) {
 	<div> "Invalid Submission. Please go through registration page first."</div>
 <?php else: ?>
 	<?php if ($errors == true): ?>
-	<div> "Invalid/Already used email. Please make sure you are not already registered."<a href="http://localhost/wordpress/?page_id=4787"> Go back to Registration </a>
+	<div> "Invalid/Already used email. Please make sure you are not already registered. If you are, and want to make certain adjustments to your record, contact our system administration "provide an email address here" OR "<a href="http://localhost/wordpress/?page_id=4787"> Go back to Registration </a>
 	<?php else: ?>
 		<?php //echo $registerInfo; ?>
 		<div class="section group">

@@ -8,7 +8,6 @@ GUADEC 2014 Registration
 <?php
 // tell PHP to log errors to ipn_errors.log in this directory
 ini_set('log_errors', true);
-//ini_set('error_log', dirname(__FILE__).'/ipn_errors.log');
 
 ini_set('error_log', 'ipn_errors.log');
 
@@ -76,11 +75,14 @@ if ($verified) {
     }
 
     // TODO: Check for duplicate user_id
-    
+    $reg_email = $cvar['email'];
+    if(empty($reg_email)){
+        $errmsg .= "No Valid user email-address found\n"
+    }        
     if (!empty($errmsg)) {
-        $reg_email = $cvar['email'];
-        $upipn = $listener->updateCompleted($reg_email);
-       error_log($upipn);
+        $status = "Fraud-check"
+        $upipn = $listener->updateCompleted($reg_email,$status);
+        error_log($upipn);
         // manually investigate errors from the fraud checking
         $body .= "Registration Payment Successful-with fraud warning ";
         $body .= "IPN failed fraud checks: \n$errmsg\n\n";
@@ -95,18 +97,7 @@ if ($verified) {
         mail($_POST['payer_email'], 'GUADEC-2014 Registration Payment:Waiting for Confirmation', $body, $headers);
         
     } else {
-
-        $reg_email = $cvar['email'];
-        $body = $listener->updateCompleted($reg_email);
-        // $wpdb->update(
-        // $table_name,
-        // array(
-        //     'payment' => 'Completed'
-        //     ),
-        // array(
-        //     'email' => $reg_email
-        //     ) 
-        // );
+        $body = $listener->updateCompleted($reg_email, $_POST['payment_status']);
         $body .= "Registration Payment Successful for ";
         $body .= $cvar['name'];
         $body .= " with email ";
@@ -115,6 +106,7 @@ if ($verified) {
         error_log($body);
         mail($_POST['receiver_email'], 'GUADEC-2014 Registration Payment Successful', $body, $headers);
         mail($_POST['payer_email'], 'GUADEC-2014 Registration Successful', $body, $headers);
+        $body .= "Complete List of items that you have paid for\n"
         $email_content =
         "Name: " . $cvar['name'] . "\r\n".
         "Email: " . $cvar['email'] . "\r\n" .
@@ -132,7 +124,6 @@ if ($verified) {
 } 
 else {
     // manually investigate the invalid IPN
-
     error_log($listener->getTextReport());
     mail($_POST['receiver_email'], 'Invalid IPN', $listener->getTextReport());
 }

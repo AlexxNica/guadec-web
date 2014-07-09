@@ -11,6 +11,8 @@
  *  @author     Micah Carrick
  *  @copyright  (c) 2012 - Micah Carrick
  *  @version    2.1.0
+ *  
+ *  Modified for use: GUADEC 2014 Registrations 
  */
 
 require_once($_SERVER['DOCUMENT_ROOT']."/wp-load.php"); 
@@ -312,17 +314,9 @@ class IpnListener {
             throw new Exception("Invalid HTTP request method.");
         }
     }
-    public function updateCompleted($reg_email='dummy@mail.com') {
-    //    if (!$wpdb) {
-    //        $wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST);
-    //    } else {
-            global $wpdb;
-    //    }   
-        
+    public function updateCompleted($reg_email='dummy@mail.com', $status='Pending') {
+        global $wpdb;
         $table_name = $wpdb->prefix .'guadec2014_registrations';
-     //   error_log($table_name);     // check if the wpdb is accessible
-        var_dump($wpdb);
-        $up = $wpdb->get_results('SELECT * FROM wp_guadec2014_registrations', ARRAY_A);
              
         $up = $wpdb->update(
         $table_name,
