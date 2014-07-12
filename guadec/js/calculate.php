@@ -28,9 +28,6 @@
        else{
          $diffDate = (31 - $aDate) + 1;
        }
-      if ($diffDate == 0){
-        $diffDate = 1;
-      }
        return $diffDate;   
     }
     
