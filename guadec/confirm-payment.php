@@ -49,8 +49,8 @@ if (!empty($_POST)) {
 	
 	$entry = (isset($_POST['entry-fee']))?(trim(stripslashes($_POST['entry-fee']))):'0';
 	$lamount = (isset($_POST['lfee']))?(trim(stripslashes($_POST['lfee']))):'0';
-	$aamount = (isset($_POST['lfee']))?(trim(stripslashes($_POST['afee']))):'0';
-	$tamount = (isset($_POST['lfee']))?(trim(stripslashes($_POST['tfee']))):'0';
+	$aamount = (isset($_POST['afee']))?(trim(stripslashes($_POST['afee']))):'0';
+	$tamount = (isset($_POST['tfee']))?(trim(stripslashes($_POST['tfee']))):'0';
 	$bday = (isset($_POST['bday']))?($_POST['bday']):'NA';
 	$student =  ($_POST['student'] == true)?"YES":"NA";
 
