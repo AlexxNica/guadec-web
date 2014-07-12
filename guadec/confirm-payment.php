@@ -27,7 +27,7 @@ $sql = "CREATE TABLE $table_name (
   irc text,
   gender text,
   country text,
-  student VARCHAR(10) DEFAULT 'NO',
+  room VARCHAR(7),
   payment VARCHAR(10) DEFAULT 'NoPayment',
   bday date,
   UNIQUE KEY id (id)
@@ -37,6 +37,7 @@ require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 dbDelta( $sql );
 
 if (!empty($_POST)) {
+	require_once('pricing.php');
 	$application_submitted = true;
 	$errors = false;
 
@@ -48,11 +49,8 @@ if (!empty($_POST)) {
 	$diet = (isset($_POST['diet']))?(trim(stripslashes($_POST['diet']))) : 'NA';
 	
 	$entry = (isset($_POST['entry-fee']))?(trim(stripslashes($_POST['entry-fee']))):'0';
-	$lamount = (isset($_POST['lfee']))?(trim(stripslashes($_POST['lfee']))):'0';
-	$aamount = (isset($_POST['afee']))?(trim(stripslashes($_POST['afee']))):'0';
-	$tamount = (isset($_POST['tfee']))?(trim(stripslashes($_POST['tfee']))):'0';
+
 	$bday = (isset($_POST['bday']))?($_POST['bday']):'NA';
-	$student =  ($_POST['student'] == true)?"YES":"NA";
 
 	$obfuscated_email = str_replace("@", " AT ", $email);
 	//check if the email already registered
@@ -69,15 +67,27 @@ if (!empty($_POST)) {
 	}
 	if(!empty($repeat)){
 		$errors = true;
-	}	
+	}
 	if(!isset($_POST['accommodation'])){
 		$arrive = "NA";
 		$depart = "NA";
 	}
 	else{
+		if(!isset($_POST['room_type'])){
+			$errors = true;
+		} else {
+			$room_type = $_POST['room_type'];
+			if ($room_type != 'single' && $room_type != 'double') {
+				$errors = true;
+			}
+		}
 		$arrive = $_POST['arrival'];
 		$depart = $_POST['departure'];
 	}
+
+	$nights = dayParser($arrive, $depart);
+	$aamount = accomPrice($nights, $room_type);
+
 	$lunch_days = "";
 	$x = 0;
 	if(isset($_POST['lunch'])){
@@ -86,6 +96,9 @@ if (!empty($_POST)) {
 			$x = $x + 1;
 		}
 	}
+	$lamount = lunchPrice($x);
+	$tamount = $aamount + $lamount + $entry;
+
 	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
 	$payment = ($tamount > 0)?"Pending":"NoPayment";
 	$accom = ($_POST['accommodation'] == true)?"YES":"NO";
@@ -110,6 +123,7 @@ if (!empty($_POST)) {
   				 'name' => $name,
   				 'email' => $email,
   				 'accom' => $accom,
+  				 'room' => $room_type,
   				 'arrive' => $arrive,
   				 'depart' => $depart,
   				 'sponsored' => $sponsor_check,
@@ -123,8 +137,7 @@ if (!empty($_POST)) {
   				 'gender' => $gender,
   				 'country' => $country,
   				 'payment' => $payment,
-  				 'student' => $student,
-  				 'bday' => $bday)); 	
+  				 'bday' => $bday));
 	}
 }
 	
@@ -156,6 +169,10 @@ if (!empty($_POST)) {
 		<div class="col span_1_of_2"><?php echo $accom;?></div>
 		</div>
 		<div class="section group">
+		<div class="col span_1_of_2">Room Type</div>
+		<div class="col span_1_of_2"><?php echo $room_type;?></div>
+		</div>
+		<div class="section group">
 		<div class="col span_1_of_2">Arrival</div>
 		<div class="col span_1_of_2"><?php echo $arrive;?></div>
 		</div>
@@ -170,10 +187,6 @@ if (!empty($_POST)) {
 		<div class="section group">
 		<div class="col span_1_of_2">Dietary-Restrictions</div>
 		<div class="col span_1_of_2"><?php echo $diet;?></div>
-		</div>
-		<div class="section group">
-		<div class="col span_1_of_2">Student</div>
-		<div class="col span_1_of_2"><?php echo $student;?></div>
 		</div>
 		<div class="section group">
 		<div class="col span_1_of_2">Accommodation-Fee</div>

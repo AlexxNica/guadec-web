@@ -7,7 +7,7 @@ function callTotalCalculate() {
 	$.ajax({
 	type: "POST",	
 	url:"../wp-content/themes/guadec/js/calculate.php",
-	data: {functionname: "updateTotal", arguments : [$("form input[value*='lunch_']:checked").size(), $('#arrive').val(), $('#depart').val(), $('input:radio[name=entry-fee]:checked').val(), $("[value=lunch]").prop("checked"), $("[value=accommodation]").prop("checked"), $("[value=sponsored]").prop("checked") ]},
+	data: {functionname: "updateTotal", arguments : [$("form input[value*='lunch_']:checked").size(), $('#arrive').val(), $('#depart').val(), $('input:radio[name=entry-fee]:checked').val(), $("[value=lunch]").prop("checked"), $("[value=accommodation]").prop("checked"), $("[value=room]").val() ]},
 	success:function(obj, status){
 		result = new String(obj);
 		result = result.trim();
@@ -46,7 +46,7 @@ function callAccomCalculate() {
 	$.ajax({
 	type: "POST",	
 	url:"../wp-content/themes/guadec/js/calculate.php",
-	data: {functionname : "updateAccomTotal", arguments : [$('#arrive').val(),$('#depart').val(), $("[value=accommodation]").prop("checked"), $("[value=sponsored]").prop("checked")]},
+	data: {functionname : "updateAccomTotal", arguments : [$('#arrive').val(),$('#depart').val(), $("[value=accommodation]").prop("checked"), $("[value=room]").val()]},
 	success:function(obj, status){
 		result = new String(obj);
 		result = result.trim();
@@ -66,21 +66,19 @@ function enableDisableA(obj) {
 		$("[name=arrival]").prop("disabled", false);
 		$("[name=departure]").prop("disabled", false);
 		$('[name=bday]').prop("disabled", false);
-		$("[name=sponsored]").prop("disabled", false);
-		$("[name=student]").prop("disabled", false);
+		$("[name=sponsored]").prop("checked", false);
 		$(".box-options-accom").removeClass("disabled");
-
 	}
 	else {
 		$("[name=arrival]").prop("disabled", true);
 		$("[name=departure]").prop("disabled", true);
 		$("[name=bday]").prop("disabled", true);
-		$("[name=sponsored]").prop("disabled", true);
-		$("[name=student]").prop("disabled", true);
-		$("[name=sponsored]").prop("checked", false);
-		$("[name=student]").prop("checked", false);
 		$(".box-options-accom").addClass("disabled");
-
+	}
+}
+function enableDisableS(obj) {
+	if ($(obj).is(":checked")) {
+		$('[name=accomodation]').prop("checked", false);
 	}
 }
 
@@ -116,9 +114,6 @@ $(function() {
 		callLunchCalculate();
 	})
 	$("[value=accommodation]").change(function(){
-		callAccomCalculate();
-	})
-	$("[value=sponsored]").change(function(){
 		callAccomCalculate();
 	})
 	$("[value*='lunch_']").click(function(){
@@ -158,6 +153,12 @@ $(function() {
 			enableDisableL(this);	
 		});
 	});
+	$(document).ready(function() {
+		enableDisableS(this);
+		$("[name=sponsored]").click(function() {
+			enableDisableS(this);
+		});
+	});
 	// Enable Disable the submit button
 	$('input[name=regsub]').attr('disabled','disabled');
 
@@ -166,7 +167,7 @@ $(function() {
            $('input[name=regsub]').removeAttr('disabled');
         }
         else {
-    		$('input[name=regsub]').attr('disabled','disabled');
+           $('input[name=regsub]').attr('disabled','disabled');
         }
      });
 
@@ -177,7 +178,7 @@ $(function() {
            $('#entry-arb').removeAttr('disabled');
         }
         else {
-    		$('#entry-arb').attr('disabled','disabled');
+           $('#entry-arb').attr('disabled','disabled');
         }
      });
 
