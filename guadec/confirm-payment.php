@@ -200,7 +200,7 @@ if (!empty($_POST)) {
 		    <input type="hidden" name="cmd" value="_xclick">
 		    <input type="hidden" name="business" value="saumya.zero-facilitator@gmail.com">
 		    <input type="hidden" name="currency_code" value="EUR">
-		    <input type="hidden" name="item_name" value="Digital Download">
+		    <input type="hidden" name="item_name" value="GUADEC 2014">
 		    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
 		    <!-- Redirect to thank you after successful payment -->
 		    <input type="hidden" name="return" value="https://www.guadec.org/thank-you/">
