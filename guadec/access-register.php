@@ -8,9 +8,9 @@ Template Name: Access Registration
 global $wpdb;
 function display_result($result){
 	echo "<table class='regtable'><tr><th>ID</th><th>Name</th>
-				<th>Email</th><th>Gender</th>
+				<th>Irc</th><th>Email</th><th>Gender</th>
 				<th>Arrival</th><th>Departure</th>
-				<th>Sponsored</th>
+				<th>Sponsored</th><th>Country</th>
 				<th>EntryFee</th>
 				<th>LunchFee</th><th>AccomFee</th>
 				<th>TotalFee</th>
@@ -19,11 +19,13 @@ function display_result($result){
 		echo "<tr>";
 		echo "<td>"; echo $results['id']; echo "</td>";
 		echo "<td>"; echo $results['name']; echo "</td>";
+		echo "<td>"; echo $results['irc']; echo "</td>";
 		echo "<td>"; echo $results['email']; echo "</td>";
 		echo "<td>"; echo $results['gender']; echo "</td>";
 		echo "<td>"; echo $results['arrive']; echo "</td>";
 		echo "<td>"; echo $results['depart']; echo "</td>";
 		echo "<td>"; echo $results['sponsored']; echo "</td>";
+		echo "<td>"; echo $results['country']; echo "</td>";
 //		echo "<td>"; echo $results['lunchdays']; echo "</td>";
 		echo "<td>"; echo $results['entryfee']; echo "</td>";
 		echo "<td>"; echo $results['lunchfee']; echo "</td>";
