@@ -36,6 +36,33 @@ function display_result($result){
 	}
 	echo "</table>";
 }
+function display_totals($result){
+	$lunches = Array('lunch_saturday' => 0, 'lunch_sunday' => 0, 'lunch_monday' => 0, 'lunch_tuesday' => 0);
+	$single_rooms = 0;
+	$double_rooms = 0;
+	foreach($result as $results) {
+		foreach(explode(" ", $results['lunchdays']) as $lunch_day) {
+			$lunches[$lunch_day] += 1;
+		}
+		if ($results['accom'] = 'YES') {
+			if ($results['room'] = 'single') {
+				$single_rooms += 1;
+			} else {
+				$double_rooms += 1;
+			}
+		}
+	}
+	echo "<h2>Lunch</h2><ul>";
+	foreach($lunches as $day => $count) {
+		echo "<li>$day: $count</li>";
+	}
+	echo "</ul>\n";
+	echo "<h2>Accomodation</h2><ul>";
+	echo "<li>Beds in single room: $single_rooms</li>";
+	echo "<li>Beds in double room: $double_rooms</li>";
+	echo "</ul>\n";
+}
+
 require_once("header.php");
  if( !(current_user_can( 'administrator' ) )){
  	echo "You are not authorised to view this page.";
@@ -55,11 +82,13 @@ else{
 	    		$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE payment = 'Completed' OR payment ='NoPayment'", ARRAY_A);
 	     		echo display_result($result);
 	        	break;
-		    
+		case 'showtotals' :
+			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE payment = 'Completed' OR payment ='NoPayment'", ARRAY_A);
+			echo display_totals($result);
+			break;
 		    default :
 	      	  	$result = 'Error';
 	        break;
-	        
 	    }
 	}
 	else{
@@ -70,6 +99,7 @@ else{
 		<div><select id='viewtype' name='viewtype'>
      	<option value='showall' selected='selected'>Show All Entries</option>
      	<option value='showcomplete'>Only Completed Registration</option>
+	<option value='showtotals'>Totals For Completed Registrations</option>
 		</select></div>
 		<input type='submit' value='Go' />
 		</form>";
