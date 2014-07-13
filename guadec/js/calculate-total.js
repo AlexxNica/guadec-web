@@ -108,6 +108,9 @@ $(function() {
 	$('#depart').on('change' , function(){
 		callAccomCalculate();
 	})
+	$('#room_type').on('change' , function(){
+		callAccomCalculate();
+	})
 
 	 /* Checkboxes call events */
 	$("[value=lunch]").change(function(){
