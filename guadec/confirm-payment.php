@@ -60,8 +60,6 @@ if (!empty($_POST)) {
 		where email=%s and payment=%s",
 		$email, 'Completed')
 	);
-	
-
 	if (empty($name) || empty($email)) {
 		$errors = true;
 	}
@@ -78,6 +76,11 @@ if (!empty($_POST)) {
 		} else {
 			$room_type = $_POST['room_type'];
 			if ($room_type != 'single' && $room_type != 'double') {
+				$errors = true;
+			}
+                        $booked = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM wp_guadec2014_registrations WHERE accom = 'YES' AND room=%s", $room_type);
+		        $total_beds = $room_type == 'single' ? 14 : 26;
+			if ($total_beds <= $booked) {
 				$errors = true;
 			}
 		}
@@ -149,7 +152,7 @@ if (!empty($_POST)) {
 	<div> "Invalid Submission. Please go through registration page first."</div>
 <?php else: ?>
 	<?php if ($errors == true): ?>
-	<div> "Invalid/Already used email. Please make sure you are not already registered. If you are, and want to make certain adjustments to your record, contact our system administration "provide an email address here" OR "<a href="https://www.guadec.org/registration-form/"> Go back to Registration </a>
+	<div> "Invalid/Already used email or invalid room type. Please make sure you are not already registered. If you are, and want to make certain adjustments to your record, contact contact AT guadec.org OR "<a href="https://www.guadec.org/registration-form/"> Go back to Registration </a>
 	<?php else: ?>
 		<?php //echo $registerInfo; ?>
 		<div class="section group">
