@@ -1,6 +1,6 @@
 <?php
-    define('single_fee', 30);
-    define('double_fee', 35);
+    define('single_fee', 37);
+    define('double_fee', 32);
     define('lunch_fee', 8.5);
 
     function dayParser($arrive_string, $depart_string){
