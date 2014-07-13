@@ -61,7 +61,18 @@
                      
                }
                break;
-            
+	    case 'roomAvailable':
+               # room_type
+               if( !is_array($_POST['arguments']) || (count($_POST['arguments']) < 1 || ($_POST['arguments'][0] != 'single' && $_POST['arguments'][0]) != 'double') ) {
+                   $aResult = 'error';
+	       }
+               else {
+                   $room_type = $_POST['arguments'][0];
+                   $booked = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM wp_guadec2014_registrations WHERE accom = 'YES' AND room=%s", $room_type);
+		   $total_beds = $room_type == 'single' ? 14 : 26;
+                   $aResult = ($total_beds>$booked) ? 'true' : 'false'; 
+               }
+               break;
             default:
                $aResult = 'error';
                break;
