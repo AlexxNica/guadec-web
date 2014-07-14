@@ -67,7 +67,7 @@ function enableDisableA(obj) {
 		$("[name=departure]").prop("disabled", false);
 		$('[name=bday]').prop("disabled", false);
 		$("[name=room_type]").prop("disabled", false);
-		$("[name=sponsored]").prop("checked", false);
+		$("[name=sponsored]").removeAttr('checked');
 		$(".box-options-accom").removeClass("disabled");
 	}
 	else {
@@ -80,7 +80,7 @@ function enableDisableA(obj) {
 }
 function enableDisableS(obj) {
 	if ($(obj).is(":checked")) {
-		$('[name=accomodation]').prop("checked", false);
+		$('[name=accomodation]').removeAttr('checked');
 		enableDisableA($('[name=accomodation]'));
 	}
 }
