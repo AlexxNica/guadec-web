@@ -7,7 +7,7 @@ function callTotalCalculate() {
 	$.ajax({
 	type: "POST",	
 	url:"../wp-content/themes/guadec/js/calculate.php",
-	data: {functionname: "updateTotal", arguments : [$("form input[value*='lunch_']:checked").size(), $('#arrive').val(), $('#depart').val(), $('input:radio[name=entry-fee]:checked').val(), $("[value=lunch]").prop("checked"), $("[value=accommodation]").prop("checked"), $("[value=room_type]").val() ]},
+	data: {functionname: "updateTotal", arguments : [$("form input[value*='lunch_']:checked").size(), $("[name=arrival]").val(),$("[name=departure]").val(), $('input:radio[name=entry-fee]:checked').val(), $("[value=lunch]").prop("checked"), $("[value=accommodation]").prop("checked"), $("[name=room_type]").val() ]},
 	success:function(obj, status){
 		result = new String(obj);
 		result = result.trim();
@@ -46,7 +46,7 @@ function callAccomCalculate() {
 	$.ajax({
 	type: "POST",	
 	url:"../wp-content/themes/guadec/js/calculate.php",
-	data: {functionname : "updateAccomTotal", arguments : [$('#arrive').val(),$('#depart').val(), $("[value=accommodation]").prop("checked"), $("[value=room_type]").val()]},
+	data: {functionname : "updateAccomTotal", arguments : [$("[name=arrival]").val(),$("[name=departure]").val(), $("[value=accommodation]").prop("checked"), $("[name=room_type]").val()]},
 	success:function(obj, status){
 		result = new String(obj);
 		result = result.trim();
