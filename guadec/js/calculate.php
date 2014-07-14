@@ -35,7 +35,7 @@
                    }
                    else{
                      $nights = dayParser($_POST['arguments'][0], $_POST['arguments'][1]);
-                     $aResult = accomPrice($nights, $_POST['arguments'][3]){
+                     $aResult = accomPrice($nights, $_POST['arguments'][3]);
                   }
                }
                break;
