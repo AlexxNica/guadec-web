@@ -55,7 +55,7 @@
                    if ($_POST['arguments'][5] == 'false'){
                      $accom = 0;
                    }
-                  $aResult = $accom + $lunch + $fee);
+                  $aResult = $accom + $lunch + $fee;
                   if ($total_days == "Incorrect dates"){
                       $aResult = $total_days;
                   }
@@ -69,7 +69,7 @@
 	       }
                else {
                    $room_type = $_POST['arguments'][0];
-                   $booked = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM wp_guadec2014_registrations WHERE accom = 'YES' AND room=%s", $room_type);
+                   $booked = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM wp_guadec2014_registrations WHERE accom = 'YES' AND room=%s", $room_type));
 		   $total_beds = $room_type == 'single' ? 14 : 26;
                    $aResult = ($total_beds>$booked) ? 'true' : 'false'; 
                }
