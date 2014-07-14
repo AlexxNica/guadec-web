@@ -79,7 +79,7 @@ if (!empty($_POST)) {
 			if ($room_type != 'single' && $room_type != 'double') {
 				$errors = true;
 			}
-                        $booked = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM wp_guadec2014_registrations WHERE accom = 'YES' AND room=%s", $room_type);
+                        $booked = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM wp_guadec2014_registrations WHERE accom = 'YES' AND room=%s", $room_type));
 		        $total_beds = $room_type == 'single' ? 14 : 26;
 			if ($total_beds <= $booked) {
 				$errors = true;
