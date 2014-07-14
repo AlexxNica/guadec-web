@@ -66,12 +66,14 @@ function enableDisableA(obj) {
 		$("[name=arrival]").prop("disabled", false);
 		$("[name=departure]").prop("disabled", false);
 		$('[name=bday]').prop("disabled", false);
+		$("[name=room_type]").prop("disabled", false);
 		$("[name=sponsored]").prop("checked", false);
 		$(".box-options-accom").removeClass("disabled");
 	}
 	else {
 		$("[name=arrival]").prop("disabled", true);
 		$("[name=departure]").prop("disabled", true);
+		$("[name=room_type]").prop("disabled", true);
 		$("[name=bday]").prop("disabled", true);
 		$(".box-options-accom").addClass("disabled");
 	}
@@ -79,6 +81,7 @@ function enableDisableA(obj) {
 function enableDisableS(obj) {
 	if ($(obj).is(":checked")) {
 		$('[name=accomodation]').prop("checked", false);
+		enableDisableA($('[name=accomodation]'));
 	}
 }
 
