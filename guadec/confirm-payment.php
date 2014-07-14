@@ -52,6 +52,7 @@ if (!empty($_POST)) {
 	$entry = (isset($_POST['entry-fee']))?(trim(stripslashes($_POST['entry-fee']))):'0';
 
 	$bday = (isset($_POST['bday']))?($_POST['bday']):'NA';
+	$public = isset($_POST['public'])?'YES':'NO';
 
 	$obfuscated_email = str_replace("@", " AT ", $email);
 	//check if the email already registered
@@ -141,6 +142,7 @@ if (!empty($_POST)) {
   				 'gender' => $gender,
   				 'country' => $country,
   				 'payment' => $payment,
+  				 'public' => $public,
   				 'bday' => $bday));
 	}
 }
