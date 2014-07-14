@@ -1,6 +1,6 @@
 
 <?php
-    include("../pricing.php");
+    include(__DIR__ . "/../pricing.php");
 
     $aResult = "";
 
