@@ -136,18 +136,14 @@ $(function() {
 		callTotalCalculate();
 	});
 
-	$('#entry-arb').focusout(function(){
-		$('input:radio[id=entry-fee-arb]').prop('value', $('#entry-arb').val());
-		if($('input:radio[id=entry-fee-arb]').is(':checked')){
-			callTotalCalculate();
-		}
-	});
 	/* To force entry of numbers in money textbox */
 	$('#entry-arb').on('change keyup', function() {
 	  // Remove invalid characters
 	  var sanitized = $(this).val().replace(/[^0-9]/g, '');
 	  // Update value
 	   $(this).val(sanitized);
+           $('input:radio[id=entry-fee-arb]').prop('value', sanitized);
+	   callTotalCalculate();
 	});
 	//Enable Disable Accomodation and Lunch Selection
 	$(document).ready(function() {
