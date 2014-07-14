@@ -105,13 +105,13 @@ $(function() {
 
 	/*Dropdown triggered event*/
 
-	$('#arrive').on('change' , function(){
+	$('[name=arrival]').on('change' , function(){
 		callAccomCalculate();
 	})
-	$('#depart').on('change' , function(){
+	$('[name=departure]').on('change' , function(){
 		callAccomCalculate();
 	})
-	$('#room_type').on('change' , function(){
+	$('[name=room_type]').on('change' , function(){
 		callAccomCalculate();
 	})
 
