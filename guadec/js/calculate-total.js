@@ -129,12 +129,16 @@ $(function() {
 
 	/*Radio triggered event */
 	$('input:radio[name=entry-fee]').click(function() {
-	 	callTotalCalculate();
+		callTotalCalculate();
 	});               
-	
+
+	$('input:radio[id=entry-fee-arb]').click(function() {
+		callTotalCalculate();
+	});
+
 	$('#entry-arb').focusout(function(){
+		$('input:radio[id=entry-fee-arb]').prop('value', $('#entry-arb').val());
 		if($('input:radio[id=entry-fee-arb]').is(':checked')){
-	 		$('input:radio[id=entry-fee-arb]').prop('value', $('#entry-arb').val()); 
 			callTotalCalculate();
 		}
 	});
@@ -144,7 +148,6 @@ $(function() {
 	  var sanitized = $(this).val().replace(/[^0-9]/g, '');
 	  // Update value
 	   $(this).val(sanitized);
-
 	});
 	//Enable Disable Accomodation and Lunch Selection
 	$(document).ready(function() {
