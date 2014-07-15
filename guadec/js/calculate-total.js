@@ -100,6 +100,16 @@ function enableDisableL(obj) {
 		
 	}
 }
+
+function enableDisableR(obj) {
+	if ($(obj).val() == "double") {
+		$("[name=roommate]").prop("disabled", false);
+	}
+	else {
+		$("[name=roommate]").prop("disabled", true);
+	}
+}
+
 $(function() {
 
 
@@ -113,6 +123,7 @@ $(function() {
 	})
 	$('[name=room_type]').on('change' , function(){
 		callAccomCalculate();
+		enableDisableR(this);	
 	})
 
 	 /* Checkboxes call events */
