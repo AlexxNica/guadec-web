@@ -202,7 +202,7 @@ $(function() {
      $('form[name=registration]').submit(function(event){
      	if($("[value=accommodation]").is(':checked')){
 			if(!$("[name=contact_country]").val() || !$("[name=bday]").val()){
-				alert("Make sure you enter the birth country, date of birth and agree to anti-harassment policy");
+				alert("Make sure you enter your location and date of birth");
    				event.preventDefault();
 			}
 		}
