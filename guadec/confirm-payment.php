@@ -29,6 +29,7 @@ $sql = "CREATE TABLE $table_name (
   gender text,
   country text,
   room VARCHAR(7),
+  roommate text,
   payment VARCHAR(10) DEFAULT 'NoPayment',
   bday date,
   UNIQUE KEY id (id)
@@ -42,16 +43,16 @@ if (!empty($_POST)) {
 	$application_submitted = true;
 	$errors = false;
 
-	$name = trim(stripslashes($_POST['contact_name']));
-	$email = trim(stripslashes($_POST['contact_email']));
-	$irc = (isset($_POST['irc']))?(trim(stripslashes($_POST['irc']))) : 'NA';
-	$gender = (isset($_POST['contact_gender']))?(trim(stripslashes($_POST['contact_gender']))) : 'NA';
-	$country = (isset($_POST['contact_country']))?(trim(stripslashes($_POST['contact_country']))) : 'NA';
-	$diet = (isset($_POST['diet']))?(trim(stripslashes($_POST['diet']))) : 'NA';
+	$name = trim(sanitize_text_field($_POST['contact_name']));
+	$email = trim(sanitize_text_field($_POST['contact_email']));
+	$irc = (isset($_POST['irc']))?(trim(sanitize_text_field($_POST['irc']))) : 'NA';
+	$gender = (isset($_POST['contact_gender']))?(trim(sanitize_text_field($_POST['contact_gender']))) : 'NA';
+	$country = (isset($_POST['contact_country']))?(trim(sanitize_text_field($_POST['contact_country']))) : 'NA';
+	$diet = (isset($_POST['diet']))?(trim(sanitize_text_field($_POST['diet']))) : 'NA';
 	
-	$entry = (isset($_POST['entry-fee']))?(trim(stripslashes($_POST['entry-fee']))):'0';
+	$entry = (isset($_POST['entry-fee']))?(intval($_POST['entry-fee'])):0;
 
-	$bday = (isset($_POST['bday']))?($_POST['bday']):'NA';
+	$bday = (isset($_POST['bday']))?(trim(sanitize_text_field($_POST['bday'])):'NA';
 	$public = isset($_POST['public'])?'YES':'NO';
 
 	$obfuscated_email = str_replace("@", " AT ", $email);
@@ -86,8 +87,9 @@ if (!empty($_POST)) {
 				$errors = true;
 			}
 		}
-		$arrive = $_POST['arrival'];
-		$depart = $_POST['departure'];
+		$roommate = sanitize_text_field($_POST['roommate']);
+		$arrive = sanitize_text_field($_POST['arrival']);
+		$depart = sanitize_text_field($_POST['departure']);
 	}
 
 	$nights = dayParser($arrive, $depart);
@@ -129,6 +131,7 @@ if (!empty($_POST)) {
   				 'email' => $email,
   				 'accom' => $accom,
   				 'room' => $room_type,
+  				 'roommate' => $roommate,
   				 'arrive' => $arrive,
   				 'depart' => $depart,
   				 'sponsored' => $sponsor_check,
@@ -177,6 +180,10 @@ if (!empty($_POST)) {
 		<div class="section group">
 		<div class="col span_1_of_2">Room Type</div>
 		<div class="col span_1_of_2"><?php echo $room_type;?></div>
+		</div>
+		<div class="section group">
+		<div class="col span_1_of_2">Roommate</div>
+		<div class="col span_1_of_2"><?php echo $roommate;?></div>
 		</div>
 		<div class="section group">
 		<div class="col span_1_of_2">Arrival</div>
