@@ -52,7 +52,7 @@ if (!empty($_POST)) {
 	
 	$entry = (isset($_POST['entry-fee']))?(intval($_POST['entry-fee'])):0;
 
-	$bday = (isset($_POST['bday']))?(trim(sanitize_text_field($_POST['bday'])):'NA';
+	$bday = (isset($_POST['bday']))?(trim(sanitize_text_field($_POST['bday']))):'NA';
 	$public = isset($_POST['public'])?'YES':'NO';
 
 	$obfuscated_email = str_replace("@", " AT ", $email);
