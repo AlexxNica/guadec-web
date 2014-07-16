@@ -65,7 +65,6 @@ function enableDisableA(obj) {
 	if ($(obj).is(":checked")) {
 		$("[name=arrival]").prop("disabled", false);
 		$("[name=departure]").prop("disabled", false);
-		$('[name=bday]').prop("disabled", false);
 		$("[name=room_type]").prop("disabled", false);
 		$("[name=sponsored]").removeAttr('checked');
 		$(".box-options-accom").removeClass("disabled");
@@ -74,7 +73,6 @@ function enableDisableA(obj) {
 		$("[name=arrival]").prop("disabled", true);
 		$("[name=departure]").prop("disabled", true);
 		$("[name=room_type]").prop("disabled", true);
-		$("[name=bday]").prop("disabled", true);
 		$(".box-options-accom").addClass("disabled");
 	}
 }
@@ -200,12 +198,6 @@ $(function() {
 
      /*Form Submit related checks */
      $('form[name=registration]').submit(function(event){
-     	if($("[value=accommodation]").is(':checked')){
-			if(!$("[name=contact_country]").val() || !$("[name=bday]").val()){
-				alert("Make sure you enter your location and date of birth");
-   				event.preventDefault();
-			}
-		}
 		if(!$("[name=contact_name]").val() || !$("[name=contact_email]").val()) {
 			alert("Make sure you enter your name and email", $('.accomfee').html());
    			event.preventDefault();
