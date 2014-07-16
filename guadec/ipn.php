@@ -15,8 +15,8 @@ ini_set('error_log', 'ipn_errors.log');
 include('ipnlistener.php');
 $listener = new IpnListener();
 
-// tell the IPN listener to use the PayPal test sandbox
-$listener->use_sandbox = true;
+// tell the IPN listener to not the PayPal test sandbox
+$listener->use_sandbox = false;
 
 // try to process the IPN POST
 try {
@@ -57,7 +57,7 @@ if ($verified) {
     }
 
     // 2. Make sure seller email matches your primary account email.
-    if ($_POST['receiver_email'] !='saumya.zero-facilitator@gmail.com') {
+    if ($_POST['receiver_email'] !='guadec@gnome.org') {
         $errmsg .= "'receiver_email' does not match: ";
         $errmsg .= $_POST['receiver_email']."\n";
     }
@@ -65,7 +65,7 @@ if ($verified) {
     // 3. Make sure the amount(s) paid match
     $total_fee = floatval($cvar['totalfee']);
     if ($_POST['mc_gross'] != $total_fee) {
-        $errmsg .= "'mc_gross' does not match: ";
+        $errmsg .= "Total fee does not match (expected $total_fee): ";
         $errmsg .= $_POST['mc_gross']."\n";
     }
     
@@ -84,9 +84,13 @@ if ($verified) {
         $status = "FraudCheck";
         $upipn = $listener->updateCompleted($reg_email,$status);
         error_log($upipn);
+
+	$body = "Your payment was accepted but was not as expected and your registration will need manual validation.";
+        mail($_POST['payer_email'], 'GUADEC-2014 Registration Payment: Waiting for Confirmation', $body, $headers);
+
         // manually investigate errors from the fraud checking
-        $body .= "Registration Payment Successful-with fraud warning ";
-        $body .= "IPN failed fraud checks: \n$errmsg\n\n";
+        $body = "Registration Payment Successful-with fraud warning: \n";
+        $body .= "$errmsg\n\n";
 
         //append with the real payment details
         $body .= $cvar['name'];
@@ -94,16 +98,14 @@ if ($verified) {
         $body .= $cvar['email'];
         $body .= $listener->getTextReport();
         error_log($body); // Transcript copy in the error log
-        mail($_POST['receiver_email'], 'IPN Fraud Warning', $body, $headers);
-        mail($_POST['payer_email'], 'GUADEC-2014 Registration Payment:Waiting for Confirmation', $body, $headers);
-        
+        mail('zana@gnome.org, pterjan@gmail.com', 'Guadec Payment Fraud Warning (validation needed)', $body, $headers);
     } else {
         $body = $listener->updateCompleted($reg_email, 'Completed');
         $body .= "Registration Payment Successful for ";
         $body .= $cvar['name'];
         $body .= " with email ";
         $body .= $cvar['email'];
-        mail($_POST['payer_email'], 'GUADEC-2014 Registration Successful', $body, $headers);
+        mail($_POST['payer_email'], 'GUADEC-2014 Registration Payment Successful', $body, $headers);
         $body .= "Complete List of items that you have paid for\n";
         $email_content =
         "Name: " . $cvar['name'] . "\r\n".
@@ -120,7 +122,6 @@ if ($verified) {
         mail($cvar['email'], 'GUADEC-2014 Registration Successful', $body, $headers);
         $body .= $listener->getTextReport();
         error_log($body);
-        mail($_POST['receiver_email'], 'GUADEC-2014 Registration Payment Successful', $body, $headers);
     }
 } 
 else {

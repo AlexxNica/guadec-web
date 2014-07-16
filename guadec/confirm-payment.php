@@ -107,7 +107,7 @@ if (!empty($_POST)) {
 	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
 	$payment = ($tamount > 0)?"Pending":"NoPayment";
 	$accom = ($_POST['accommodation'] == true)?"YES":"NO";
-	$headers = "From: GUADEC 2014 Registration Script <membership-committee@gnome.org>\n";
+	$headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
         
 	if ($errors == false) {
 		/* This variable not be changed: goes to a restricted field to Paypal API */
@@ -123,7 +123,7 @@ if (!empty($_POST)) {
 		"totalfee=".$tamount
 		;
 		$mailContent .= $registerInfo;
-		$subject = "From GUADEC 2014 Registration";
+		$subject = "GUADEC 2014 Registration";
 		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
   				 'name' => $name,
   				 'email' => $email,
@@ -219,9 +219,9 @@ if (!empty($_POST)) {
 		<?php if ($tamount > 0): ?>
 			<div>Your details have been stored. Proceed to pay €<?php echo $tamount;?>.</div>
 				
-			<form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+			<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 		    <input type="hidden" name="cmd" value="_xclick">
-		    <input type="hidden" name="business" value="saumya.zero-facilitator@gmail.com">
+		    <input type="hidden" name="business" value="guadec@gnome.org">
 		    <input type="hidden" name="currency_code" value="EUR">
 		    <input type="hidden" name="item_name" value="GUADEC 2014">
 		    <input type="hidden" name="amount" value="<?php echo $tamount; ?>">
