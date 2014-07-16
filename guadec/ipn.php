@@ -45,7 +45,7 @@ if ($verified) {
     $cvar[$ckey] = $cvalue;
     $i = $i + 1;
     }    
-    $headers = "From: GUADEC 2014 Registration Script <membership-committee@gnome.org>\n";
+    $headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
 
     // 1. Make sure the payment status is "Completed" 
     if ($_POST['payment_status'] != 'Completed') { 
@@ -103,9 +103,6 @@ if ($verified) {
         $body .= $cvar['name'];
         $body .= " with email ";
         $body .= $cvar['email'];
-        $body .= $listener->getTextReport();
-        error_log($body);
-        mail($_POST['receiver_email'], 'GUADEC-2014 Registration Payment Successful', $body, $headers);
         mail($_POST['payer_email'], 'GUADEC-2014 Registration Successful', $body, $headers);
         $body .= "Complete List of items that you have paid for\n";
         $email_content =
@@ -121,6 +118,9 @@ if ($verified) {
         ;
         $body .= $email_content;
         mail($cvar['email'], 'GUADEC-2014 Registration Successful', $body, $headers);
+        $body .= $listener->getTextReport();
+        error_log($body);
+        mail($_POST['receiver_email'], 'GUADEC-2014 Registration Payment Successful', $body, $headers);
     }
 } 
 else {
