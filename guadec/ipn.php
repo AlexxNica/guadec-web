@@ -55,7 +55,7 @@ if ($verified) {
     }
 
     // 2. Make sure seller email matches your primary account email.
-    if ($_POST['receiver_email'] !='guadec@gnome.org') {
+    if ($_POST['receiver_email'] !='friends@gnome.org') {
         $errmsg .= "'receiver_email' does not match: ";
         $errmsg .= $_POST['receiver_email']."\n";
     }
