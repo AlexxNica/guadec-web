@@ -52,8 +52,6 @@ if ($verified) {
         $errmsg .= "'Payment status' does not match: ";
         $errmsg .= $_POST['payment_status']."\n";
         $errmsg .= $_POST['receiver_email']."\n";
-        // simply ignore any IPN that is not completed
-        exit(0); 
     }
 
     // 2. Make sure seller email matches your primary account email.
@@ -61,7 +59,13 @@ if ($verified) {
         $errmsg .= "'receiver_email' does not match: ";
         $errmsg .= $_POST['receiver_email']."\n";
     }
-    
+
+    // If payment was not for us or failed, ignore it
+    if (!empty($errmsg)) {
+        error_log($listener->getTextReport());
+        exit(0);
+    }
+
     // 3. Make sure the amount(s) paid match
     $total_fee = floatval($cvar['totalfee']);
     if ($_POST['mc_gross'] != $total_fee) {
