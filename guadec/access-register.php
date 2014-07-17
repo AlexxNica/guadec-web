@@ -10,12 +10,13 @@ function display_result($result){
 	echo "<div style='overflow: auto'>";
 	echo "<table class='regtable'><tr><th>ID</th><th>Name</th>
 				<th>Irc</th><th>Email</th><th>Gender</th>
-				<th>Arrival</th><th>Departure</th>
+				<th>Accom</th><th>Arrival</th><th>Departure</th>
 				<th>Sponsored</th><th>Country</th>
 				<th>EntryFee</th>
 				<th>LunchFee</th><th>AccomFee</th>
 				<th>TotalFee</th>
-				<th>Payment Status</th></tr>";
+				<th>Payment Status</th>
+				<th>Public</th></tr>";
 	foreach($result as $results){
 		echo "<tr>";
 		echo "<td>"; echo $results['id']; echo "</td>";
@@ -23,6 +24,7 @@ function display_result($result){
 		echo "<td>"; echo $results['irc']; echo "</td>";
 		echo "<td>"; echo $results['email']; echo "</td>";
 		echo "<td>"; echo $results['gender']; echo "</td>";
+		echo "<td>"; echo $results['accom']; echo "</td>";
 		echo "<td>"; echo $results['arrive']; echo "</td>";
 		echo "<td>"; echo $results['depart']; echo "</td>";
 		echo "<td>"; echo $results['sponsored']; echo "</td>";
@@ -33,6 +35,7 @@ function display_result($result){
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
 		echo "<td>"; echo $results['totalfee']; echo "</td>";
 		echo "<td>"; echo $results['payment']; echo "</td>";
+		echo "<td>"; echo $results['public']; echo "</td>";
 		echo "</tr>";
 	}
 	echo "</table></div>";
