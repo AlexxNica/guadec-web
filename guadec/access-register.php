@@ -48,8 +48,8 @@ function display_totals($result){
 		foreach(explode(" ", $results['lunchdays']) as $lunch_day) {
 			$lunches[$lunch_day] += 1;
 		}
-		if ($results['accom'] = 'YES') {
-			if ($results['room'] = 'single') {
+		if ($results['accom'] == 'YES') {
+			if ($results['room'] == 'single') {
 				$single_rooms += 1;
 			} else {
 				$double_rooms += 1;
