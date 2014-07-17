@@ -7,6 +7,7 @@ Template Name: Access Registration
 // Restricted Admin Access. View Registration details.
 global $wpdb;
 function display_result($result){
+	echo "<div style='overflow: auto'>";
 	echo "<table class='regtable'><tr><th>ID</th><th>Name</th>
 				<th>Irc</th><th>Email</th><th>Gender</th>
 				<th>Arrival</th><th>Departure</th>
@@ -34,7 +35,7 @@ function display_result($result){
 		echo "<td>"; echo $results['payment']; echo "</td>";
 		echo "</tr>";
 	}
-	echo "</table>";
+	echo "</table></div>";
 }
 function display_totals($result){
 	$lunches = Array('lunch_saturday' => 0, 'lunch_sunday' => 0, 'lunch_monday' => 0, 'lunch_tuesday' => 0);
