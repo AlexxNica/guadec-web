@@ -56,8 +56,8 @@
                      $accom = 0;
                    }
                   $aResult = $accom + $lunch + $fee;
-                  if ($total_days == "Incorrect dates"){
-                      $aResult = $total_days;
+                  if ($nights == "Incorrect dates"){
+                      $aResult = $nights;
                   }
                      
                }
