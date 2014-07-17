@@ -15,7 +15,7 @@ $sql = "CREATE TABLE $table_name (
   name tinytext NOT NULL,
   email VARCHAR(55) NOT NULL,
   accom VARCHAR(10) DEFAULT 'NO' NOT NULL,
-  public VARCHAR(3) DEFAULT 'NO' NOT NULL,
+  ispublic VARCHAR(3) DEFAULT 'NO' NOT NULL,
   arrive VARCHAR(20) DEFAULT 'NA' NOT NULL,
   depart VARCHAR(20) DEFAULT 'NA' NOT NULL,
   sponsored VARCHAR(10) DEFAULT 'NO' NOT NULL,
@@ -143,7 +143,7 @@ if (!empty($_POST)) {
   				 'gender' => $gender,
   				 'country' => $country,
   				 'payment' => $payment,
-  				 'public' => $public));
+  				 'ispublic' => $public));
 	}
 }
 	

@@ -35,7 +35,7 @@ function display_result($result){
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
 		echo "<td>"; echo $results['totalfee']; echo "</td>";
 		echo "<td>"; echo $results['payment']; echo "</td>";
-		echo "<td>"; echo $results['public']; echo "</td>";
+		echo "<td>"; echo $results['ispublic']; echo "</td>";
 		echo "</tr>";
 	}
 	echo "</table></div>";
