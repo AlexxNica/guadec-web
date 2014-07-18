@@ -51,7 +51,7 @@ function display_result($result){
 		echo "<td>"; echo $results['totalfee']; echo "</td>";
 			$total_totalfee += $results['totalfee'];
 		echo "<td>"; echo $results['payment']; echo "</td>";
-			if ($results['payment'] == 'YES') { $total_confirmed += 1;}
+			if ($results['payment'] == 'Completed') { $total_confirmed += 1;}
 		echo "<td>"; echo $results['ispublic']; echo "</td>";
 			if ($results['ispublic'] == 'YES') { $total_ispublic += 1;}
 		echo "</tr>";
