@@ -57,10 +57,10 @@ function display_result($result){
 		echo "</tr>";
 	}
 	echo"</tbody>";
-	echo "<tfoot><tr><td>Total</td><td colspan='4'>"; echo count($results); echo " registered people</td>
+	echo "<tfoot><tr><td>Total</td><td colspan='4'>"; echo count($result); echo " registered people</td>
 				<td colspan='3'>"; echo $total_beds; echo " beds</td>
 				<td>"; echo $total_sponsored; echo " sponsored</td><td></td>
-				<td>Entry: "; echo $total_entryfee; echo " ("; echo $total_entryfee/count($results);echo " average)</td>
+				<td>Entry: "; echo $total_entryfee; echo " ("; echo $total_entryfee/count($result);echo " average)</td>
 				<td>Lunch: "; echo $total_lunchfee; echo "</td>
 				<td>Accommodation: "; echo $total_accomfee; echo "</td>
 				<td>Total: "; echo $total_totalfee; echo "</td>
