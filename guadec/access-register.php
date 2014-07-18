@@ -14,6 +14,7 @@ function display_result($result){
 	$total_accomfee = 0;
 	$total_totalfee = 0;
 	$total_confirmed = 0;
+	$total_onsite = 0;
 	$total_ispublic = 0;
 
 	echo "<div style='overflow: auto'>";
@@ -52,6 +53,7 @@ function display_result($result){
 			$total_totalfee += $results['totalfee'];
 		echo "<td>"; echo $results['payment']; echo "</td>";
 			if ($results['payment'] == 'Completed') { $total_confirmed += 1;}
+			else if ($results['payment'] == 'OnSite') { $total_onsite += 1;}
 		echo "<td>"; echo $results['ispublic']; echo "</td>";
 			if ($results['ispublic'] == 'YES') { $total_ispublic += 1;}
 		echo "</tr>";
@@ -64,7 +66,7 @@ function display_result($result){
 				<td>Lunch: "; echo $total_lunchfee; echo "</td>
 				<td>Accommodation: "; echo $total_accomfee; echo "</td>
 				<td>Total: "; echo $total_totalfee; echo "</td>
-				<td>"; echo $total_confirmed; echo " confirmed</td>
+				<td>"; echo $total_confirmed; echo " confirmed, "; echo $total_onsite; echo " on site</td>
 				<td>"; echo $total_ispublic; echo " public</td></tr></tfoot>";
 	echo "</table></div>";
 }
