@@ -80,13 +80,14 @@ if ($verified) {
     // }
 
     // TODO: Check for duplicate user_id
+    $reg_id = $cvar['regid'];
     $reg_email = $cvar['email'];
     if(empty($reg_email)){
         $errmsg .= "No Valid user email-address found\n";
     }        
     if (!empty($errmsg)) {
         $status = "FraudCheck";
-        $upipn = $listener->updateCompleted($reg_email,$status);
+        $upipn = $listener->updateCompleted($reg_id,$status);
         error_log($upipn);
 
 	$body = "Your payment was accepted but was not as expected and your registration will need manual validation.";
@@ -104,7 +105,7 @@ if ($verified) {
         error_log($body); // Transcript copy in the error log
         mail('zana@gnome.org, pterjan@gmail.com', 'Guadec Payment Fraud Warning (validation needed)', $body, $headers);
     } else {
-        $body = $listener->updateCompleted($reg_email, 'Completed');
+        $body = $listener->updateCompleted($reg_id, 'Completed');
         $body .= "Registration Payment Successful for ";
         $body .= $cvar['name'];
         $body .= " with email ";

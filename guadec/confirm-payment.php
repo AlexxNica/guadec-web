@@ -149,20 +149,6 @@ if (!empty($_POST)) {
         $headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
             
         if ($errors == false) {
-            /* This variable not be changed: goes to a restricted field to Paypal API */
-            $registerInfo = 
-            "name=" . $name . "&".
-            "email=" . $email . "&" .
-            "time=" . date("Y-m-d H:i:s"). "&".
-            "arrive=". $arrive . "&".
-            "depart=". $depart . "&".
-            "entryfee=". $entry ."&".
-            "lunchfee=".$lamount."&".
-            "accomfee=".$aamount."&".
-            "totalfee=".$tamount
-            ;
-            $mailContent .= $registerInfo;
-            $subject = "GUADEC 2014 Registration";
             $wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
                      'name' => $name,
                      'email' => $email,
@@ -183,6 +169,21 @@ if (!empty($_POST)) {
                      'country' => $country,
                      'payment' => $payment,
                      'ispublic' => $public));
+            /* This variable not be changed: goes to a restricted field to Paypal API */
+            $registerInfo = 
+            "regid=" . $wpdb->insert_id . "&" .
+            "name=" . $name . "&".
+            "email=" . $email . "&" .
+            "time=" . date("Y-m-d H:i:s"). "&".
+            "arrive=". $arrive . "&".
+            "depart=". $depart . "&".
+            "entryfee=". $entry ."&".
+            "lunchfee=".$lamount."&".
+            "accomfee=".$aamount."&".
+            "totalfee=".$tamount
+            ;
+            $mailContent .= $registerInfo;
+            $subject = "GUADEC 2014 Registration";
         }
 	
 ?>

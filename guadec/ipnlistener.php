@@ -314,7 +314,7 @@ class IpnListener {
             throw new Exception("Invalid HTTP request method.");
         }
     }
-    public function updateCompleted($reg_email='dummy@mail.com', $status='Pending') {
+    public function updateCompleted($reg_id=0, $status='Pending') {
         global $wpdb;
         $table_name = $wpdb->prefix .'guadec2014_registrations';
         // check if the record exists: with a status to be changed
@@ -325,7 +325,7 @@ class IpnListener {
             'payment' => $status
             ),
         array(
-            'email' => $reg_email
+            'id' => $reg_id
             ) 
         );
         // if(!($up)){
