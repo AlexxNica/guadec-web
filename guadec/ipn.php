@@ -38,7 +38,7 @@ if ($verified) {
     $csplit = explode('&',$customInfo);
     $cvar = array(); $i = 0;
 
-    while(($i < 9) && ($csplit[$i] != null)){
+    while(($i < 10) && ($csplit[$i] != null)){
     $dsplit =  explode('=',$csplit[$i]);
     $ckey = $dsplit[0];
     $cvalue = ($dsplit[1] == null)?'0': $dsplit[1];
