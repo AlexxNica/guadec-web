@@ -31,124 +31,161 @@ $sql = "CREATE TABLE $table_name (
   room VARCHAR(7),
   roommate text,
   payment VARCHAR(10) DEFAULT 'NoPayment',
+  vercode VARCHAR(20) DEFAULT '-none-',
   UNIQUE KEY id (id)
 );";
 
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 dbDelta( $sql );
+require_once('header.php');
 
 if (!empty($_POST)) {
-	require_once('pricing.php');
-	$application_submitted = true;
-	$errors = false;
+    if(!empty($_POST['regid']))
+    {
+        $regid = $_POST['regid'];
+        $email = $_POST['email'];
+        // This is a current registration that wants to pay manually
+        // Just generate a new verification code of 20 characters. No need to be cryptographically secure
+        $newvercode = substr(md5(microtime()),rand(0,26),20);
+        $updated = $wpdb->update($table_name,
+                                 array('vercode' => $newvercode),
+                                 array('id' => $regid,
+                                       'payment' => 'Pending',
+                                       'email' => $email));
 
-	$name = trim(sanitize_text_field($_POST['contact_name']));
-	$email = trim(sanitize_text_field($_POST['contact_email']));
-	$irc = (isset($_POST['irc']))?(trim(sanitize_text_field($_POST['irc']))) : 'NA';
-	$gender = (isset($_POST['contact_gender']))?(trim(sanitize_text_field($_POST['contact_gender']))) : 'NA';
-	$country = (isset($_POST['contact_country']))?(trim(sanitize_text_field($_POST['contact_country']))) : 'NA';
-	$diet = (isset($_POST['diet']))?(trim(sanitize_text_field($_POST['diet']))) : 'NA';
-	
-	$entry = (isset($_POST['entry-fee']))?(intval($_POST['entry-fee'])):0;
+        if($updated != 1)
+        {
+            ?>
+            <div>Something went wrong...</div>
+            <?php
+        }
+        else
+        {
 
-	$public = isset($_POST['public'])?'YES':'NO';
+            $headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
+            $body = "Please verify your intent to pay at the GUADEC event by opening the following URL in your webbrowser: \n";
+            $body .= "https://www.guadec.org/confirm-payment?regid=" . $regid . "&vercode=" . $vercode;
+            mail($email, 'GUADEC-2014 Registration Payment: Confirm intent to pay on-site', $body, $headers);
 
-	$obfuscated_email = str_replace("@", " AT ", $email);
-	//check if the email already registered
-	//TODO: Add the payment condition, once ipn works
-	$repeat = $wpdb->get_var($wpdb->prepare(
-		"select id from wp_guadec2014_registrations
-		where email=%s and payment=%s",
-		$email, 'Completed')
-	);
-	if (empty($name) || empty($email)) {
-		$errors = true;
-	}
-	if(!empty($repeat)){
-		$errors = true;
-	}
-	if(!isset($_POST['accommodation'])){
-		$arrive = "NA";
-		$depart = "NA";
-	}
-	else{
-		if(!isset($_POST['room_type'])){
-			$errors = true;
-		} else {
-			$room_type = $_POST['room_type'];
-			if ($room_type != 'single' && $room_type != 'double') {
-				$errors = true;
-			}
-                        $booked = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM wp_guadec2014_registrations WHERE accom = 'YES' AND room=%s", $room_type));
-		        $total_beds = $room_type == 'single' ? 14 : 36;
-			if ($total_beds <= $booked) {
-				$errors = true;
-			}
-		}
-		$roommate = sanitize_text_field($_POST['roommate']);
-		$arrive = sanitize_text_field($_POST['arrival']);
-		$depart = sanitize_text_field($_POST['departure']);
-	}
+            ?>
+            <div>
+            An email has been sent to your email address requesting you to verify your intent to pay at the event.
+            </div>
+            <?php
+        }
+    }
+    else
+    {
+        // This is a new registration
+        require_once('pricing.php');
+        $application_submitted = true;
+        $errors = false;
 
-	$nights = dayParser($arrive, $depart);
-	$aamount = accomPrice($nights, $room_type);
-
-	$lunch_days = "";
-	$x = 0;
-	if(isset($_POST['lunch'])){
-		foreach($_POST['lentry-fee'] as $value){
-			$lunch_days = $lunch_days." ".$value;
-			$x = $x + 1;
-		}
-	}
-	$lamount = lunchPrice($x);
-	$tamount = $aamount + $lamount + $entry;
-
-	$sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
-	$payment = ($tamount > 0)?"Pending":"NoPayment";
-	$accom = ($_POST['accommodation'] == true)?"YES":"NO";
-	$headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
+        $name = trim(sanitize_text_field($_POST['contact_name']));
+        $email = trim(sanitize_text_field($_POST['contact_email']));
+        $irc = (isset($_POST['irc']))?(trim(sanitize_text_field($_POST['irc']))) : 'NA';
+        $gender = (isset($_POST['contact_gender']))?(trim(sanitize_text_field($_POST['contact_gender']))) : 'NA';
+        $country = (isset($_POST['contact_country']))?(trim(sanitize_text_field($_POST['contact_country']))) : 'NA';
+        $diet = (isset($_POST['diet']))?(trim(sanitize_text_field($_POST['diet']))) : 'NA';
         
-	if ($errors == false) {
-		/* This variable not be changed: goes to a restricted field to Paypal API */
-		$registerInfo = 
-		"name=" . $name . "&".
-		"email=" . $email . "&" .
-		"time=" . date("Y-m-d H:i:s"). "&".
-		"arrive=". $arrive . "&".
-		"depart=". $depart . "&".
-		"entryfee=". $entry ."&".
-		"lunchfee=".$lamount."&".
-		"accomfee=".$aamount."&".
-		"totalfee=".$tamount
-		;
-		$mailContent .= $registerInfo;
-		$subject = "GUADEC 2014 Registration";
-		$wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
-  				 'name' => $name,
-  				 'email' => $email,
-  				 'accom' => $accom,
-  				 'room' => $room_type,
-  				 'roommate' => $roommate,
-  				 'arrive' => $arrive,
-  				 'depart' => $depart,
-  				 'sponsored' => $sponsor_check,
-  				 'lunchdays' => $lunch_days,
-  				 'dietrestrict' => $diet,
-  				 'entryfee' => $entry,
-  				 'lunchfee' => $lamount,
-  				 'accomfee' => $aamount,
-  				 'totalfee' => $tamount,
-  				 'irc' => $irc,
-  				 'gender' => $gender,
-  				 'country' => $country,
-  				 'payment' => $payment,
-  				 'ispublic' => $public));
-	}
-}
+        $entry = (isset($_POST['entry-fee']))?(intval($_POST['entry-fee'])):0;
+
+        $public = isset($_POST['public'])?'YES':'NO';
+
+        $obfuscated_email = str_replace("@", " AT ", $email);
+        //check if the email already registered
+        //TODO: Add the payment condition, once ipn works
+        $repeat = $wpdb->get_var($wpdb->prepare(
+            "select id from wp_guadec2014_registrations
+            where email=%s and payment=%s",
+            $email, 'Completed')
+        );
+        if (empty($name) || empty($email)) {
+            $errors = true;
+        }
+        if(!empty($repeat)){
+            $errors = true;
+        }
+        if(!isset($_POST['accommodation'])){
+            $arrive = "NA";
+            $depart = "NA";
+        }
+        else{
+            if(!isset($_POST['room_type'])){
+                $errors = true;
+            } else {
+                $room_type = $_POST['room_type'];
+                if ($room_type != 'single' && $room_type != 'double') {
+                    $errors = true;
+                }
+                            $booked = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM wp_guadec2014_registrations WHERE accom = 'YES' AND room=%s", $room_type));
+                    $total_beds = $room_type == 'single' ? 14 : 36;
+                if ($total_beds <= $booked) {
+                    $errors = true;
+                }
+            }
+            $roommate = sanitize_text_field($_POST['roommate']);
+            $arrive = sanitize_text_field($_POST['arrival']);
+            $depart = sanitize_text_field($_POST['departure']);
+        }
+
+        $nights = dayParser($arrive, $depart);
+        $aamount = accomPrice($nights, $room_type);
+
+        $lunch_days = "";
+        $x = 0;
+        if(isset($_POST['lunch'])){
+            foreach($_POST['lentry-fee'] as $value){
+                $lunch_days = $lunch_days." ".$value;
+                $x = $x + 1;
+            }
+        }
+        $lamount = lunchPrice($x);
+        $tamount = $aamount + $lamount + $entry;
+
+        $sponsor_check = ($_POST['sponsored'] == true)?"YES":"NO";
+        $payment = ($tamount > 0)?"Pending":"NoPayment";
+        $accom = ($_POST['accommodation'] == true)?"YES":"NO";
+        $headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
+            
+        if ($errors == false) {
+            /* This variable not be changed: goes to a restricted field to Paypal API */
+            $registerInfo = 
+            "name=" . $name . "&".
+            "email=" . $email . "&" .
+            "time=" . date("Y-m-d H:i:s"). "&".
+            "arrive=". $arrive . "&".
+            "depart=". $depart . "&".
+            "entryfee=". $entry ."&".
+            "lunchfee=".$lamount."&".
+            "accomfee=".$aamount."&".
+            "totalfee=".$tamount
+            ;
+            $mailContent .= $registerInfo;
+            $subject = "GUADEC 2014 Registration";
+            $wpdb->insert($table_name, array('timeofregistration' => date("Y-m-d H:i:s"),
+                     'name' => $name,
+                     'email' => $email,
+                     'accom' => $accom,
+                     'room' => $room_type,
+                     'roommate' => $roommate,
+                     'arrive' => $arrive,
+                     'depart' => $depart,
+                     'sponsored' => $sponsor_check,
+                     'lunchdays' => $lunch_days,
+                     'dietrestrict' => $diet,
+                     'entryfee' => $entry,
+                     'lunchfee' => $lamount,
+                     'accomfee' => $aamount,
+                     'totalfee' => $tamount,
+                     'irc' => $irc,
+                     'gender' => $gender,
+                     'country' => $country,
+                     'payment' => $payment,
+                     'ispublic' => $public));
+        }
 	
 ?>
-<?php require_once("header.php"); ?>
 
 <div>
 <?php if(!($application_submitted == true)): ?>
@@ -237,6 +274,13 @@ if (!empty($_POST)) {
 		    
 		    <input type="image" src="http://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 			</form>
+
+            <br>
+
+            <form action="https://www.guadec.org/confirm-payment" method="post">
+            <input type="hidden" name="regid" value="<?php print($wpdb->insert_id); ?>">
+            <input type="submit" value="Pay at event">
+            </form>
 		<?php else: ?>
 			<div>Your details have been stored. An email confirming your registration will be sent to you shortly. Thank you.</div>
 			<!-- Send a confirm registration mail to the registered -->
@@ -251,4 +295,65 @@ if (!empty($_POST)) {
 	<?php endif; ?>
 <?php endif; ?>	
 </div>
-<?php require_once("footer.php"); ?>
+<?php
+    }
+}
+else // Not post
+{
+    if(in_array('regid', $_GET))
+    {
+        // Verification email link
+        $regid = $_GET['regid'];
+        $vercode = $_GET['vercode'];
+
+        $updated = $wpdb->update($table_name,
+                                 array('payment' => 'OnSite'),
+                                 array('payment' => 'Pending',
+                                       'id' => $regid,
+                                       'email' => $email,
+                                       'vercode' => $vercode));
+
+        if($updated == false)
+        {
+            ?>
+            <div>There was an error updating the database. Please try again later.</div>
+            <?php
+        }
+        else if($updated == 0)
+        {
+            ?>
+            <div>There was no such registration waiting for verification. Please make sure to copy the entire link.</div>
+            <?php
+        }
+        else if($updated > 1)
+        {
+            // This should be impossible, but let's catch it anyway
+            ?>
+            <div>Something went wrong here....</div>
+            <?php
+        }
+        else
+        {
+            $email = $wpdb->get_var($wpdb->prepare("SELECT email FROM " .  $table_name . " WHERE id=%d",
+                                                   $regid));
+
+            // We updated their registration. Lets send a verification email
+            $headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
+            $body = "You have verified your intent to pay on-site at GUADEC. Please look in your earlier email for the exact amount to pay.";
+            mail($email, 'GUADEC-2014 Registration Payment: On-site payment verified', $body, $headers);
+
+            ?>
+            <div>Your registration has been marked as payment on-site.</div>
+            <?php
+        }
+    }
+    else
+    {
+        ?>
+        <div> Invalid Submission. Please go through registration page first.</div>
+        <?php
+    }
+}
+
+require_once("footer.php");
+?>
