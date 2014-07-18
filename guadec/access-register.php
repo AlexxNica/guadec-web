@@ -7,8 +7,17 @@ Template Name: Access Registration
 // Restricted Admin Access. View Registration details.
 global $wpdb;
 function display_result($result){
+	$total_beds = 0;
+	$total_sponsored = 0;
+	$total_entryfee = 0;
+	$total_lunchfee = 0;
+	$total_accomfee = 0;
+	$total_totalfee = 0;
+	$total_confirmed = 0;
+	$total_ispublic = 0;
+
 	echo "<div style='overflow: auto'>";
-	echo "<table class='regtable'><tr><th>ID</th><th>Name</th>
+	echo "<table class='regtable'><thead><tr><th>ID</th><th>Name</th>
 				<th>Irc</th><th>Email</th><th>Gender</th>
 				<th>Accom</th><th>Arrival</th><th>Departure</th>
 				<th>Sponsored</th><th>Country</th>
@@ -16,7 +25,8 @@ function display_result($result){
 				<th>LunchFee</th><th>AccomFee</th>
 				<th>TotalFee</th>
 				<th>Payment Status</th>
-				<th>Public</th></tr>";
+				<th>Public</th></tr></thead>";
+	echo"<tbody>";
 	foreach($result as $results){
 		echo "<tr>";
 		echo "<td>"; echo $results['id']; echo "</td>";
@@ -25,19 +35,37 @@ function display_result($result){
 		echo "<td>"; echo $results['email']; echo "</td>";
 		echo "<td>"; echo $results['gender']; echo "</td>";
 		echo "<td>"; echo $results['accom']; echo "</td>";
+			if ($results['accom'] == 'YES') { $total_beds += 1;}
 		echo "<td>"; echo $results['arrive']; echo "</td>";
 		echo "<td>"; echo $results['depart']; echo "</td>";
 		echo "<td>"; echo $results['sponsored']; echo "</td>";
+			if ($results['sponsored'] == 'YES') { $total_sponsored += 1;}
 		echo "<td>"; echo $results['country']; echo "</td>";
 //		echo "<td>"; echo $results['lunchdays']; echo "</td>";
 		echo "<td>"; echo $results['entryfee']; echo "</td>";
+			$total_entryfee += $results['entryfee'];
 		echo "<td>"; echo $results['lunchfee']; echo "</td>";
+			$total_lunchfee += $results['lunchfee'];
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
+			$total_accomfee += $results['accomfee'];
 		echo "<td>"; echo $results['totalfee']; echo "</td>";
+			$total_totalfee += $results['totalfee'];
 		echo "<td>"; echo $results['payment']; echo "</td>";
+			if ($results['payment'] == 'YES') { $total_confirmed += 1;}
 		echo "<td>"; echo $results['ispublic']; echo "</td>";
+			if ($results['ispublic'] == 'YES') { $total_ispublic += 1;}
 		echo "</tr>";
 	}
+	echo"</tbody>";
+	echo "<tfoot><tr><td>Total</td><td colspan='4'>"; echo count($results); echo " registered people</td>
+				<td colspan='3'>"; echo $total_beds; echo " beds</td>
+				<td>"; echo $total_sponsored; echo " sponsored</td><td></td>
+				<td>Entry: "; echo $total_entryfee; echo " ("; echo $total_entryfee/count($results);echo " average)</td>
+				<td>Lunch: "; echo $total_lunchfee; echo "</td>
+				<td>Accommodation: "; echo $total_accomfee; echo "</td>
+				<td>Total: "; echo $total_totalfee; echo "</td>
+				<td>"; echo $total_confirmed; echo " confirmed</td>
+				<td>"; echo $total_ispublic; echo " public</td></tr></tfoot>";
 	echo "</table></div>";
 }
 function display_totals($result){
