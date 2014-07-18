@@ -64,7 +64,7 @@ if (!empty($_POST)) {
 
             $headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
             $body = "Please verify your intent to pay at the GUADEC event by opening the following URL in your webbrowser: \n";
-            $body .= "https://www.guadec.org/confirm-payment?regid=" . $regid . "&vercode=" . $vercode;
+            $body .= "https://www.guadec.org/confirm-payment?regid=" . $regid . "&vercode=" . $newvercode;
             mail($email, 'GUADEC-2014 Registration Payment: Confirm intent to pay on-site', $body, $headers);
 
             ?>
@@ -279,6 +279,7 @@ if (!empty($_POST)) {
 
             <form action="https://www.guadec.org/confirm-payment" method="post">
             <input type="hidden" name="regid" value="<?php print($wpdb->insert_id); ?>">
+            <input type="hidden" name="email" value="<?php print($email); ?>">
             <input type="submit" value="Pay at event">
             </form>
 		<?php else: ?>
@@ -300,7 +301,7 @@ if (!empty($_POST)) {
 }
 else // Not post
 {
-    if(in_array('regid', $_GET))
+    if(isset($_GET['regid']))
     {
         // Verification email link
         $regid = $_GET['regid'];
@@ -310,7 +311,6 @@ else // Not post
                                  array('payment' => 'OnSite'),
                                  array('payment' => 'Pending',
                                        'id' => $regid,
-                                       'email' => $email,
                                        'vercode' => $vercode));
 
         if($updated == false)
