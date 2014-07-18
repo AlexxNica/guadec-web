@@ -17,7 +17,7 @@ function display_result($result){
 	$total_onsite = 0;
 	$total_ispublic = 0;
 
-	echo "<div style='overflow: auto'>";
+	echo "<div>";
 	echo "<table class='regtable'><thead><tr><th>ID</th><th>Name</th>
 				<th>Irc</th><th>Email</th><th>Gender</th>
 				<th>Accom</th><th>Arrival</th><th>Departure</th>
