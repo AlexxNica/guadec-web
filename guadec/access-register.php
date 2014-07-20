@@ -102,6 +102,7 @@ function display_accommodation($result){
 	echo "<table class='regtable'><thead><tr><th>ID</th><th>Name</th>
 				<th>Email</th><th>Gender</th>
 				<th>Arrival</th><th>Departure</th>
+				<th>Room type</th>
 				<th>AccomFee</th>
 				<th>Payment Status</th>
 				</tr></thead>";
@@ -114,6 +115,7 @@ function display_accommodation($result){
 		echo "<td>"; echo $results['gender']; echo "</td>";
 		echo "<td>"; echo $results['arrive']; echo "</td>";
 		echo "<td>"; echo $results['depart']; echo "</td>";
+		echo "<td>"; echo $results['room']; echo "</td>";
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
 		echo "<td>"; echo $results['payment']; echo "</td>";
 		echo "</tr>";
