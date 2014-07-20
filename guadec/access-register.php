@@ -117,7 +117,7 @@ else{
 	     		echo display_result($result);
 	        	break;
 		case 'showtotals' :
-			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE payment = 'Completed' OR payment ='NoPayment'", ARRAY_A);
+			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE payment = 'Completed' OR payment ='NoPayment' OR payment ='OnSite'", ARRAY_A);
 			echo display_totals($result);
 			break;
 		    default :
