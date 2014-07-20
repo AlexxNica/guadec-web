@@ -97,6 +97,31 @@ function display_totals($result){
 	echo "</ul>\n";
 }
 
+function display_accommodation($result){
+	echo "<div>";
+	echo "<table class='regtable'><thead><tr><th>ID</th><th>Name</th>
+				<th>Email</th><th>Gender</th>
+				<th>Arrival</th><th>Departure</th>
+				<th>AccomFee</th>
+				<th>Payment Status</th>
+				</tr></thead>";
+	echo"<tbody>";
+	foreach($result as $results){
+		echo "<tr>";
+		echo "<td>"; echo $results['id']; echo "</td>";
+		echo "<td>"; echo $results['name']; echo "</td>";
+		echo "<td>"; echo $results['email']; echo "</td>";
+		echo "<td>"; echo $results['gender']; echo "</td>";
+		echo "<td>"; echo $results['arrive']; echo "</td>";
+		echo "<td>"; echo $results['depart']; echo "</td>";
+		echo "<td>"; echo $results['accomfee']; echo "</td>";
+		echo "<td>"; echo $results['payment']; echo "</td>";
+		echo "</tr>";
+	}
+	echo"</tbody>";
+	echo "</table></div>";
+}
+
 require_once("header.php");
  if( !(current_user_can( 'administrator' ) )){
  	echo "You are not authorised to view this page.";
@@ -120,6 +145,10 @@ else{
 			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE payment = 'Completed' OR payment ='NoPayment' OR payment ='OnSite'", ARRAY_A);
 			echo display_totals($result);
 			break;
+		case 'showaccommodation' :
+			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE accom = 'YES'", ARRAY_A);
+			echo display_accommodation($result);
+			break;
 		    default :
 	      	  	$result = 'Error';
 	        break;
@@ -134,6 +163,7 @@ else{
      	<option value='showall' selected='selected'>Show All Entries</option>
      	<option value='showcomplete'>Only Completed Registration</option>
 	<option value='showtotals'>Totals For Completed Registrations</option>
+	<option value='showaccommodation'>Accommodation</option>
 		</select></div>
 		<input type='submit' value='Go' />
 		</form>";
