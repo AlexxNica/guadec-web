@@ -106,6 +106,7 @@ if (!empty($_POST) || isset($_GET['payfor'])) {
             $gender = $results['gender'];
             $country = $results['country'];
             $payment = $results['payment'];
+            $application_submitted = true;
 
             if($payment != 'Pending')
             {
@@ -211,10 +212,10 @@ if (!empty($_POST) || isset($_GET['payfor'])) {
                          'payment' => $payment,
                          'ispublic' => $public));
             $regid = $wpdb->insert_id;
-            $mailContent .= $registerInfo;
-            $subject = "GUADEC 2014 Registration";
         }
     }
+    $mailContent .= $registerInfo;
+    $subject = "GUADEC 2014 Registration";
     /* This variable not be changed: goes to a restricted field to Paypal API */
     $registerInfo = 
     "regid=" . $regid . "&" .
@@ -322,7 +323,7 @@ if (!empty($_POST) || isset($_GET['payfor'])) {
             <br>
 
             <form action="https://www.guadec.org/confirm-payment" method="post">
-            <input type="hidden" name="regid" value="<?php print($wpdb->insert_id); ?>">
+            <input type="hidden" name="regid" value="<?php print($regid); ?>">
             <input type="hidden" name="email" value="<?php print($email); ?>">
             <input type="submit" value="Pay at event">
             </form>
