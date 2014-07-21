@@ -58,10 +58,10 @@ function display_result($result){
 		echo "<td>"; echo $results['ispublic']; echo "</td>";
 			if ($results['ispublic'] == 'YES') { $total_ispublic += 1;}
         echo "<td>";
-            if ($results['payment'] != 'Completed') {
+            if (($results['payment'] != 'Completed') && ($results['payment'] != 'Dupe')) {
                 print('<form method="post" action="">
                 <input type="hidden" name="regid" value="' . $results['id'] . '">
-                <input type="hidden" name="action" value="MarkDupe">
+                <input type="hidden" name="newstatus" value="Dupe">
                 <input type="hidden" name="viewtype" value="' . $_POST['viewtype'] . '">
                 <input type="submit" value="Mark dupe">
                 </form>');
@@ -69,9 +69,17 @@ function display_result($result){
             if ($results['payment'] == 'OnSite') {
                 print('<form method="post" action="">
                 <input type="hidden" name="regid" value="' . $results['id'] . '">
-                <input type="hidden" name="action" value="MarkPaid">
+                <input type="hidden" name="newstatus" value="OnSitePaid">
                 <input type="hidden" name="viewtype" value="' . $_POST['viewtype'] . '">
                 <input type="submit" value="Mark paid on-site">
+                </form>');
+            }
+            if ($results['payment'] == 'Dupe') {
+                print('<form method="post" action="">
+                <input type="hidden" name="regid" value="' . $results['id'] . '">
+                <input type="hidden" name="newstatus" value="Pending">
+                <input type="hidden" name="viewtype" value="' . $_POST['viewtype'] . '">
+                <input type="submit" value="Un-mark dupe">
                 </form>');
             }
         echo "</td>";
@@ -149,17 +157,9 @@ require_once("header.php");
  }
 else{
 	
-    if(isset($_POST['action'])) {
-        $action = $_POST['action'];
+    if(isset($_POST['newstatus'])) {
+        $newstatus = $_POST['newstatus'];
         $regid = $_POST['regid'];
-
-        $newstatus = '???';
-        if($action == 'MarkDupe') {
-            $newstatus = 'Dupe';
-        }
-        else if($action == 'MarkPaid') {
-            $newstatus = 'OnSitePaid';
-        }
 
         $updated = $wpdb->update('wp_guadec2014_registrations',
                                  array('payment' => $newstatus),
