@@ -26,7 +26,8 @@ function display_result($result){
 				<th>LunchFee</th><th>AccomFee</th>
 				<th>TotalFee</th>
 				<th>Payment Status</th>
-				<th>Public</th></tr></thead>";
+				<th>Public</th>
+                <th>Update</th></tr></thead>";
 	echo"<tbody>";
 	foreach($result as $results){
 		echo "<tr>";
@@ -56,6 +57,24 @@ function display_result($result){
 			else if ($results['payment'] == 'OnSite') { $total_onsite += 1;}
 		echo "<td>"; echo $results['ispublic']; echo "</td>";
 			if ($results['ispublic'] == 'YES') { $total_ispublic += 1;}
+        echo "<td>";
+            if ($results['payment'] != 'Completed') {
+                print('<form method="post" action="">
+                <input type="hidden" name="regid" value="' . $results['id'] . '">
+                <input type="hidden" name="action" value="MarkDupe">
+                <input type="hidden" name="viewtype" value="' . $_POST['viewtype'] . '">
+                <input type="submit" value="Mark dupe">
+                </form>');
+            }
+            if ($results['payment'] == 'OnSite') {
+                print('<form method="post" action="">
+                <input type="hidden" name="regid" value="' . $results['id'] . '">
+                <input type="hidden" name="action" value="MarkPaid">
+                <input type="hidden" name="viewtype" value="' . $_POST['viewtype'] . '">
+                <input type="submit" value="Mark paid on-site">
+                </form>');
+            }
+        echo "</td>";
 		echo "</tr>";
 	}
 	echo"</tbody>";
@@ -130,6 +149,25 @@ require_once("header.php");
  }
 else{
 	
+    if(isset($_POST['action'])) {
+        $action = $_POST['action'];
+        $regid = $_POST['regid'];
+
+        $newstatus = '???';
+        if($action == 'MarkDupe') {
+            $newstatus = 'Dupe';
+        }
+        else if($action == 'MarkPaid') {
+            $newstatus = 'OnSitePaid';
+        }
+
+        $updated = $wpdb->update('wp_guadec2014_registrations',
+                                 array('payment' => $newstatus),
+                                 array('id' => $regid));
+
+        // This should always be one, but let's make sure..
+        print('<div>' . print_r($updated, true) . ' entries were updated to status ' . $newstatus . '</div><br />');
+    }
 	if(isset($_POST['viewtype']) && !empty($_POST['viewtype'])) {
 	    $action = $_POST['viewtype'];
 	   // $table_name = $wpdb->prefix .'guadec2014_registrations';
