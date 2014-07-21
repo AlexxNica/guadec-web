@@ -70,6 +70,7 @@ function display_result($result){
                     print('<form method="post" action="">
                     <input type="hidden" name="regid" value="' . $results['id'] . '">
                     <input type="hidden" name="action" value="sendreminder">
+                    <input type="hidden" name="viewtype" value="' . $_POST['viewtype'] . '">
                     <input type="submit" value="Send payment reminder">
                     </form>');
                 }
@@ -165,7 +166,34 @@ require_once("header.php");
  }
 else{
 	
-    if(isset($_POST['newstatus'])) {
+    if(isset($_POST['action'])) {
+        $action = $_POST['action'];
+        $regid = $_POST['regid'];
+        if($action == 'sendreminder')
+        {
+            // Get the email address of the registrant
+            $results = $wpdb->get_row($wpdb->prepare("SELECT * FROM wp_guadec2014_registrations WHERE id=%d",
+                                                     $regid),
+                                      ARRAY_A);
+            
+            $name = $results['name'];
+            $email = $results['email'];
+
+            $headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
+            $body = "Hi " . $name . "\n";
+            $body .= "\n";
+            $body .= "It seems you haven't completed the registation process. To finish it, please either pay online with Paypal or select the on-site payment option on the following page: https://www.guadec.org/confirm-payment/?payfor=" . $regied . "\n";
+            $body .= "\n";
+            $body .= "Thanks for registering! We hope you have a nice GUADEC.\n";
+            $body .= "\n";
+            $body .= "--\n";
+            $body .= "The GUADEC organization team";
+            mail($email, 'GUADEC-2014 Registration Payment: Reminder', $body, $headers);
+
+            print('<div>Reminder email sent to ' . $name . '<' . $email . '></div><br />');
+        }
+    }
+    else if(isset($_POST['newstatus'])) {
         $newstatus = $_POST['newstatus'];
         $regid = $_POST['regid'];
 
