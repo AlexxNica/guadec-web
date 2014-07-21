@@ -65,11 +65,14 @@ function display_result($result){
                 <input type="hidden" name="viewtype" value="' . $_POST['viewtype'] . '">
                 <input type="submit" value="Mark dupe">
                 </form>');
-                print('<form method="post" action="">
-                <input type="hidden" name="regid" value="' . $results['id'] . '">
-                <input type="hidden" name="action" value="sendreminder">
-                <input type="submit" value="Send payment reminder">
-                </form>');
+                if($results['payment'] == 'Pending')
+                {
+                    print('<form method="post" action="">
+                    <input type="hidden" name="regid" value="' . $results['id'] . '">
+                    <input type="hidden" name="action" value="sendreminder">
+                    <input type="submit" value="Send payment reminder">
+                    </form>');
+                }
             }
             if ($results['payment'] == 'OnSite') {
                 print('<form method="post" action="">
