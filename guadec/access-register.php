@@ -194,7 +194,7 @@ else{
             print('<div>Reminder email sent to ' . $name . '&lt;' . $email . '&gt;</div><br />');
         }
     }
-    else if(isset($_POST['newstatus'])) {
+    if(isset($_POST['newstatus'])) {
         $newstatus = $_POST['newstatus'];
         $regid = $_POST['regid'];
 
