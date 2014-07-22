@@ -25,7 +25,7 @@
         }
        }
        else{
-         $diffDate = (31 - $aDate) + 1;
+         $diffDate = (31 - $aDate) + $bDate;
        }
        return $diffDate;   
     }
