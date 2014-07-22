@@ -182,7 +182,7 @@ else{
             $headers = "From: GUADEC 2014 Registration Script <contact@guadec.org>\n";
             $body = "Hi " . $name . "\n";
             $body .= "\n";
-            $body .= "It seems you haven't completed the registation process. To finish it, please either pay online with Paypal or select the on-site payment option on the following page: https://www.guadec.org/confirm-payment/?payfor=" . $regied . "\n";
+            $body .= "It seems you haven't completed the registation process. To finish it, please either pay online with Paypal or select the on-site payment option on the following page: https://www.guadec.org/confirm-payment/?payfor=" . $regid . "\n";
             $body .= "\n";
             $body .= "Thanks for registering! We hope you have a nice GUADEC.\n";
             $body .= "\n";
