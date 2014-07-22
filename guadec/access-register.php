@@ -239,7 +239,7 @@ else{
 		<div><select id='viewtype' name='viewtype'>
      	<option value='showall' selected='selected'>Show All Entries</option>
      	<option value='showcomplete'>Only Completed Registration</option>
-	<option value='showtotals'>Totals For Completed Registrations</option>
+	<option value='showtotals'>Totals For Completed And OnSite Registrations</option>
 	<option value='showaccommodation'>Accommodation</option>
 		</select></div>
 		<input type='submit' value='Go' />
