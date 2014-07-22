@@ -74,6 +74,7 @@ function enableDisableA(obj) {
 		$("[name=departure]").prop("disabled", true);
 		$("[name=room_type]").prop("disabled", true);
 		$(".box-options-accom").addClass("disabled");
+		enableDisableR($("[name=room_type]"));
 	}
 }
 function enableDisableS(obj) {
