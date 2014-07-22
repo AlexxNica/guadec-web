@@ -135,6 +135,10 @@ function display_totals($result){
 }
 
 function display_accommodation($result){
+	$total_single = 0;
+	$total_double = 0;
+	$total_accomfee = 0;
+
 	echo "<div>";
 	echo "<table class='regtable'><thead><tr><th>ID</th><th>Name</th>
 				<th>Email</th><th>Gender</th>
@@ -153,11 +157,19 @@ function display_accommodation($result){
 		echo "<td>"; echo $results['arrive']; echo "</td>";
 		echo "<td>"; echo $results['depart']; echo "</td>";
 		echo "<td>"; echo $results['room']; echo "</td>";
+			if ($results['room'] == 'single') { $total_single += 1;}
+			else if ($results['room'] == 'double') { $total_double += 1;}
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
+			$total_accomfee += $results['accomfee'];
 		echo "<td>"; echo $results['payment']; echo "</td>";
 		echo "</tr>";
 	}
 	echo"</tbody>";
+	echo "<tfoot><tr><td>Total</td><td colspan='2'>"; echo count($result); echo " booked beds</td>
+				<td></td><td></td><td></td>
+				<td>"; echo $total_single; echo " single, "; echo $total_double; echo " double</td>
+				<td>Total: "; echo $total_accomfee; echo "</td>
+				<td></td></tr></tfoot>";
 	echo "</table></div>";
 }
 
