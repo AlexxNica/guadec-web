@@ -190,7 +190,7 @@ else{
             $body .= "The GUADEC organization team";
             mail($email, 'GUADEC-2014 Registration Payment: Reminder', $body, $headers);
 
-            print('<div>Reminder email sent to ' . $name . '<' . $email . '></div><br />');
+            print('<div>Reminder email sent to ' . $name . '&lt;' . $email . '&gt;</div><br />');
         }
     }
     else if(isset($_POST['newstatus'])) {
