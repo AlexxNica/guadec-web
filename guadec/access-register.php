@@ -70,6 +70,7 @@ function display_result($result){
                     print('<form method="post" action="">
                     <input type="hidden" name="regid" value="' . $results['id'] . '">
                     <input type="hidden" name="action" value="sendreminder">
+                    <input type="hidden" name="newstatus" value="Reminded">
                     <input type="hidden" name="viewtype" value="' . $_POST['viewtype'] . '">
                     <input type="submit" value="Send payment reminder">
                     </form>');
