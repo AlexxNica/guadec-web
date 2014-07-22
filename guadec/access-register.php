@@ -223,7 +223,7 @@ else{
 			echo display_totals($result);
 			break;
 		case 'showaccommodation' :
-			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE accom = 'YES'", ARRAY_A);
+			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE accom = 'YES' AND payment != 'Dupe'", ARRAY_A);
 			echo display_accommodation($result);
 			break;
 		    default :
