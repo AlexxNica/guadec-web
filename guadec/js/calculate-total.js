@@ -68,13 +68,13 @@ function enableDisableA(obj) {
 		$("[name=room_type]").prop("disabled", false);
 		$("[name=sponsored]").removeAttr('checked');
 		$(".box-options-accom").removeClass("disabled");
+		enableDisableR($("[name=room_type]"));
 	}
 	else {
 		$("[name=arrival]").prop("disabled", true);
 		$("[name=departure]").prop("disabled", true);
 		$("[name=room_type]").prop("disabled", true);
 		$(".box-options-accom").addClass("disabled");
-		enableDisableR($("[name=room_type]"));
 	}
 }
 function enableDisableS(obj) {
