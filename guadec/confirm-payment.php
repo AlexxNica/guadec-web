@@ -108,7 +108,7 @@ if (!empty($_POST) || isset($_GET['payfor'])) {
             $payment = $results['payment'];
             $application_submitted = true;
 
-            if($payment != 'Pending' && $payment != "Reminded')
+            if($payment != 'Pending' && $payment != 'Reminded')
             {
                 print('Your payment is currently completed or marked as payment onsite.');
                 require_once('footer.php');
