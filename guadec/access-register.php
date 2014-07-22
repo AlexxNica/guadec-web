@@ -160,7 +160,7 @@ function display_accommodation($result){
 		echo "<td>"; echo $results['room']; echo "</td>";
 			if ($results['room'] == 'single') { $total_single += 1;}
 			else if ($results['room'] == 'double') { $total_double += 1;}
-		echo "<td>"; echo $results['roommate']; echo "</td>";
+		echo "<td>"; if ($results['room'] == 'double') { echo $results['roommate'];} else { echo "NA";}; echo "</td>";
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
 			$total_accomfee += $results['accomfee'];
 		echo "<td>"; echo $results['payment']; echo "</td>";
