@@ -265,7 +265,7 @@ else{
 			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE accom = 'YES' AND payment != 'Dupe'", ARRAY_A);
 			echo display_accommodation($result);
 			break;
-		case 'showaccommodation' :
+		case 'showlunch' :
 			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE lunchfee != '0' AND payment != 'Dupe'", ARRAY_A);
 			echo display_lunch($result);
 			break;
