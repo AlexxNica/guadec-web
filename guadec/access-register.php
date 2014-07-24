@@ -177,6 +177,29 @@ function display_accommodation($result){
 	echo "</table></div>";
 }
 
+function display_lunch($result){
+	echo "<div>";
+	echo "<table class='regtable'><thead><tr><th>ID</th><th>Name</th>
+				<th>Lunch days</th>
+				<th>Dietary requirements</th>
+				<th>Payment Status</th>
+				</tr></thead>";
+	echo"<tbody>";
+	foreach($result as $results){
+		echo "<tr>";
+		echo "<td>"; echo $results['id']; echo "</td>";
+		echo "<td>"; echo $results['name']; echo "</td>";
+		echo "<td>"; echo $results['lunchdays']; echo "</td>";
+		echo "<td>FIXME</td>";
+		echo "<td>"; echo $results['payment']; echo "</td>";
+		echo "</tr>";
+	}
+	echo"</tbody>";
+	echo "<tfoot><tr><td>Total</td><td colspan='4'>"; echo count($result); echo " people with meals</td>
+				</tr></tfoot>";
+	echo "</table></div>";
+}
+
 require_once("header.php");
  if( !(current_user_can( 'administrator' ) )){
  	echo "You are not authorised to view this page.";
@@ -242,6 +265,10 @@ else{
 			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE accom = 'YES' AND payment != 'Dupe'", ARRAY_A);
 			echo display_accommodation($result);
 			break;
+		case 'showaccommodation' :
+			$result = $wpdb->get_results("SELECT * FROM wp_guadec2014_registrations WHERE lunchfee != '0' AND payment != 'Dupe'", ARRAY_A);
+			echo display_lunch($result);
+			break;
 		    default :
 	      	  	$result = 'Error';
 	        break;
@@ -257,6 +284,7 @@ else{
      	<option value='showcomplete'>Only Completed Registration</option>
 	<option value='showtotals'>Totals For Completed And OnSite Registrations</option>
 	<option value='showaccommodation'>Accommodation</option>
+	<option value='showlunch'>Lunch</option>
 		</select></div>
 		<input type='submit' value='Go' />
 		</form>";
