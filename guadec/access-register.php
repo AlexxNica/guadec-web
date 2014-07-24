@@ -49,7 +49,7 @@ function display_result($result){
 			$total_entryfee += $results['entryfee'];
 		echo "<td>"; echo $results['lunchfee']; echo "</td>";
 			$total_lunchfee += $results['lunchfee'];
-		echo "<td>"; echo explode(" ", $results['lunchdays']); echo "</td>";
+		echo "<td>"; echo $results['lunchdays']; echo "</td>";
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
 			$total_accomfee += $results['accomfee'];
 		echo "<td>"; echo $results['totalfee']; echo "</td>";
