@@ -102,7 +102,7 @@ function display_result($result){
 				<td colspan='3'>"; echo $total_beds; echo " beds</td>
 				<td>"; echo $total_sponsored; echo " sponsored</td><td></td>
 				<td>Entry: "; echo $total_entryfee; echo " ("; echo $total_entryfee/count($result);echo " average)</td>
-				<td colspan="2">Lunch: "; echo $total_lunchfee; echo "</td>
+				<td colspan='2'>Lunch: "; echo $total_lunchfee; echo "</td>
 				<td>Accommodation: "; echo $total_accomfee; echo "</td>
 				<td>Total: "; echo $total_totalfee; echo "</td>
 				<td>"; echo $total_confirmed; echo " confirmed, "; echo $total_onsite; echo " on site</td>
