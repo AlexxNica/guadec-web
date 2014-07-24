@@ -192,10 +192,10 @@ function display_lunch($result){
 		echo "<tr>";
 		echo "<td>"; echo $results['id']; echo "</td>";
 		echo "<td>"; echo $results['name']; echo "</td>";
-		echo "<td>"; if ($results['lunchdays'] contains 'saturday') { echo "✓";}; echo "</td>";
-		echo "<td>"; if ($results['lunchdays'] contains 'sunday') { echo "✓";}; echo "</td>";
-		echo "<td>"; if ($results['lunchdays'] contains 'monday') { echo "✓";}; echo "</td>";
-		echo "<td>"; if ($results['lunchdays'] contains 'tuesday') { echo "✓";}; echo "</td>";
+		echo "<td>"; if (strpos($results['lunchdays'], 'saturday') !== false) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (strpos($results['lunchdays'], 'sunday') !== false) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (strpos($results['lunchdays'], 'monday') !== false) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (strpos($results['lunchdays'], 'tuesday') !== false) { echo "✓";}; echo "</td>";
 		echo "<td>FIXME</td>";
 		echo "<td>"; echo $results['payment']; echo "</td>";
 		echo "</tr>";
