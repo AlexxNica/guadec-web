@@ -23,7 +23,9 @@ function display_result($result){
 				<th>Accom</th><th>Arrival</th><th>Departure</th>
 				<th>Sponsored</th><th>Country</th>
 				<th>EntryFee</th>
-				<th>LunchFee</th><th>AccomFee</th>
+				<th>LunchFee</th>
+				<th>LunchDays</th>
+				<th>AccomFee</th>
 				<th>TotalFee</th>
 				<th>Payment Status</th>
 				<th>Public</th>
@@ -43,11 +45,11 @@ function display_result($result){
 		echo "<td>"; echo $results['sponsored']; echo "</td>";
 			if ($results['sponsored'] == 'YES') { $total_sponsored += 1;}
 		echo "<td>"; echo $results['country']; echo "</td>";
-//		echo "<td>"; echo $results['lunchdays']; echo "</td>";
 		echo "<td>"; echo $results['entryfee']; echo "</td>";
 			$total_entryfee += $results['entryfee'];
 		echo "<td>"; echo $results['lunchfee']; echo "</td>";
 			$total_lunchfee += $results['lunchfee'];
+		echo "<td>"; echo $results['lunchdays']; echo "</td>";
 		echo "<td>"; echo $results['accomfee']; echo "</td>";
 			$total_accomfee += $results['accomfee'];
 		echo "<td>"; echo $results['totalfee']; echo "</td>";
@@ -100,7 +102,7 @@ function display_result($result){
 				<td colspan='3'>"; echo $total_beds; echo " beds</td>
 				<td>"; echo $total_sponsored; echo " sponsored</td><td></td>
 				<td>Entry: "; echo $total_entryfee; echo " ("; echo $total_entryfee/count($result);echo " average)</td>
-				<td>Lunch: "; echo $total_lunchfee; echo "</td>
+				<td colspan="2">Lunch: "; echo $total_lunchfee; echo "</td>
 				<td>Accommodation: "; echo $total_accomfee; echo "</td>
 				<td>Total: "; echo $total_totalfee; echo "</td>
 				<td>"; echo $total_confirmed; echo " confirmed, "; echo $total_onsite; echo " on site</td>
