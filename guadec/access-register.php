@@ -192,10 +192,10 @@ function display_lunch($result){
 		echo "<tr>";
 		echo "<td>"; echo $results['id']; echo "</td>";
 		echo "<td>"; echo $results['name']; echo "</td>";
-		echo "<td>"; if (in_array("lunch_saturday", $results['lunchdays']) { echo "✓";}; echo "</td>";
-		echo "<td>"; if (in_array("lunch_sunday", $results['lunchdays']) { echo "✓";}; echo "</td>";
-		echo "<td>"; if (in_array("lunch_monday", $results['lunchdays']) { echo "✓";}; echo "</td>";
-		echo "<td>"; if (in_array("lunch_tuesday", $results['lunchdays']) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (in_array('lunch_saturday', $results['lunchdays']) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (in_array('lunch_sunday', $results['lunchdays']) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (in_array('lunch_monday', $results['lunchdays']) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (in_array('lunch_tuesday', $results['lunchdays']) { echo "✓";}; echo "</td>";
 		echo "<td>FIXME</td>";
 		echo "<td>"; echo $results['payment']; echo "</td>";
 		echo "</tr>";
