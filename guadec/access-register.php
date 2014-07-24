@@ -180,7 +180,10 @@ function display_accommodation($result){
 function display_lunch($result){
 	echo "<div>";
 	echo "<table class='regtable'><thead><tr><th>ID</th><th>Name</th>
-				<th>Lunch days</th>
+				<th>Saturday</th>
+				<th>Sunday</th>
+				<th>Monday</th>
+				<th>Tuesday</th>
 				<th>Dietary requirements</th>
 				<th>Payment Status</th>
 				</tr></thead>";
@@ -189,13 +192,16 @@ function display_lunch($result){
 		echo "<tr>";
 		echo "<td>"; echo $results['id']; echo "</td>";
 		echo "<td>"; echo $results['name']; echo "</td>";
-		echo "<td>"; echo $results['lunchdays']; echo "</td>";
+		echo "<td>"; if (in_array("lunch_saturday", $results['lunchdays']) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (in_array("lunch_sunday", $results['lunchdays']) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (in_array("lunch_monday", $results['lunchdays']) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (in_array("lunch_tuesday", $results['lunchdays']) { echo "✓";}; echo "</td>";
 		echo "<td>FIXME</td>";
 		echo "<td>"; echo $results['payment']; echo "</td>";
 		echo "</tr>";
 	}
 	echo"</tbody>";
-	echo "<tfoot><tr><td>Total</td><td colspan='4'>"; echo count($result); echo " people with meals</td>
+	echo "<tfoot><tr><td>Total</td><td colspan='6'>"; echo count($result); echo " people with meals</td>
 				</tr></tfoot>";
 	echo "</table></div>";
 }
