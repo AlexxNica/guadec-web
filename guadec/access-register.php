@@ -178,6 +178,10 @@ function display_accommodation($result){
 }
 
 function display_lunch($result){
+	$total_lunchsaturday = 0;
+	$total_lunchsunday = 0;
+	$total_lunchmonday = 0;
+	$total_lunchtuesday = 0;
 	echo "<div>";
 	echo "<table class='regtable'><thead><tr><th>ID</th><th>Name</th>
 				<th>Saturday</th>
@@ -192,16 +196,21 @@ function display_lunch($result){
 		echo "<tr>";
 		echo "<td>"; echo $results['id']; echo "</td>";
 		echo "<td>"; echo $results['name']; echo "</td>";
-		echo "<td>"; if (strpos($results['lunchdays'], 'saturday') !== false) { echo "✓";}; echo "</td>";
-		echo "<td>"; if (strpos($results['lunchdays'], 'sunday') !== false) { echo "✓";}; echo "</td>";
-		echo "<td>"; if (strpos($results['lunchdays'], 'monday') !== false) { echo "✓";}; echo "</td>";
-		echo "<td>"; if (strpos($results['lunchdays'], 'tuesday') !== false) { echo "✓";}; echo "</td>";
+		echo "<td>"; if (strpos($results['lunchdays'], 'saturday') !== false) { echo "✓"; $total_lunchsaturday += 1;}; echo "</td>";
+		echo "<td>"; if (strpos($results['lunchdays'], 'sunday') !== false) { echo "✓"; $total_lunchsunday += 1;}; echo "</td>";
+		echo "<td>"; if (strpos($results['lunchdays'], 'monday') !== false) { echo "✓"; $total_lunchmonday += 1;}; echo "</td>";
+		echo "<td>"; if (strpos($results['lunchdays'], 'tuesday') !== false) { echo "✓"; $total_lunchtuesday += 1;}; echo "</td>";
 		echo "<td>FIXME</td>";
 		echo "<td>"; echo $results['payment']; echo "</td>";
 		echo "</tr>";
 	}
 	echo"</tbody>";
-	echo "<tfoot><tr><td>Total</td><td colspan='6'>"; echo count($result); echo " people with meals</td>
+	echo "<tfoot><tr><td>Total</td><td>"; echo count($result); echo " people with meals</td>
+				<td>"; echo $total_lunchsaturday; echo "</td>
+				<td>"; echo $total_lunchsunday; echo "</td>
+				<td>"; echo $total_lunchmonday; echo "</td>
+				<td>"; echo $total_lunchtuesday; echo "</td>
+				<td></td><td></td>
 				</tr></tfoot>";
 	echo "</table></div>";
 }
