@@ -78,7 +78,7 @@ function display_result($result){
                     </form>');
                 }
             }
-            if ($results['payment'] == 'OnSite') {
+            if ($results['payment'] == 'OnSite' || $results['payment'] == 'Pending') {
                 print('<form method="post" action="">
                 <input type="hidden" name="regid" value="' . $results['id'] . '">
                 <input type="hidden" name="newstatus" value="OnSitePaid">
